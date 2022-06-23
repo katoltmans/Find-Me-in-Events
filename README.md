@@ -1,1 +1,1 @@
-This is the FIND ME n EVents project.
+This is the FIND ME in Events project.
