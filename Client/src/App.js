@@ -14,7 +14,7 @@ function App() {
     return (
         <BrowserRouter>
             <div>
-                <Navbar user={user} setUser={setUser} />
+                <Navbar user={user} setUser={setUser} isLoggedIn={isLoggedIn} />
                 Hello World!
                 <Routes>
                     <Route

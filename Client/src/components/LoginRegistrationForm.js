@@ -12,7 +12,7 @@ import {
     List,
 } from "@mui/material";
 
-const LoginRegistrationForm = (props) => {
+const LoginRegistrationForm = () => {
     const navigate = useNavigate();
     const [user, setUser] = useState({
         first_name: "",
@@ -93,9 +93,9 @@ const LoginRegistrationForm = (props) => {
 
     return (
         <Paper elevation={2} sx={{ p: 5, m: 5, display: "flex" }}>
-            <Box>
+            <Box sx={{ flexGrow: 1, mr: 1 }}>
                 <Typography variant="h3" component="h1" sx={{ mb: 3 }}>
-                    Registration Form
+                    Registration
                 </Typography>
                 {errors ? (
                     <List sx={{ mb: 5 }}>
@@ -114,7 +114,7 @@ const LoginRegistrationForm = (props) => {
                 <Box sx={{ flexGrow: 1 }}>
                     <Grid container spacing={3}>
                         <Grid container item spacing={1}>
-                            <Grid item xs={6}>
+                            <Grid item xs={4}>
                                 <TextField
                                     fullWidth
                                     name="first_name"
@@ -123,7 +123,7 @@ const LoginRegistrationForm = (props) => {
                                     onChange={onChangeHandler}
                                 />
                             </Grid>
-                            <Grid item xs={6}>
+                            <Grid item xs={4}>
                                 <TextField
                                     fullWidth
                                     name="last_name"
@@ -134,7 +134,7 @@ const LoginRegistrationForm = (props) => {
                             </Grid>
                         </Grid>
                         <Grid container item spacing={3}>
-                            <Grid item xs={12}>
+                            <Grid item xs={8}>
                                 <TextField
                                     fullWidth
                                     name="email"
@@ -145,7 +145,7 @@ const LoginRegistrationForm = (props) => {
                             </Grid>
                         </Grid>
                         <Grid container item spacing={3}>
-                            <Grid item xs={6}>
+                            <Grid item xs={4}>
                                 <TextField
                                     fullWidth
                                     name="password"
@@ -155,7 +155,7 @@ const LoginRegistrationForm = (props) => {
                                     onChange={onChangeHandler}
                                 />
                             </Grid>
-                            <Grid item xs={6}>
+                            <Grid item xs={4}>
                                 <TextField
                                     fullWidth
                                     name="confirm_password"
@@ -176,7 +176,7 @@ const LoginRegistrationForm = (props) => {
                     </Button>
                 </Box>
             </Box>
-            <Box>
+            <Box sx={{ flexGrow: 1, ml: 5 }}>
                 <Typography variant="h3" component="h1" sx={{ mb: 3 }}>
                     Login
                 </Typography>
@@ -196,18 +196,18 @@ const LoginRegistrationForm = (props) => {
                 <Box sx={{ flexGrow: 1 }}>
                     <Grid container spacing={3}>
                         <Grid container item spacing={3}>
-                            <Grid item xs={6}>
+                            <Grid item xs={8}>
                                 <TextField
                                     fullWidth
-                                    name="username"
-                                    label="Username"
+                                    name="email"
+                                    label="Email"
                                     variant="outlined"
                                     onChange={(e) => setEmail(e.target.value)}
                                 />
                             </Grid>
                         </Grid>
                         <Grid container item spacing={3}>
-                            <Grid item xs={6}>
+                            <Grid item xs={8}>
                                 <TextField
                                     fullWidth
                                     name="password"
