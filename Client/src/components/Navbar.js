@@ -61,7 +61,21 @@ const Navbar = (props) => {
                                 My Events
                             </Link>
                         </Typography>
-                        <Button variant="contained">Launch An Event</Button>
+                        <Typography
+                            variant="h6"
+                            color="inherit"
+                            component="div"
+                            sx={{ mr: 8 }}
+                        >
+                            <Link
+                                component={RouterLink}
+                                to="/"
+                                color="inherit"
+                                underline="none"
+                            >
+                                Launch An Event
+                            </Link>
+                        </Typography>
                         {!!user?.firstName ? (
                             <Box
                                 sx={{
@@ -96,17 +110,7 @@ const Navbar = (props) => {
                                         color="inherit"
                                         underline="none"
                                     >
-                                        Login
-                                    </Link>
-                                </Button>
-                                <Button variant="contained">
-                                    <Link
-                                        component={RouterLink}
-                                        to="/register"
-                                        color="inherit"
-                                        underline="none"
-                                    >
-                                        Register
+                                        Login or Register
                                     </Link>
                                 </Button>
                             </Box>
