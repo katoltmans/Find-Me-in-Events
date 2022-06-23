@@ -92,7 +92,7 @@ const LoginRegistrationForm = (props) => {
     };
 
     return (
-        <Paper elevation={2} sx={{ p: 5, m: 5 }}>
+        <Paper elevation={2} sx={{ p: 5, m: 5, display: "flex" }}>
             <Box>
                 <Typography variant="h3" component="h1" sx={{ mb: 3 }}>
                     Registration Form
