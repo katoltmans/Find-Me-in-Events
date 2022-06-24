@@ -14,6 +14,9 @@ import {
 
 const LoginRegistrationForm = ({ setIsLoggedIn }) => {
   const navigate = useNavigate();
+  const [regErr, setRegisterErrors] = useState([]);
+  const [logErr, setLogErrors] = useState("");
+
   const [user, setUser] = useState({
     firstName: "",
     lastName: "",
@@ -21,14 +24,18 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
     password: "",
     confirmPassword: "",
   });
-  const [regErr, setRegisterErrors] = useState([]);
-  const [logErr, setLogErrors] = useState("");
 
-  const onChangeHandler = (e) => {
-    setUser({
-      ...user,
-      [e.target.name]: e.target.value,
-    });
+  const [loginuser, setloginUser] = useState({ emailId: "", password: "" });
+
+  const onChangeHandler = (e, val) => {
+    if (val == "register") {
+      setUser({
+        ...user,
+        [e.target.name]: e.target.value,
+      });
+    } else if (val == "login") {
+      setloginUser({ ...loginuser, [e.target.name]: e.target.value });
+    }
   };
 
   const OnSubmitHandlerRegistration = (e) => {
@@ -46,6 +53,9 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
       })
       .catch((err) => {
         setLogErrors("");
+        setRegisterErrors([]);
+        console.log("Error with registering post request client", err);
+
         const errorarray = (obj) => {
           const arr = [];
           for (let keys of Object.keys(obj)) {
@@ -53,27 +63,27 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
           }
           setRegisterErrors(arr);
         };
-        errorarray(err.response.data.errors);
+        if (!err.response.data.errors && err.response.data.code == 11000) {
+          setRegisterErrors(["Email-Id Should be unique"]);
+        } else {
+          errorarray(err.response.data.errors);
+        }
       });
   };
 
   const OnSubmitHandlerLogin = (e) => {
     e.preventDefault();
     axios
-      .post(
-        "http://localhost:8000/api/login",
-        {
-          emailId: user.emailId,
-          password: user.password,
-        },
-        { withCredentials: true }
-      )
+      .post("http://localhost:8000/api/login", loginuser, {
+        withCredentials: true,
+      })
       .then((res) => {
         console.log("successfully loggedIn", res.data);
         setIsLoggedIn(true);
         navigate("/home");
       })
       .catch((err) => {
+        setLogErrors("");
         setRegisterErrors([]);
         setLogErrors(err.response.data.Error);
         console.log("Error with login post request client", err);
@@ -106,7 +116,7 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
                   name="firstName"
                   label="First Name"
                   variant="outlined"
-                  onChange={onChangeHandler}
+                  onChange={(e) => onChangeHandler(e, "register")}
                 />
               </Grid>
               <Grid item xs={4}>
@@ -115,7 +125,7 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
                   name="lastName"
                   label="Last Name"
                   variant="outlined"
-                  onChange={onChangeHandler}
+                  onChange={(e) => onChangeHandler(e, "register")}
                 />
               </Grid>
             </Grid>
@@ -126,7 +136,7 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
                   name="emailId"
                   label="EmailId"
                   variant="outlined"
-                  onChange={onChangeHandler}
+                  onChange={(e) => onChangeHandler(e, "register")}
                 />
               </Grid>
             </Grid>
@@ -138,7 +148,7 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
                   type="password"
                   label="Password"
                   variant="outlined"
-                  onChange={onChangeHandler}
+                  onChange={(e) => onChangeHandler(e, "register")}
                 />
               </Grid>
               <Grid item xs={4}>
@@ -148,7 +158,7 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
                   type="password"
                   label="Confirm Password"
                   variant="outlined"
-                  onChange={onChangeHandler}
+                  onChange={(e) => onChangeHandler(e, "register")}
                 />
               </Grid>
             </Grid>
@@ -176,7 +186,7 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
                   name="emailId"
                   label="EmailId"
                   variant="outlined"
-                  onChange={onChangeHandler}
+                  onChange={(e) => onChangeHandler(e, "login")}
                 />
               </Grid>
             </Grid>
@@ -188,7 +198,7 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
                   type="password"
                   label="Password"
                   variant="outlined"
-                  onChange={onChangeHandler}
+                  onChange={(e) => onChangeHandler(e, "login")}
                 />
               </Grid>
             </Grid>
