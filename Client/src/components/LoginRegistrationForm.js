@@ -10,7 +10,9 @@ import {
     Button,
     ListItem,
     List,
+    Stack,
 } from "@mui/material";
+import { Container } from "@mui/system";
 
 const LoginRegistrationForm = ({ setIsLoggedIn }) => {
     const navigate = useNavigate();
@@ -72,7 +74,7 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
             .then((res) => {
                 console.log("successfully loggedIn", res.data);
                 setIsLoggedIn(true);
-                navigate("/home");
+                navigate("/homwe");
             })
             .catch((err) => {
                 setRegisterErrors([]);
@@ -82,133 +84,157 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
     };
 
     return (
-        <Paper elevation={2} sx={{ p: 10, m: 5, display: "flex" }}>
-            <Box sx={{ flexGrow: 1, mr: 5, ml: 3 }}>
-                <Typography variant="h3" component="h1" sx={{ fontSize: 30 }}>
-                    Registration
-                </Typography>
-                {regErr && (
-                    <List sx={{ mb: 5 }}>
-                        {regErr.map((error, index) => {
-                            return (
-                                <ListItem
-                                    key={index}
-                                    sx={{ color: "error.main" }}
-                                >
-                                    {error}
-                                </ListItem>
-                            );
-                        })}
-                    </List>
-                )}
-                <Box sx={{ flexGrow: 1 }}>
-                    <Grid container spacing={3}>
-                        <Grid container item spacing={1}>
-                            <Grid item xs={4}>
-                                <TextField
-                                    fullWidth
-                                    name="firstName"
-                                    label="First Name"
-                                    variant="outlined"
-                                    onChange={onChangeHandler}
-                                />
-                            </Grid>
-                            <Grid item xs={4}>
-                                <TextField
-                                    fullWidth
-                                    name="lastName"
-                                    label="Last Name"
-                                    variant="outlined"
-                                    onChange={onChangeHandler}
-                                />
-                            </Grid>
-                        </Grid>
-                        <Grid container item spacing={3}>
-                            <Grid item xs={8}>
-                                <TextField
-                                    fullWidth
-                                    name="emailId"
-                                    label="Email"
-                                    variant="outlined"
-                                    onChange={onChangeHandler}
-                                />
-                            </Grid>
-                        </Grid>
-                        <Grid container item spacing={3}>
-                            <Grid item xs={4}>
-                                <TextField
-                                    fullWidth
-                                    name="password"
-                                    type="password"
-                                    label="Password"
-                                    variant="outlined"
-                                    onChange={onChangeHandler}
-                                />
-                            </Grid>
-                            <Grid item xs={4}>
-                                <TextField
-                                    fullWidth
-                                    name="confirmPassword"
-                                    type="password"
-                                    label="Confirm Password"
-                                    variant="outlined"
-                                    onChange={onChangeHandler}
-                                />
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                    <Button
-                        variant="contained"
-                        sx={{ mt: 3 }}
-                        onClick={OnSubmitHandlerRegistration}
+        <Box sx={{ pt: 5, mx: 15 }}>
+            <Grid container spacing={10}>
+                <Grid item xs={6}>
+                    <Paper
+                        elevation={2}
+                        sx={{
+                            p: 3,
+                        }}
                     >
-                        Submit
-                    </Button>
-                </Box>
-            </Box>
-            <Box sx={{ flexGrow: 1, ml: 5, mr: 3 }}>
-                <Typography variant="h3" component="h1" sx={{ fontSize: 30 }}>
-                    Login
-                </Typography>
-                <List sx={{ mb: 5, color: "error.main" }}>
-                    {logErr && <p>{logErr}!!</p>}
-                </List>
-                <Box sx={{ flexGrow: 1 }}>
-                    <Grid container spacing={3}>
-                        <Grid container item spacing={1}>
-                            <Grid item xs={12}>
-                                <TextField
-                                    fullWidth
-                                    name="emailId"
-                                    label="Email"
-                                    variant="outlined"
-                                    onChange={onChangeHandler}
-                                />
+                        <Typography
+                            variant="h3"
+                            component="h1"
+                            sx={{ fontSize: 25 }}
+                        >
+                            Registration
+                        </Typography>
+                        {regErr && (
+                            <List sx={{ mb: 5 }}>
+                                {regErr.map((error, index) => {
+                                    return (
+                                        <ListItem
+                                            key={index}
+                                            sx={{ color: "error.main" }}
+                                        >
+                                            {error}
+                                        </ListItem>
+                                    );
+                                })}
+                            </List>
+                        )}
+                        <Box>
+                            <Grid container spacing={3}>
+                                <Grid container item spacing={1}>
+                                    <Grid item xs={12}>
+                                        <TextField
+                                            fullWidth
+                                            name="firstName"
+                                            label="First Name"
+                                            variant="outlined"
+                                            onChange={onChangeHandler}
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <TextField
+                                            fullWidth
+                                            name="lastName"
+                                            label="Last Name"
+                                            variant="outlined"
+                                            onChange={onChangeHandler}
+                                        />
+                                    </Grid>
+                                </Grid>
+                                <Grid container item spacing={3}>
+                                    <Grid item xs={12}>
+                                        <TextField
+                                            fullWidth
+                                            name="emailId"
+                                            label="Email"
+                                            variant="outlined"
+                                            onChange={onChangeHandler}
+                                        />
+                                    </Grid>
+                                </Grid>
+                                <Grid container item spacing={3}>
+                                    <Grid item xs={12}>
+                                        <TextField
+                                            fullWidth
+                                            name="password"
+                                            type="password"
+                                            label="Password"
+                                            variant="outlined"
+                                            onChange={onChangeHandler}
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <TextField
+                                            fullWidth
+                                            name="confirmPassword"
+                                            type="password"
+                                            label="Confirm Password"
+                                            variant="outlined"
+                                            onChange={onChangeHandler}
+                                        />
+                                    </Grid>
+                                </Grid>
                             </Grid>
-                        </Grid>
-                        <Grid container item spacing={3}>
-                            <Grid item xs={12}>
-                                <TextField
-                                    fullWidth
-                                    name="password"
-                                    type="password"
-                                    label="Password"
-                                    variant="outlined"
-                                    onChange={onChangeHandler}
-                                />
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                    <Button
-                        variant="contained"
-                        sx={{ mt: 3 }}
-                        onClick={OnSubmitHandlerLogin}
+                            <Button
+                                variant="contained"
+                                sx={{ mt: 3 }}
+                                onClick={OnSubmitHandlerRegistration}
+                            >
+                                Submit
+                            </Button>
+                        </Box>
+                    </Paper>
+                </Grid>
+                <Grid item xs={6}>
+                    <Paper
+                        elevation={2}
+                        sx={{
+                            p: 3,
+                        }}
                     >
-                        Login
-                    </Button>
-                </Box>
-            </Box>
-        </Paper>
+                        <Typography
+                            variant="h3"
+                            component="h1"
+                            sx={{ fontSize: 25 }}
+                        >
+                            Login
+                        </Typography>
+                        <List sx={{ mb: 5, color: "error.main" }}>
+                            {logErr && <p>{logErr}!!</p>}
+                        </List>
+                        <Box>
+                            <Grid container spacing={3}>
+                                <Grid container item spacing={1}>
+                                    <Grid item xs={12}>
+                                        <TextField
+                                            fullWidth
+                                            name="emailId"
+                                            label="Email"
+                                            variant="outlined"
+                                            onChange={onChangeHandler}
+                                        />
+                                    </Grid>
+                                </Grid>
+                                <Grid container item spacing={3}>
+                                    <Grid item xs={12}>
+                                        <TextField
+                                            fullWidth
+                                            name="password"
+                                            type="password"
+                                            label="Password"
+                                            variant="outlined"
+                                            onChange={onChangeHandler}
+                                        />
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                            <Button
+                                variant="contained"
+                                sx={{ mt: 3 }}
+                                onClick={OnSubmitHandlerLogin}
+                            >
+                                Login
+                            </Button>
+                        </Box>
+                    </Paper>
+                </Grid>
+            </Grid>
+        </Box>
     );
 };
 
