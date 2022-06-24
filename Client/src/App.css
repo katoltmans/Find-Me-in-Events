@@ -1,5 +1,19 @@
+
 .App {
     text-align: center;
     margin: 0;
     padding: 0;
+}
+.eventLaunchBar{
+    display:flex;
+    justify-content: center;
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
+    
+}
+
+.eventLaunchButton{
+    display: flex;
+    justify-content: center;
 }

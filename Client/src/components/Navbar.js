@@ -71,7 +71,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
             >
               <Link
                 component={RouterLink}
-                to="/"
+                to="/event/:id"
                 color="inherit"
                 underline="none"
               >
@@ -86,7 +86,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
             >
               <Link
                 component={RouterLink}
-                to="/"
+                to="/new"
                 color="inherit"
                 underline="none"
               >
@@ -121,25 +121,14 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
             ) : (
               <Box sx={{ flexDirection: "row-reverse", ml: 5 }}>
                 <Button variant="contained">
-                  {user ? (
-                    <Link
-                      component={RouterLink}
-                      to="/"
-                      color="inherit"
-                      underline="none"
-                    >
-                      Logout
-                    </Link>
-                  ) : (
-                    <Link
-                      component={RouterLink}
-                      to="/"
-                      color="inherit"
-                      underline="none"
-                    >
-                      Login or Register
-                    </Link>
-                  )}
+                  <Link
+                    component={RouterLink}
+                    to="/login"
+                    color="inherit"
+                    underline="none"
+                  >
+                    Login or Register
+                  </Link>
                 </Button>
               </Box>
             )}
