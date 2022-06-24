@@ -51,7 +51,7 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
             .then((res) => {
                 console.log("successfully registered", res.data);
                 setIsLoggedIn(true);
-                navigate("/home");
+                navigate("/");
             })
             .catch((err) => {
                 setLogErrors("");
@@ -85,7 +85,7 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
             .then((res) => {
                 console.log("successfully loggedIn", res.data);
                 setIsLoggedIn(true);
-                navigate("/home");
+                navigate("/");
             })
             .catch((err) => {
                 setLogErrors("");
@@ -217,7 +217,7 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
                         >
                             Login
                         </Typography>
-                        <List sx={{ mb: 5 }}>
+                        <List sx={{ mb: 5, color: "error.main" }}>
                             {logErr && <p>{logErr}!!</p>}
                         </List>
                         <Box>

@@ -19,7 +19,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
             const user = jwtDecode(userToken);
             console.log("user", user);
             setUser(user);
-            navigate("/home");
+            navigate("/");
         }
     }, [isLoggedIn]);
 
@@ -135,7 +135,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
                                 <Button variant="contained">
                                     <Link
                                         component={RouterLink}
-                                        to="/"
+                                        to="/login"
                                         color="inherit"
                                         underline="none"
                                     >
