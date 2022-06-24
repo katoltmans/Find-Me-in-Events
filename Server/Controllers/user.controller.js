@@ -1,7 +1,6 @@
 const User = require("../Models/user.model");
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
-require("dotenv").config();
+const jwt = require("jsonwebtoken"); // sending the tokens
+const bcrypt = require("bcrypt"); // password
 const secretKey = process.env.SECRET_KEY;
 
 console.log("secretkey", secretKey);
@@ -18,7 +17,7 @@ const register = async (req, res) => {
         _id: newUser._id,
         firstName: newUser.firstName,
         lastName: newUser.lastName,
-        emailId: newUser.emailId,
+        emailId: newUser.emailId, //payload
       },
       secretKey
     );
@@ -43,17 +42,15 @@ const login = async (req, res) => {
     const user = await User.findOne({ emailId: loggedInUser.emailId });
     console.log("user", user);
     if (!user) {
-      res.status(400).json({ Error: "Inva;;;lid Login" });
+      res.status(400).json({ Error: "Invalid Login" });
     } else {
       const passwordcheck = await bcrypt.compare(
         loggedInUser.password,
         user.password
-      );
-      console.log("passwordChekc", loggedInUser.password);
-      console.log("passwordChekc", user.password);
+      ); //
 
       if (!passwordcheck) {
-        res.status(400).json({ Error: "Invalikkkkkd Login" });
+        res.status(400).json({ Error: "Invalid Login" });
       } else {
         // if password and email matched again generate the new token and send to the client via cookies
         // when decoding the token in client side will get the user deatails sent through payload

@@ -1,17 +1,9 @@
-import React, {useState,useEffect} from 'react';
-
+import React, { useState, useEffect } from "react";
 
 function DisplayAllEvent() {
-  const [eventList, setEventlist]= useState([])
+  const [eventList, setEventlist] = useState([]);
 
-
-
-  return (
-    <div>
-
-
-        </div>
-  )
+  return <div>Displayall events</div>;
 }
 
-export default DisplayAllEvent
+export default DisplayAllEvent;
