@@ -54,7 +54,7 @@ const Navbar = (props) => {
                         >
                             <Link
                                 component={RouterLink}
-                                to="/"
+                                to="/event/:id"
                                 color="inherit"
                                 underline="none"
                             >
@@ -69,7 +69,7 @@ const Navbar = (props) => {
                         >
                             <Link
                                 component={RouterLink}
-                                to="/"
+                                to="/new"
                                 color="inherit"
                                 underline="none"
                             >
