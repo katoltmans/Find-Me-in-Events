@@ -26,8 +26,10 @@ const EventSchema = new mongoose.Schema(
             minlength : [10, 'Describe Event in minimum of 10 characters.']
         },
 
-        image : String
-
+        image : {
+            type: String,
+            default: "Meetup.png",
+        },
     },
     {timestamps:true}
 )

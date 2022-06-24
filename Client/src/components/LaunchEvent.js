@@ -16,6 +16,7 @@ function LaunchEvent() {
   const [location, setLocation] = useState("");
   const [date, setDate] = useState("0");
   const [time, setTime] = useState("0");
+  const [image, setImage] = useState('');
   const [description, setDescription] = useState([]);
 
   //navigate
@@ -24,15 +25,16 @@ function LaunchEvent() {
   //submithandler
   const submitHandler = (e) => {
     e.preventDefault();
+    console.log("hello")
     axios
       .post(
         "http://localhost:8000/api/events",
-        { eventTitle, location, date, time, description },
-        { withCredentials: true }
+        {eventTitle, location, date, time, description, image},
+        {withCredentials: true}
       )
       .then((res) => {
         console.log(res.data);
-        navigate("/");
+        navigate("/home");
       })
       .catch((err) => {
         console.log(err);
@@ -41,12 +43,12 @@ function LaunchEvent() {
 
   return (
     <div className="eventLaunchBar">
-      <Card sx={{ maxWidth: 700 }} className="boxDetails">
-        <form onSubmit={submitHandler}>
+      <Card sx={{ maxWidth:450}} className="boxDetails">
+        <form >
           <Box
             sx={{
               width: 500,
-              maxWidth: "90%",
+              maxWidth: "100%",
             }}
           >
             <br />
@@ -55,6 +57,7 @@ function LaunchEvent() {
               fullWidth
               label="Event Title"
               id="div"
+              className="textField"
               value={eventTitle}
               onChange={(e) => setEventTitle(e.target.value)}
             />
@@ -63,7 +66,7 @@ function LaunchEvent() {
           <Box
             sx={{
               width: 500,
-              maxWidth: "90%",
+              maxWidth: "100%",
             }}
           >
             <TextField
@@ -79,7 +82,7 @@ function LaunchEvent() {
           <Box
             sx={{
               width: 500,
-              maxWidth: "90%",
+              maxWidth: "100%",
             }}
           >
             <TextField
@@ -95,7 +98,7 @@ function LaunchEvent() {
           <Box
             sx={{
               width: 500,
-              maxWidth: "90%",
+              maxWidth: "100%",
             }}
           >
             <TextField
@@ -110,7 +113,7 @@ function LaunchEvent() {
           <Box
             sx={{
               width: 500,
-              maxWidth: "90%",
+              maxWidth: "100%",
             }}
           >
             <TextField
@@ -122,8 +125,11 @@ function LaunchEvent() {
             />
           </Box>
           <br />
+          <input type="date"/>
+          <input type="time"/>
+          <br/>
           <Stack spacing={2} direction="row" className="eventLaunchButton">
-            <Button variant="outlined">Create an Event</Button>
+            <Button variant="outlined"  onClick = {submitHandler} >Create an Event</Button>
           </Stack>
           <br />
         </form>
