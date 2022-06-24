@@ -4,6 +4,10 @@ import "./App.css";
 // Import components
 import Navbar from "./components/Navbar";
 import LoginRegistrationForm from "./components/LoginRegistrationForm";
+import LunchEvent from "./components/LunchEvent";
+import DispalyAllEvent from "./components/DisplayAllEvent"
+import MyEvent from "./components/MyEvent"
+import DisplayAllEvent from "./components/DisplayAllEvent";
 
 function App() {
     // declare state
@@ -15,12 +19,14 @@ function App() {
         <BrowserRouter>
             <div>
                 <Navbar user={user} setUser={setUser} isLoggedIn={isLoggedIn} />
-                Hello World!
                 <Routes>
                     <Route
                         path="/register/login"
                         element={<LoginRegistrationForm />}
                     />
+                    <Route path="/new" element= {<LunchEvent/>} />
+                    <Route path="/" element= {<DisplayAllEvent isLoggedIn={isLoggedIn} />} />
+                    <Route path="/events/:id" element= {<MyEvent/>} />
                 </Routes>
             </div>
         </BrowserRouter>
