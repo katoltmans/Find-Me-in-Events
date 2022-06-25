@@ -21,7 +21,9 @@ const EventDetail = () => {
 
     useEffect(() => {
         axios
-            .get(`http://localhost:8000/api/events/${id}`)
+            .get(`http://localhost:8000/api/events/${id}`, {
+                withCredentials: true,
+            })
             .then((res) => {
                 console.log("EVENT: ", res.data);
                 setEvent(res.data.event);
