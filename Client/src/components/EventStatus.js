@@ -10,7 +10,11 @@ const EventStatus = () => {
             <Typography variant="h5" component="h2" sx={{ mb: 2 }}>
                 Look Who's Attending
             </Typography>
-            <Typography variant="h6" component="h3" sx={{ fontSize: 15 }}>
+            <Typography
+                variant="h6"
+                component="h3"
+                sx={{ fontSize: 15, color: "#0e934e" }}
+            >
                 Going
             </Typography>
             <ul>
@@ -18,7 +22,11 @@ const EventStatus = () => {
                 <li>Once I Have</li>
                 <li>Axios Route</li>
             </ul>
-            <Typography variant="h6" component="h3" sx={{ fontSize: 15 }}>
+            <Typography
+                variant="h6"
+                component="h3"
+                sx={{ fontSize: 15, color: "#c49224" }}
+            >
                 Maybe
             </Typography>
             <ul>
@@ -26,7 +34,11 @@ const EventStatus = () => {
                 <li>Once I Have</li>
                 <li>Axios Route</li>
             </ul>
-            <Typography variant="h6" component="h3" sx={{ fontSize: 15 }}>
+            <Typography
+                variant="h6"
+                component="h3"
+                sx={{ fontSize: 15, color: "#992e2e" }}
+            >
                 Can't Go
             </Typography>
             <ul>
