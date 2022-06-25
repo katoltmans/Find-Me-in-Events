@@ -10,6 +10,9 @@ import CardContent from "@mui/material/CardContent";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import Grid from "@mui/material/Grid";
+
+
 
 function LaunchEvent() {
   const [eventTitle, setEventTitle] = useState("");
@@ -71,45 +74,38 @@ function LaunchEvent() {
           >
             <TextField
               fullWidth
-              label="Location"
+              label="Street"
               id="fullWidth"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
             />
           </Box>
           <br />
-
-          <Box
-            sx={{
-              width: 500,
-              maxWidth: "100%",
-            }}
-          >
+            <Grid container item spacing= {3} >
+            <Grid item xs={6}>
             <TextField
               fullWidth
-              label="Date"
+              label="City"
               id="fullWidth"
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
             />
-          </Box>
-          <br />
-
-          <Box
-            sx={{
-              width: 500,
-              maxWidth: "100%",
-            }}
-          >
+          </Grid>
+          <Grid item xs={3}>
             <TextField
               fullWidth
-              label="Time"
+              label="State"
               id="fullWidth"
-              value={time}
-              onChange={(e) => setTime(e.target.value)}
+              
             />
-          </Box>
-          <br />
+          </Grid>
+          <Grid item xs={3}>
+            <TextField
+              fullWidth
+              label="ZipCode"
+              id="fullWidth"
+            />
+          </Grid>
+            </Grid>
+          <br/>
           <Box
             sx={{
               width: 500,
@@ -125,8 +121,13 @@ function LaunchEvent() {
             />
           </Box>
           <br />
-          <input type="date"/>
-          <input type="time"/>
+          <input type="date"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}/>
+          <input type="time" 
+              value={time}
+              onChange={(e) => setTime(e.target.value)}/>
+          <br/>
           <br/>
           <Stack spacing={2} direction="row" className="eventLaunchButton">
             <Button variant="outlined"  onClick = {submitHandler} >Create an Event</Button>

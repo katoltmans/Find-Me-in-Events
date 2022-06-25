@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+import {Link} from "react-router-dom";
+import axios from "axios";
+
 
 
 //Mui imports
@@ -9,37 +12,60 @@ import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 
 function DisplayAllEvent() {
-  const [eventList, setEventlist] = useState([]);
+  const [eventList, setEventList] = useState([]);
+
+  useEffect(()=> {
+    axios.get ('http://localhost:8000/api/events')
+    .then (res =>{
+      setEventList(res.data.events)
+      console.log(res.data.events)
+    }).catch (err => {
+      console.log("error in front end DispalyALl", err)
+    })
+  },[])
+
+// how to fix date to numeric
+  const eventDate = ((date)=>{
+    let fixDate= new Date(date)
+    return fixDate.toLocaleDateString();
+  })
 
   return <div>
+    {eventList.map((event)=>(
+      <div key={event._id}>
     <Card sx={{ maxWidth: 345 }}>
       <CardActionArea>
         <CardMedia
           component="img"
           height="140"
-          image="/static/images/cards/contemplative-reptile.jpg"
-          alt="green iguana"
+          image={event.image}
+          alt={event.image}
         />
+
+        {/* <img src=`./image/${event.image}` alt={event.eventTitle}/> */}
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            Lizard
+            {event.eventTitle}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
+            {event.location} 
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {eventDate(event.date)}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {event.time}
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
         <Button size="small" color="primary">
-          Share
+          <Link to={`/events/${event._id}`}> View Details</Link>
         </Button>
       </CardActions>
     </Card>
-    
-    
-    
-    
+    </div>
+    ))};
     </div>;
 }
 
