@@ -28,7 +28,7 @@ const EventSchema = new mongoose.Schema(
 
         image : {
             type: String,
-            default: "Meetup.png",
+            default: "/image/Meetup.png",
         },
     },
     {timestamps:true}
