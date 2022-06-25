@@ -17,7 +17,7 @@ module.exports = (app) => {
     EventController.deleteComment
   );
 
-  //goin or not decision
+  //join or not decision
   app.put("/api/decision/:eventId", authenticate, EventController.AddDecision);
 
   //all like routes...

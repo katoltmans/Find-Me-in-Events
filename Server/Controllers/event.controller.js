@@ -1,4 +1,3 @@
-const { findByIdAndUpdate } = require("../Models/event.model");
 const Event = require("../Models/event.model");
 
 const createEvent = (req, res) => {
