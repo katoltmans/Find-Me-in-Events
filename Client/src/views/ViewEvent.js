@@ -1,24 +1,27 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import EventDetail from "../components/EventDetail";
+import { Grid, Stack } from "@mui/material";
+import EventStatus from "../components/EventStatus";
+import EventComments from "../components/EventComments";
 
 const ViewEvent = () => {
-    // const navigate = useNavigate();
-    // const [event, setEvent] = useState({});
-    // const { id } = useParams();
-    // console.log("ID:", id);
-
-    // useEffect(() => {
-    //     axios
-    //         .get(`http://localhost:8000/api/events/${id}`)
-    //         .then((res) => {
-    //             console.log("EVENT: ", res.data);
-    //             setEvent(res.data);
-    //         })
-    //         .catch((err) => {
-    //             console.log(err);
-    //         });
-    // }, []);
+    return (
+        <div>
+            <Grid container spacing={2}>
+                <Grid item xs={6}>
+                    <EventDetail />
+                </Grid>
+                <Grid item xs={6}>
+                    <Stack>
+                        <EventStatus />
+                        <EventComments />
+                    </Stack>
+                </Grid>
+            </Grid>
+        </div>
+    );
 };
 
 export default ViewEvent;
