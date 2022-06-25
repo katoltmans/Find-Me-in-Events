@@ -30,7 +30,7 @@ function DisplayAllEvent() {
     return fixDate.toLocaleDateString();
   })
 
-  return <div>
+  return <div className="displayAll">
     {eventList.map((event)=>(
       <div key={event._id}>
     <Card sx={{ maxWidth: 345 }}>
@@ -41,8 +41,6 @@ function DisplayAllEvent() {
           image={event.image}
           alt={event.image}
         />
-
-        {/* <img src=`./image/${event.image}` alt={event.eventTitle}/> */}
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
             {event.eventTitle}
@@ -65,7 +63,7 @@ function DisplayAllEvent() {
       </CardActions>
     </Card>
     </div>
-    ))};
+    ))}
     </div>;
 }
 
