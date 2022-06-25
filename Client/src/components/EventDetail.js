@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import { styled, alpha } from "@mui/material/styles";
 import {
-    Box,
     Grid,
     Paper,
     Typography,
     Button,
     MenuItem,
-    Menu,
     IconButton,
 } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -58,14 +55,14 @@ const EventDetail = () => {
     };
 
     return (
-        <Paper elevation={2} sx={{ p: 10, m: 5 }}>
-            <Grid container spacing={2}>
-                <Grid item xs={8}>
+        <Paper elevation={2} sx={{ p: 10 }}>
+            <Grid container spacing={2} sx={{ mb: 3 }}>
+                <Grid item xs={11}>
                     <Typography variant="h4" component="h2">
                         {event.eventTitle}
                     </Typography>
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={1}>
                     <MenuDropdown
                         dropdownButton={
                             <IconButton>
@@ -89,7 +86,7 @@ const EventDetail = () => {
                 </Grid>
             </Grid>
             <Grid container>
-                <Grid item xs={12}>
+                <Grid item xs={12} sx={{ mb: 2 }}>
                     <img
                         src="/image/Meetup.png"
                         alt="placeholder"
@@ -97,19 +94,19 @@ const EventDetail = () => {
                     />
                 </Grid>
             </Grid>
-            <Grid container item spacing={5} sx={{ display: "flex" }}>
-                <Grid item xs={6}>
+            <Grid container item spacing={5} sx={{ display: "flex", mb: 2 }}>
+                <Grid item xs={7}>
                     <Typography variant="h6" component="h2">
                         {event.location}
                     </Typography>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={5}>
                     <Typography variant="h6" component="h2">
                         {eventDate(event.date)} | {event.time}
                     </Typography>
                 </Grid>
             </Grid>
-            <Typography variant="body1" component="h2">
+            <Typography variant="body1" component="h2" sx={{ mb: 3 }}>
                 {event.description}
             </Typography>
 

@@ -9,14 +9,21 @@ import EventComments from "../components/EventComments";
 const ViewEvent = () => {
     return (
         <div>
-            <Grid container spacing={2}>
-                <Grid item xs={6}>
+            <Grid container sx={{ mt: 5, mx: 2 }}>
+                <Grid item xs={6} width="100%">
                     <EventDetail />
                 </Grid>
                 <Grid item xs={6}>
-                    <Stack>
-                        <EventStatus />
-                        <EventComments />
+                    <Stack width="100%" sx={{ mt: 5, ml: 2 }}>
+                        Map Component will go here
+                        <Grid container spacing={2} sx={{ mt: 1 }}>
+                            <Grid item xs={4}>
+                                <EventStatus />
+                            </Grid>
+                            <Grid item xs={7}>
+                                <EventComments />
+                            </Grid>
+                        </Grid>
                     </Stack>
                 </Grid>
             </Grid>
