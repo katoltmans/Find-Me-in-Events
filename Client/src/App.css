@@ -21,7 +21,9 @@
     padding: 30px;
 }
 
-/* .state{
+.displayAll{
     display: flex;
-    justify-content: space-around;
-} */
+    justify-content: space-between;
+    margin: 20px;
+    padding: 20px;
+}
