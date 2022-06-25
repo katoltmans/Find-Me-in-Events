@@ -16,49 +16,6 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import MenuDropdown from "./MenuDropdown";
 
-const StyledMenu = styled((props) => (
-    <Menu
-        elevation={0}
-        anchorOrigin={{
-            vertical: "bottom",
-            horizontal: "right",
-        }}
-        transformOrigin={{
-            vertical: "top",
-            horizontal: "right",
-        }}
-        {...props}
-    />
-))(({ theme }) => ({
-    "& .MuiPaper-root": {
-        borderRadius: 6,
-        marginTop: theme.spacing(1),
-        minWidth: 180,
-        color:
-            theme.palette.mode === "light"
-                ? "rgb(55, 65, 81)"
-                : theme.palette.grey[300],
-        boxShadow:
-            "rgb(255, 255, 255) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px",
-        "& .MuiMenu-list": {
-            padding: "4px 0",
-        },
-        "& .MuiMenuItem-root": {
-            "& .MuiSvgIcon-root": {
-                fontSize: 18,
-                color: theme.palette.text.secondary,
-                marginRight: theme.spacing(1.5),
-            },
-            "&:active": {
-                backgroundColor: alpha(
-                    theme.palette.primary.main,
-                    theme.palette.action.selectedOpacity
-                ),
-            },
-        },
-    },
-}));
-
 const EventDetail = () => {
     const navigate = useNavigate();
     const [event, setEvent] = useState({});
@@ -81,7 +38,7 @@ const EventDetail = () => {
         axios
             .delete(`http://localhost:8000/api/events/${id}`)
             .then((res) => {
-                console.loh(res);
+                console.log(res);
                 // setEvents(events.filter((event) => event._id !== eventId));
                 navigate("/");
             })
@@ -89,16 +46,6 @@ const EventDetail = () => {
                 console.log("Error with delete request", err);
             });
     };
-
-    const [anchorEl, setAnchorEl] = useState(null);
-    const open = Boolean(anchorEl);
-    const handleMenuClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
-    // Source: https://mui.com/material-ui/react-menu/
 
     const routeToUpdate = () => {
         navigate("/");
@@ -119,21 +66,12 @@ const EventDetail = () => {
                     </Typography>
                 </Grid>
                 <Grid item xs={4}>
-                    <IconButton
-                        aria-label="more"
-                        id="editMenuButton"
-                        aria-controls={open ? "editMenu" : undefined}
-                        aria-expanded={open ? "true" : undefined}
-                        aria-haspopup="true"
-                        onClick={handleMenuClick}
-                    >
-                        <MoreVertIcon />
-                    </IconButton>
-                    <StyledMenu
-                        id="editMenu"
-                        anchorEl={anchorEl}
-                        open={open}
-                        onClose={handleClose}
+                    <MenuDropdown
+                        dropdownButton={
+                            <IconButton>
+                                <MoreVertIcon />
+                            </IconButton>
+                        }
                     >
                         <MenuItem
                             onClick={() => routeToUpdate(event._id)}
@@ -147,7 +85,7 @@ const EventDetail = () => {
                         >
                             Delete
                         </MenuItem>
-                    </StyledMenu>
+                    </MenuDropdown>
                 </Grid>
             </Grid>
             <Grid container>
