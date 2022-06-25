@@ -80,10 +80,10 @@ const EventSchema = new mongoose.Schema(
         enum: statesArray,
       },
     },
-    // date: {
-    //   type: Date,
-    //   required: [true, "When's the Event?"],
-    // },
+    date: {
+      type: Date,
+      //   required : [true, 'When\'s the Event?']
+    },
     time: {
       type: String,
       required: [true, "Can't have an Event without a set time, come on!"],
@@ -98,7 +98,10 @@ const EventSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
-    image: String,
+    image: {
+      type: String,
+      default: "/image/Meetup.png",
+    },
 
     going: [
       {

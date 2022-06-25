@@ -10,10 +10,20 @@
     margin: 10px;
     padding: 10px;
     text-align: center;
-    
 }
 
 .eventLaunchButton{
     display: flex;
     justify-content: center;
+}
+
+.boxDetails{
+    padding: 30px;
+}
+
+.displayAll{
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+    padding: 20px;
 }
