@@ -1,36 +1,132 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
+const statesArray = [
+  "AL",
+  "AK",
+  "AZ",
+  "AR",
+  "CA",
+  "CO",
+  "CT",
+  "DC",
+  "DE",
+  "FL",
+  "GA",
+  "HI",
+  "ID",
+  "IL",
+  "IN",
+  "IA",
+  "KS",
+  "KY",
+  "LA",
+  "ME",
+  "MD",
+  "MA",
+  "MI",
+  "MN",
+  "MS",
+  "MO",
+  "MT",
+  "NE",
+  "NV",
+  "NH",
+  "NJ",
+  "NM",
+  "NY",
+  "NC",
+  "ND",
+  "OH",
+  "OK",
+  "OR",
+  "PA",
+  "RI",
+  "SC",
+  "SD",
+  "TN",
+  "TX",
+  "UT",
+  "VT",
+  "VA",
+  "WA",
+  "WV",
+  "WI",
+  "WY",
+];
 
 const EventSchema = new mongoose.Schema(
-    {
-        eventTitle : {
-            type: String,
-            required : [true, 'Event must have a title'],
-            minlength : [5, 'Title can\'t be less than 5 characters']
+  {
+    eventTitle: {
+      type: String,
+      required: [true, "Event must have a title"],
+      minlength: [5, "Title can't be less than 5 characters"],
     },
-        location : {
-            type: String,
-            required : [true, 'Where\'s the Event located?'],
-            minlength : [3, 'Location must be at least 3 characters']
-        },
-        date : {
-            type : Date,
-            required : [true, 'When\'s the Event?']
-        }, 
-        time : {
-            type : String,
-            required : [true, 'Can\'t have an Event without a set time, come on!']
-        },
-        description : {
-            type: String, 
-            required : [true, 'Tell us what the Event is about.'],
-            minlength : [10, 'Describe Event in minimum of 10 characters.']
-        },
-
-        image : String
-
+    location: {
+      street: {
+        type: String,
+        required: [true, "Sreet name is required"],
+      },
+      city: {
+        type: String,
+        required: [true, "City name is required"],
+      },
+      zipcode: {
+        type: Number,
+        required: [true, "Zipcode name is required"],
+      },
+      state: {
+        type: String,
+        uppercase: true,
+        required: true,
+        enum: statesArray,
+      },
     },
-    {timestamps:true}
-)
+    // date: {
+    //   type: Date,
+    //   required: [true, "When's the Event?"],
+    // },
+    time: {
+      type: String,
+      required: [true, "Can't have an Event without a set time, come on!"],
+    },
+    description: {
+      type: String,
+      required: [true, "Tell us what the Event is about."],
+      minlength: [10, "Describe Event in minimum of 10 characters."],
+    },
 
-const Event = mongoose.model('Events', EventSchema);
+    createdBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+    image: String,
+
+    going: [
+      {
+        decision: {
+          type: String,
+          enum: ["Going", "May-be", "Not-Going"],
+        },
+        personId: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "User",
+        },
+      },
+    ],
+
+    comments: [
+      {
+        details: String,
+        postedBy: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "User",
+        },
+        postedAt: { type: Date, default: Date.now },
+      },
+    ],
+    likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+  },
+  { timestamps: true }
+);
+
+const Event = mongoose.model("Events", EventSchema);
 module.exports = Event;

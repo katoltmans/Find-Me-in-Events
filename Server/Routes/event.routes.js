@@ -1,10 +1,26 @@
-const EventController = require('../Controllers/event.controller');
+const EventController = require("../Controllers/event.controller");
+const authenticate = require("../Config/authentication.middleware");
 
-module.exports = app => {
-    app.get('/api/events', EventController.getAllEvents);
-    app.put('/api/events/:id', EventController.updateOneEvent);
-    app.post('/api/events', EventController.createEvent);
-    app.get('/api/events/:id', EventController.getOneEvent);
-    app.delete('/api/events/:id', EventController.deleteOneEvent);
+module.exports = (app) => {
+  //all events routes....
+  app.get("/api/events", authenticate, EventController.getAllEvents);
+  app.get("/api/events/:id", authenticate, EventController.getOneEvent);
+  app.post("/api/events", authenticate, EventController.createEvent);
+  app.put("/api/events/:id", authenticate, EventController.updateOneEvent);
+  app.delete("/api/events/:id", authenticate, EventController.deleteOneEvent);
 
-}
+  //all comment routes...
+  app.put("/api/comment/:eventId", authenticate, EventController.addComment);
+  app.put(
+    "/api/uncomment/:commentId",
+    authenticate,
+    EventController.deleteComment
+  );
+
+  //goin or not decision
+  app.put("/api/decision/:eventId", authenticate, EventController.AddDecision);
+
+  //all like routes...
+  app.put("/api/like", authenticate);
+  app.put("/api/unlike", authenticate);
+};
