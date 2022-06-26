@@ -38,12 +38,17 @@ const EventComments = (props) => {
 
     const deleteComment = (commentId) => {
         axios
-            .delete(`http://localhost:8000/api/uncomment/${commentId}`, {
-                withCredentials: true,
-            })
+            .put(
+                `http://localhost:8000/api/uncomment/${commentId}`,
+                {
+                    eventId: id,
+                },
+                {
+                    withCredentials: true,
+                }
+            )
             .then((res) => {
                 console.log(res);
-                console.log(comments);
                 setComments(comments.filter((c) => c._id !== commentId));
             })
             .catch((err) => {
