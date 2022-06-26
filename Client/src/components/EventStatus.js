@@ -1,9 +1,25 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Paper, Typography } from "@mui/material";
+import { useParams } from "react-router-dom";
 
-const EventStatus = () => {
+const EventStatus = (props) => {
     const [attendees, setAttendees] = useState([]);
+    const { id } = useParams();
+
+    useEffect(() => {
+        axios
+            .get(`http://localhost:8000/api/events/${id}`, {
+                withCredentials: true,
+            })
+            .then((res) => {
+                setAttendees(res.data.going);
+                console.log(res.data.going);
+            })
+            .catch((err) => {
+                console.log("Error EventController request", err);
+            });
+    }, []);
 
     return (
         <Paper elevation={2} sx={{ p: 3 }}>

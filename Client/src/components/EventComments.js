@@ -27,7 +27,7 @@ const EventComments = () => {
                     label="Comments"
                     id="div"
                     className="textField"
-                    value={null}
+                    // value={comment}
                     onChange={(e) => setComment(e.target.value)}
                 />
                 <Button
