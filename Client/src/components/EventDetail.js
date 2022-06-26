@@ -13,29 +13,15 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import MenuDropdown from "./MenuDropdown";
 
-const EventDetail = () => {
+const EventDetail = (props) => {
     const navigate = useNavigate();
-    const [event, setEvent] = useState({});
-    const { id } = useParams();
-    console.log("ID:", id);
-
-    useEffect(() => {
-        axios
-            .get(`http://localhost:8000/api/events/${id}`, {
-                withCredentials: true,
-            })
-            .then((res) => {
-                console.log("EVENT: ", res.data);
-                setEvent(res.data.event);
-            })
-            .catch((err) => {
-                console.log("Error with getOneEvent request", err);
-            });
-    }, []);
+    const { event, user, id } = props;
 
     const handleDelete = () => {
         axios
-            .delete(`http://localhost:8000/api/events/${id}`)
+            .delete(`http://localhost:8000/api/events/${id}`, {
+                withCredentials: true,
+            })
             .then((res) => {
                 console.log(res);
                 // setEvents(events.filter((event) => event._id !== eventId));
@@ -43,6 +29,26 @@ const EventDetail = () => {
             })
             .catch((err) => {
                 console.log("Error with delete request", err);
+            });
+    };
+
+    const updateStatus = (status) => {
+        axios
+            .put(
+                `http://localhost:8000/api/decision/${id}`,
+                {
+                    decision: status,
+                    personId: user._id,
+                },
+                {
+                    withCredentials: true,
+                }
+            )
+            .then((res) => {
+                console.log("Status response", res);
+            })
+            .catch((err) => {
+                console.log("Error with update status", err);
             });
     };
 
@@ -125,7 +131,7 @@ const EventDetail = () => {
             >
                 <MenuItem
                     onClick={(e) => {
-                        console.log("Going");
+                        updateStatus("Going");
                     }}
                     disableRipple
                 >
@@ -133,7 +139,7 @@ const EventDetail = () => {
                 </MenuItem>
                 <MenuItem
                     onClick={(e) => {
-                        console.log("Maybe");
+                        updateStatus("Maybe");
                     }}
                     disableRipple
                 >
@@ -141,7 +147,7 @@ const EventDetail = () => {
                 </MenuItem>
                 <MenuItem
                     onClick={(e) => {
-                        console.log("Can't Go");
+                        updateStatus("Not-Going");
                     }}
                     disableRipple
                 >
