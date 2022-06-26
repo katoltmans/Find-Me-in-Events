@@ -1,14 +1,54 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Button, Paper, TextField, Typography } from "@mui/material";
+import {
+    Button,
+    IconButton,
+    Paper,
+    TextField,
+    Typography,
+} from "@mui/material";
+import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 
-const EventComments = () => {
-    const [attendees, setAttendees] = useState([]);
-    const [comments, setComments] = useState([]);
+const EventComments = (props) => {
+    const { comments, setComments, id, user } = props;
     const [comment, setComment] = useState("");
 
     const onSubmitComment = () => {
-        console.log(comment);
+        axios
+            .put(
+                `http://localhost:8000/api/comment/${id}`,
+                {
+                    details: comment,
+                },
+                {
+                    withCredentials: true,
+                }
+            )
+            .then((res) => {
+                console.log(res);
+                console.log(comments);
+                console.log("Comment: ", comment);
+                setComments(res.data.comments);
+                setComment("");
+            })
+            .catch((err) => {
+                console.log("Error with EventController comments request", err);
+            });
+    };
+
+    const deleteComment = (commentId) => {
+        axios
+            .delete(`http://localhost:8000/api/uncomment/${commentId}`, {
+                withCredentials: true,
+            })
+            .then((res) => {
+                console.log(res);
+                console.log(comments);
+                setComments(comments.filter((c) => c._id !== commentId));
+            })
+            .catch((err) => {
+                console.log("Error with delete request", err);
+            });
     };
 
     return (
@@ -17,9 +57,22 @@ const EventComments = () => {
                 Comments
             </Typography>
             <ul>
-                <li>Will Set Map Function</li>
-                <li>Once I Have</li>
-                <li>Axios Route</li>
+                {comments.map((c) => {
+                    return (
+                        <li key={c._id}>
+                            {c.details}
+                            {c.postedBy._id === user._id ? (
+                                <IconButton
+                                    onClick={() => deleteComment(c._id)}
+                                >
+                                    <HighlightOffIcon
+                                        sx={{ color: "#992e2e" }}
+                                    />
+                                </IconButton>
+                            ) : null}
+                        </li>
+                    );
+                })}
             </ul>
             <form>
                 <TextField
@@ -27,7 +80,7 @@ const EventComments = () => {
                     label="Comments"
                     id="div"
                     className="textField"
-                    // value={comment}
+                    value={comment}
                     onChange={(e) => setComment(e.target.value)}
                 />
                 <Button

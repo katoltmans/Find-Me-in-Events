@@ -17,7 +17,7 @@ const EventStatus = (props) => {
                 console.log("Attendees: ", res.data.event.going);
             })
             .catch((err) => {
-                console.log("Error EventController request", err);
+                console.log("Error EventController going request", err);
             });
     }, []);
 
@@ -34,9 +34,19 @@ const EventStatus = (props) => {
                 Going
             </Typography>
             <ul>
-                {attendees.map((a) => {
+                {attendees.map((a, index) => {
                     if (a.decision === "Going") {
-                        return <li>{a.personId}</li>;
+                        return (
+                            <li
+                                key={index}
+                                style={{
+                                    color: "#0e934e",
+                                    overflowWrap: "break-word",
+                                }}
+                            >
+                                {a.personId}
+                            </li>
+                        );
                     }
                 })}
             </ul>
@@ -48,23 +58,46 @@ const EventStatus = (props) => {
                 Maybe
             </Typography>
             <ul>
-                {attendees.map((a) => {
+                {attendees.map((a, index) => {
                     if (a.decision === "Maybe") {
-                        return <li>{a.personId}</li>;
+                        return (
+                            <li
+                                key={index}
+                                style={{
+                                    color: "#c49224",
+                                    overflowWrap: "break-word",
+                                }}
+                            >
+                                {a.personId}
+                            </li>
+                        );
                     }
                 })}
             </ul>
             <Typography
                 variant="h6"
                 component="h3"
-                sx={{ fontSize: 15, color: "#992e2e" }}
+                sx={{
+                    fontSize: 15,
+                    color: "#992e2e",
+                }}
             >
                 Can't Go
             </Typography>
             <ul>
-                {attendees.map((a) => {
+                {attendees.map((a, index) => {
                     if (a.decision === "Not-Going") {
-                        return <li>{a.personId}</li>;
+                        return (
+                            <li
+                                key={index}
+                                style={{
+                                    color: "#992e2e",
+                                    overflowWrap: "break-word",
+                                }}
+                            >
+                                {a.personId}
+                            </li>
+                        );
                     }
                 })}
             </ul>

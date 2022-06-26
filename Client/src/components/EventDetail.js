@@ -12,35 +12,10 @@ import {
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import MenuDropdown from "./MenuDropdown";
-import Cookies from "js-cookie";
-import jwtDecode from "jwt-decode";
 
-const EventDetail = () => {
+const EventDetail = (props) => {
     const navigate = useNavigate();
-    const [event, setEvent] = useState({});
-    const { id } = useParams();
-    const userToken = Cookies.get("userToken");
-    const [user, setUser] = useState(null);
-    console.log("ID:", id);
-
-    useEffect(() => {
-        if (userToken) {
-            const user = jwtDecode(userToken);
-            console.log("user", user);
-            setUser(user);
-        }
-        axios
-            .get(`http://localhost:8000/api/events/${id}`, {
-                withCredentials: true,
-            })
-            .then((res) => {
-                console.log("EVENT: ", res.data);
-                setEvent(res.data.event);
-            })
-            .catch((err) => {
-                console.log("Error with getOneEvent request", err);
-            });
-    }, []);
+    const { event, user, id } = props;
 
     const handleDelete = () => {
         axios
