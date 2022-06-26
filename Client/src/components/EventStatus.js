@@ -13,8 +13,8 @@ const EventStatus = (props) => {
                 withCredentials: true,
             })
             .then((res) => {
-                setAttendees(res.data.going);
-                console.log(res.data.going);
+                setAttendees(res.data.event.going);
+                console.log("Attendees: ", res.data.event.going);
             })
             .catch((err) => {
                 console.log("Error EventController request", err);
@@ -34,9 +34,11 @@ const EventStatus = (props) => {
                 Going
             </Typography>
             <ul>
-                <li>Will Set Map Function</li>
-                <li>Once I Have</li>
-                <li>Axios Route</li>
+                {attendees.map((a) => {
+                    if (a.decision === "Going") {
+                        return <li>{a.personId}</li>;
+                    }
+                })}
             </ul>
             <Typography
                 variant="h6"
@@ -46,9 +48,11 @@ const EventStatus = (props) => {
                 Maybe
             </Typography>
             <ul>
-                <li>Will Set Map Function</li>
-                <li>Once I Have</li>
-                <li>Axios Route</li>
+                {attendees.map((a) => {
+                    if (a.decision === "Maybe") {
+                        return <li>{a.personId}</li>;
+                    }
+                })}
             </ul>
             <Typography
                 variant="h6"
@@ -58,9 +62,11 @@ const EventStatus = (props) => {
                 Can't Go
             </Typography>
             <ul>
-                <li>Will Set Map Function</li>
-                <li>Once I Have</li>
-                <li>Axios Route</li>
+                {attendees.map((a) => {
+                    if (a.decision === "Not-Going") {
+                        return <li>{a.personId}</li>;
+                    }
+                })}
             </ul>
         </Paper>
     );
