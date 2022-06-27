@@ -5,6 +5,8 @@ import Navbar from "./components/Navbar";
 import LoginRegistrationForm from "./components/LoginRegistrationForm";
 import LaunchEvent from "./components/LaunchEvent";
 import DisplayAllEvent from "./components/DisplayAllEvent";
+import MyEvent from "./components/MyEvent";
+import EditEvent from "./components/EditEvent";
 import ViewEvent from "./views/ViewEvent";
 
 function App() {
@@ -25,6 +27,8 @@ function App() {
                     <Route path="/" element={<DisplayAllEvent />} />
                     <Route path="/new" element={<LaunchEvent />} />
                     <Route path="/events/:id" element={<ViewEvent />} />
+                    <Route path="/event/:id" element={<MyEvent />} />
+                    <Route path="/event/edit/:id" element={<EditEvent />} />
                 </Routes>
             </div>
         </BrowserRouter>

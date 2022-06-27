@@ -19,7 +19,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
             const user = jwtDecode(userToken);
             console.log("user", user);
             setUser(user);
-            navigate("/");
+            //navigate("/");  This redirects all other pages upon refresh
         }
     }, [isLoggedIn]);
 

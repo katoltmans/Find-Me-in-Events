@@ -14,7 +14,7 @@ function DisplayAllEvent() {
 
     useEffect(() => {
         axios
-            .get("http://localhost:8000/api/events", { withCredentials: true })
+            .get("http://localhost:8000/api/events",{ withCredentials: true })
             .then((res) => {
                 setEventList(res.data.events);
                 console.log(res.data.events);
@@ -54,7 +54,7 @@ function DisplayAllEvent() {
                                     variant="body2"
                                     color="text.secondary"
                                 >
-                                    {event.location}
+                                    {`${event.location.street},${event.location.city},${event.location.state},${event.location.zipcode}`}
                                 </Typography>
                                 <Typography
                                     variant="body2"

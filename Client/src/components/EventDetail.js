@@ -13,29 +13,16 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import MenuDropdown from "./MenuDropdown";
 
-const EventDetail = () => {
+const EventDetail = (props) => {
     const navigate = useNavigate();
-    const [event, setEvent] = useState({});
-    const { id } = useParams();
-    console.log("ID:", id);
-
-    useEffect(() => {
-        axios
-            .get(`http://localhost:8000/api/events/${id}`, {
-                withCredentials: true,
-            })
-            .then((res) => {
-                console.log("EVENT: ", res.data);
-                setEvent(res.data.event);
-            })
-            .catch((err) => {
-                console.log("Error with getOneEvent request", err);
-            });
-    }, []);
+    const { event, user, id } = props;
+    console.log(event)
 
     const handleDelete = () => {
         axios
-            .delete(`http://localhost:8000/api/events/${id}`)
+            .delete(`http://localhost:8000/api/events/${id}`, {
+                withCredentials: true,
+            })
             .then((res) => {
                 console.log(res);
                 // setEvents(events.filter((event) => event._id !== eventId));
@@ -46,8 +33,28 @@ const EventDetail = () => {
             });
     };
 
+    const updateStatus = (status) => {
+        axios
+            .put(
+                `http://localhost:8000/api/decision/${id}`,
+                {
+                    decision: status,
+                    personId: user._id,
+                },
+                {
+                    withCredentials: true,
+                }
+            )
+            .then((res) => {
+                console.log("Status response", res);
+            })
+            .catch((err) => {
+                console.log("Error with update status", err);
+            });
+    };
+
     const routeToUpdate = () => {
-        navigate("/");
+        navigate(`/event/edit/${id}`);
     };
 
     // Format date of event
@@ -99,8 +106,7 @@ const EventDetail = () => {
             <Grid container item spacing={5} sx={{ display: "flex", mb: 2 }}>
                 <Grid item xs={7}>
                     <Typography variant="h6" component="h2">
-                        {event.location}
-                    </Typography>
+                    {`${event.location.street},${event.location.city},${event.location.state},${event.location.zipcode}`}</Typography>
                 </Grid>
                 <Grid item xs={5}>
                     <Typography variant="h6" component="h2">
@@ -125,7 +131,7 @@ const EventDetail = () => {
             >
                 <MenuItem
                     onClick={(e) => {
-                        console.log("Going");
+                        updateStatus("Going");
                     }}
                     disableRipple
                 >
@@ -133,7 +139,7 @@ const EventDetail = () => {
                 </MenuItem>
                 <MenuItem
                     onClick={(e) => {
-                        console.log("Maybe");
+                        updateStatus("Maybe");
                     }}
                     disableRipple
                 >
@@ -141,7 +147,7 @@ const EventDetail = () => {
                 </MenuItem>
                 <MenuItem
                     onClick={(e) => {
-                        console.log("Can't Go");
+                        updateStatus("Not-Going");
                     }}
                     disableRipple
                 >
