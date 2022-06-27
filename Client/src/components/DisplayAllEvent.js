@@ -84,8 +84,8 @@ function DisplayAllEvent() {
         isLoaded?
         <div className="displayAll">
             {eventList.map((event) => (
-                <div key={event._id}>
-                    <Card sx={{ maxWidth: 345 }}>
+                <div key={event._id} className="displayAll">
+                    <Card sx={{ maxWidth: 450}}>
                         <CardActionArea>
                             <CardMedia
                                 component="img"
