@@ -11,7 +11,7 @@ const authenticate = async (req, res, next) => {
     console.log("userPayLoad", userPayload);
 
     if (userPayload) {
-      const user = User.findOne({ _id: userPayload._id });
+      const user = await User.findOne({ _id: userPayload._id });
       if (user) {
         req.loggedInuser = userPayload;
         console.log("User is authenticated");
