@@ -32,12 +32,9 @@ function LaunchEvent() {
             .post(
                 "http://localhost:8000/api/events",
                 
-                { eventTitle, location, date, time, description, image },
-                { withCredentials: true }
-                )
-                .then((res) => {
-                { eventTitle, location, date, time, description},{ withCredentials: true }
-                })
+                { eventTitle, location, date, time, description },
+                { withCredentials: true })
+                
             .then((res) => {
                 console.log(res.data);
                 navigate("/");

@@ -1,18 +1,37 @@
 import React, {useEffect, useState,useCallback} from 'react'
 import {GoogleMap, useJsApiLoader, Marker, DirectionsRenderer, Autocomplete} from '@react-google-maps/api'
+import axios from 'axios'
 
 
 
-function Gmaps() {
+
+
+
+
+function Gmaps(props) {
+    const {ID} = props
 
     const [lat, setLat] = useState(37.09024)
     const [lng, setLng] = useState(-95.712891)
-    // const [center, setCenter] = useState({
-    //     lat: 0,
-    //     lng: 0
-    // })
+    const [destination, setDestination] = useState('')
+    
 
-    useEffect(() => {}, [])
+        axios
+        .get(`http://localhost:8000/api/events/${ID}`, {
+            withCredentials: true,
+        })
+        .then((res) => {
+            console.log("EVENT: ", res.data);
+            console.log('id', ID)
+            const results = res.data.event.location
+            const address = results.street + ", "+ results.city + ', ' + results.state
+            console.log('results', address)
+            setDestination(address)
+            })
+            .catch((err) => {
+                console.log("Error with getOneEvent request", err);
+            });
+    
 
     useEffect(() => {
         const success = (pos) => {
@@ -26,14 +45,13 @@ function Gmaps() {
         navigator.geolocation.getCurrentPosition(success, err);
         
     },[])
-    
-    // setCenter({lat:lat, lng:lng})
+
     const center = { lat: lat, lng: lng }
     
-    
+    const apiKey = process.env.REACT_APP_API_KEY
     
     const { isLoaded } = useJsApiLoader({
-        googleMapsApiKey: 'AIzaSyAqda53MH6tUM80EqxZkk91dQsdrp9I9Cg',
+        googleMapsApiKey: apiKey,
         libraries: ['places'],
     })
     
@@ -42,7 +60,6 @@ function Gmaps() {
     const [distance, setDistance] = useState('')
     const [duration, setDuration] = useState('')
 
-    const [destination, setDestination] = useState('')
 
 
     const onLoad = useCallback(function callback(map) {
@@ -54,13 +71,6 @@ function Gmaps() {
     async function calculateRoute(e, { destination}) {
         e.preventDefault()
         console.log('center',center)
-        // console.log(
-        //     'origin :', origin,
-        //     'destination:', destination
-        // )
-        // if (origin === '' || destination === '') {
-        //     return
-        // }
         // eslint-disable-next-line no-undef
         const directionsService = new google.maps.DirectionsService()
         const results = await directionsService.route({
@@ -95,13 +105,13 @@ function Gmaps() {
             {directionsResponse && (
             <DirectionsRenderer directions={directionsResponse} />
             )}
-            <Marker position={center} title = 'Your locaton'/> 
+            <Marker position={center} title = 'Your locaton'/>
         </GoogleMap>
 
-        <form onSubmit={(e) => calculateRoute(e, {origin, destination})}>
+        <form onSubmit={(e) => calculateRoute(e, {destination})}>
 
             <Autocomplete>
-                <input type='text' placeholder='Destination' value={destination} onSelectCapture={(e) =>{setDestination(e.target.value)}}/>
+                <input type='text' placeholder='Destination' value= {destination} onSelectCapture={(e) =>{setDestination(e.target.value)}}/>
             </Autocomplete>
             <input type="submit" value="GO"/>
         </form>
