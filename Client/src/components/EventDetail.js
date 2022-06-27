@@ -16,6 +16,7 @@ import MenuDropdown from "./MenuDropdown";
 const EventDetail = (props) => {
     const navigate = useNavigate();
     const { event, user, id } = props;
+    console.log(event)
 
     const handleDelete = () => {
         axios
@@ -53,7 +54,7 @@ const EventDetail = (props) => {
     };
 
     const routeToUpdate = () => {
-        navigate("/");
+        navigate(`/event/edit/${id}`);
     };
 
     // Format date of event
@@ -105,8 +106,7 @@ const EventDetail = (props) => {
             <Grid container item spacing={5} sx={{ display: "flex", mb: 2 }}>
                 <Grid item xs={7}>
                     <Typography variant="h6" component="h2">
-                        {event.location}
-                    </Typography>
+                    {`${event.location.street},${event.location.city},${event.location.state},${event.location.zipcode}`}</Typography>
                 </Grid>
                 <Grid item xs={5}>
                     <Typography variant="h6" component="h2">

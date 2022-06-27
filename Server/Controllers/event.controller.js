@@ -11,7 +11,7 @@ const createEvent = (req, res) => {
             console.log("Running Query: create()", newEvent);
         })
         .catch((err) => {
-            res.json({
+            res.status(400).json({
                 message: "Something went wrong running Query: create()",
                 error: err,
             });
@@ -27,7 +27,7 @@ const getAllEvents = (req, res) => {
             console.log("Running Query: find()", allEvent);
         })
         .catch((err) => {
-            res.json({
+            res.status(400).json({
                 message: "Something went wrong running Query: find()",
                 error: err,
             });
@@ -43,7 +43,7 @@ const getOneEvent = (req, res) => {
             console.log("Running Query: findOne()", oneEvent);
         })
         .catch((err) => {
-            res.json({
+            res.status(400).json({
                 message: "Something went wrong running Query: findOne()",
                 error: err,
             });
@@ -60,7 +60,7 @@ const updateOneEvent = (req, res) => {
             console.log("Running Query: findOneAndUpdate()", updated);
         })
         .catch((err) => {
-            res.json({
+            res.status(400).json({
                 message:
                     "Something went wrong running Query: findOneAndUpdate()",
                 error: err,
@@ -75,7 +75,7 @@ const deleteOneEvent = (req, res) => {
             console.log("Running Query: deleteOne()", results);
         })
         .catch((err) => {
-            res.json({
+            res.status(400).json({
                 message: "Something went wrong running Query: find()",
                 error: err,
             });
