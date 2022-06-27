@@ -55,8 +55,6 @@ function LaunchEvent() {
   const handleTimings = (e) => {
     const time = e.target.value;
     const [hrs, min] = time.split(":");
-    console.log("da", hrs);
-    console.log("timing", Number(time.slice(0, 2)));
     if (Number(hrs) > 12) {
       console.log("`${Number(hrs) - 12}:{min}`", `${Number(hrs) - 12}:{min}`);
       setTime(`${Number(hrs) - 12}:${min} PM`);
