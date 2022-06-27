@@ -32,8 +32,8 @@ function LaunchEvent() {
                 "http://localhost:8000/api/events",
                 { eventTitle, location, date, time, description, image },
                 { withCredentials: true }
-            )
-            .then((res) => {
+                )
+                .then((res) => {
                 console.log(res.data);
                 navigate("/");
             })

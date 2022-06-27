@@ -5,6 +5,7 @@ import EventDetail from "../components/EventDetail";
 import { Grid, Stack } from "@mui/material";
 import EventStatus from "../components/EventStatus";
 import EventComments from "../components/EventComments";
+import Gmaps from "./Gmaps";
 import jwtDecode from "jwt-decode";
 import Cookies from "js-cookie";
 
@@ -44,7 +45,7 @@ const ViewEvent = () => {
                     </Grid>
                     <Grid item xs={6}>
                         <Stack width="100%" sx={{ mt: 5, ml: 2 }}>
-                            Map Component will go here
+                            <Gmaps/>
                             <Grid container spacing={2} sx={{ mt: 1 }}>
                                 <Grid item xs={4}>
                                     <EventStatus />
