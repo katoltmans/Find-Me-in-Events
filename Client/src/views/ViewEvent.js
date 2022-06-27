@@ -10,12 +10,13 @@ import Cookies from "js-cookie";
 
 const ViewEvent = () => {
     const [comments, setComments] = useState([]);
-    const [event, setEvent] = useState({});
+    const [event, setEvent] = useState(false);
     const userToken = Cookies.get("userToken");
     const [user, setUser] = useState(null);
     const { id } = useParams();
 
     useEffect(() => {
+        console.log("hello there")
         if (userToken) {
             const user = jwtDecode(userToken);
             console.log("user", user);
