@@ -16,7 +16,7 @@ const ViewEvent = () => {
     const { id } = useParams();
 
     useEffect(() => {
-        console.log("hello there")
+        console.log("hello there");
         if (userToken) {
             const user = jwtDecode(userToken);
             console.log("user", user);

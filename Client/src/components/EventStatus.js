@@ -82,7 +82,7 @@ const EventStatus = (props) => {
                     color: "#992e2e",
                 }}
             >
-                Can't Go
+                Not Going
             </Typography>
             <ul>
                 {attendees.map((a, index) => {

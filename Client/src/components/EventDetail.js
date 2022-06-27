@@ -16,7 +16,7 @@ import MenuDropdown from "./MenuDropdown";
 const EventDetail = (props) => {
     const navigate = useNavigate();
     const { event, user, id } = props;
-    console.log(event)
+    console.log(event);
 
     const handleDelete = () => {
         axios
@@ -47,6 +47,8 @@ const EventDetail = (props) => {
             )
             .then((res) => {
                 console.log("Status response", res);
+                navigate("/events/" + id);
+                console.log("Successfully navigated to /events/" + id);
             })
             .catch((err) => {
                 console.log("Error with update status", err);
@@ -71,28 +73,30 @@ const EventDetail = (props) => {
                         {event.eventTitle}
                     </Typography>
                 </Grid>
-                <Grid item xs={1}>
-                    <MenuDropdown
-                        dropdownButton={
-                            <IconButton>
-                                <MoreVertIcon />
-                            </IconButton>
-                        }
-                    >
-                        <MenuItem
-                            onClick={() => routeToUpdate(event._id)}
-                            disableRipple
+                {user._id === event.createdBy ? (
+                    <Grid item xs={1}>
+                        <MenuDropdown
+                            dropdownButton={
+                                <IconButton>
+                                    <MoreVertIcon />
+                                </IconButton>
+                            }
                         >
-                            Edit
-                        </MenuItem>
-                        <MenuItem
-                            onClick={() => handleDelete(event._id)}
-                            disableRipple
-                        >
-                            Delete
-                        </MenuItem>
-                    </MenuDropdown>
-                </Grid>
+                            <MenuItem
+                                onClick={() => routeToUpdate(event._id)}
+                                disableRipple
+                            >
+                                Edit
+                            </MenuItem>
+                            <MenuItem
+                                onClick={() => handleDelete(event._id)}
+                                disableRipple
+                            >
+                                Delete
+                            </MenuItem>
+                        </MenuDropdown>
+                    </Grid>
+                ) : null}
             </Grid>
             <Grid container>
                 <Grid item xs={12} sx={{ mb: 2 }}>
@@ -106,7 +110,8 @@ const EventDetail = (props) => {
             <Grid container item spacing={5} sx={{ display: "flex", mb: 2 }}>
                 <Grid item xs={7}>
                     <Typography variant="h6" component="h2">
-                    {`${event.location.street},${event.location.city},${event.location.state},${event.location.zipcode}`}</Typography>
+                        {`${event.location.street},${event.location.city},${event.location.state},${event.location.zipcode}`}
+                    </Typography>
                 </Grid>
                 <Grid item xs={5}>
                     <Typography variant="h6" component="h2">
@@ -151,7 +156,7 @@ const EventDetail = (props) => {
                     }}
                     disableRipple
                 >
-                    Can't Go
+                    Not Going
                 </MenuItem>
             </MenuDropdown>
         </Paper>
