@@ -44,7 +44,7 @@ const EventStatus = (props) => {
                                     overflowWrap: "break-word",
                                 }}
                             >
-                                {a.personId}
+                {a.personId.firstName + " " + a.personId.lastName}
                             </li>
                         );
                     }
@@ -68,7 +68,7 @@ const EventStatus = (props) => {
                                     overflowWrap: "break-word",
                                 }}
                             >
-                                {a.personId}
+                {a.personId.firstName + " " + a.personId.lastName}
                             </li>
                         );
                     }
@@ -95,7 +95,7 @@ const EventStatus = (props) => {
                                     overflowWrap: "break-word",
                                 }}
                             >
-                                {a.personId}
+                {a.personId.firstName + " " + a.personId.lastName}
                             </li>
                         );
                     }
