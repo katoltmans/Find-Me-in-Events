@@ -11,13 +11,17 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
+import { format } from 'date-fns'
+
 
 function EditEvent() {
     const [eventTitle, setEventTitle] = useState("");
-    const [location, setLocation] = useState("");
-    const [city, setCity] = useState("");
-    const [state , setState] = useState("");
-    const [zipcode , setZipcode] = useState("");
+    const [location, setLocation] = useState({
+        street: '',city: '', state: '', zipcode: ''
+    });   
+    // const [city, setCity] = useState("");
+    // const [state , setState] = useState("");
+    // const [zipcode , setZipcode] = useState("");
     const [date, setDate] = useState("0");
     const [time, setTime] = useState("0");
     const [image, setImage] = useState("");
@@ -32,10 +36,10 @@ function EditEvent() {
         axios.get(`http://localhost:8000/api/events/${id}`,{withCredentials:true})
         .then(res =>{
             setEventTitle(res.data.event.eventTitle)
-            setLocation(res.data.event.location.street)
-            setCity(res.data.event.location.city)
-            setState(res.data.event.location.state)
-            setZipcode(res.data.event.location.zipcode)
+            setLocation(res.data.event.location)
+            // setCity(res.data.event.location.city)
+            // setState(res.data.event.location.state)
+            // setZipcode(res.data.event.location.zipcode)
             setDate(res.data.event.date)
             setTime(res.data.event.time)
             setDescription(res.data.event.description)
@@ -46,20 +50,25 @@ function EditEvent() {
     }, [])
 
 
-    const eventDate = (date) => {
-        let fixDate = new Date(date);
-        return fixDate.toLocaleDateString();
+    const eventDate= (date) =>{
+    return format (new Date(date), 'yyyy-MM-dd')
     };
-    console.log(eventDate);
+
+    const locationHandler = (e) => {
+        setLocation({
+        ...location,
+        [e.target.name]: e.target.value,
+        });
+    };
 
     //submithandler
     const submitHandler = (e) => {
         e.preventDefault();
         console.log("hello");
         axios
-            .post(
+            .put(
                 `http://localhost:8000/api/events/${id}`,
-                { eventTitle, location, date, time, description})
+                { eventTitle, location, date, time, description}, {withCredentials: true})
             .then((res) => {
                 console.log(res.data);
                 navigate("/");
@@ -101,23 +110,27 @@ function EditEvent() {
                             fullWidth
                             label="Street"
                             id="fullWidth"
-                            value={location}
-                            onChange={(e) => setLocation(e.target.value)}
+                            value={location.street}
+                            onChange={locationHandler}
                         />
                     </Box>
                     <br />
                     <Grid container item spacing={3}>
                         <Grid item xs={6}>
-                            <TextField fullWidth label="City" id="fullWidth" />
+                            <TextField fullWidth label="City" id="fullWidth"  value={location.city}
+                            onChange={locationHandler}/>
                         </Grid>
                         <Grid item xs={3}>
-                            <TextField fullWidth label="State" id="fullWidth" />
+                            <TextField fullWidth label="State" id="fullWidth" value={location.state}
+                            onChange={locationHandler}/>
                         </Grid>
                         <Grid item xs={3}>
                             <TextField
                                 fullWidth
                                 label="ZipCode"
                                 id="fullWidth"
+                                value={location.zipcode}
+                            onChange={locationHandler}
                             />
                         </Grid>
                     </Grid>

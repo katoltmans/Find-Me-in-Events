@@ -22,8 +22,7 @@
 }
 
 .displayAll{
-    display: flex;
-    justify-content: space-between;
+    display:inline-block;
+    justify-content:space-around;
     margin: 20px;
-    padding: 20px;
 }
