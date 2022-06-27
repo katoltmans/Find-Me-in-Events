@@ -21,7 +21,7 @@ const createEvent = (req, res) => {
 const getAllEvents = (req, res) => {
   Event.find()
     .populate("comments", "details postedAt")
-    .populate("comments.postedBy", "_id firstName lastName")
+    .populate("comments.postedBy", "firstName lastName")
     .then((allEvent) => {
       res.json({ events: allEvent });
       console.log("Running Query: find()", allEvent);
@@ -34,6 +34,18 @@ const getAllEvents = (req, res) => {
     });
 };
 
+const getMyEvents = async (req, res) => {
+  try {
+    const loggedInUser = req.loggedInuser;
+    const events = await Event.find({ "going.personId": loggedInUser })
+      .populate("createdBy", "firstName lastName")
+      .populate("going.personId", "firstName lastName");
+    res.status(200).json(events);
+  } catch (err) {
+    console.log("Error while finding all my events", err);
+    res.status(400).json(err);
+  }
+};
 const getOneEvent = (req, res) => {
   Event.findOne({ _id: req.params.id })
     .populate("comments", "details postedAt")
@@ -183,4 +195,5 @@ module.exports = {
   addComment,
   deleteComment,
   AddDecision,
+  getMyEvents,
 };
