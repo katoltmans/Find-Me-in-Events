@@ -8,6 +8,7 @@ module.exports = (app) => {
   app.post("/api/events", authenticate, EventController.createEvent);
   app.put("/api/events/:id", authenticate, EventController.updateOneEvent);
   app.delete("/api/events/:id", authenticate, EventController.deleteOneEvent);
+  app.get("/api/getmyevents", authenticate, EventController.getMyEvents);
 
   //all comment routes...
   app.put("/api/comment/:eventId", authenticate, EventController.addComment);
