@@ -26,6 +26,7 @@ function EditEvent() {
     const [time, setTime] = useState("0");
     const [image, setImage] = useState("");
     const [description, setDescription] = useState([]);
+    const[errors,setErrors] = useState([]);
 
     //navigate
     const navigate = useNavigate();
@@ -37,15 +38,12 @@ function EditEvent() {
         .then(res =>{
             setEventTitle(res.data.event.eventTitle)
             setLocation(res.data.event.location)
-            // setCity(res.data.event.location.city)
-            // setState(res.data.event.location.state)
-            // setZipcode(res.data.event.location.zipcode)
             setDate(res.data.event.date)
             setTime(res.data.event.time)
             setDescription(res.data.event.description)
             console.log("DATATAT",res.data.event.date)
         }).catch(err =>{
-            console.log("Error on Edit",err)
+            console.log("Error on Edit",err.response.data)
         })
     }, [])
 
@@ -74,12 +72,14 @@ function EditEvent() {
                 navigate("/");
             })
             .catch((err) => {
+                setErrors(err.response.data.error.errors)
                 console.log(err);
             });
     };
 
     return (
         <div className="eventLaunchBar">
+            
             <Card sx={{ maxWidth: 450 }} className="boxDetails">
                 <form>
                     <Box
@@ -98,7 +98,9 @@ function EditEvent() {
                             value={eventTitle}
                             onChange={(e) => setEventTitle(e.target.value)}
                         />
+                        
                     </Box>
+                    {errors.eventTitle ? <p>{errors.eventTitle.message}</p> : null}
                     <br />
                     <Box
                         sx={{
@@ -114,6 +116,7 @@ function EditEvent() {
                             onChange={locationHandler}
                         />
                     </Box>
+                    {/* {errors.location.street ? <p>{errors.location.street.message}</p> : null} */}
                     <br />
                     <Grid container item spacing={3}>
                         <Grid item xs={6}>
