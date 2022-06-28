@@ -93,12 +93,12 @@ function MyEvent() {
   return (
     <div>
       <div>
-        <h1>Going Events</h1>
+        <h1 className="myEvent">Going Events</h1>
         {displayGoingEvents("going")}
       </div>
       <hr />
       <hr />
-      <h1>Your Events</h1>
+      <h1 className="myEvent">Your Events</h1>
       <div>{displayGoingEvents("created")}</div>
     </div>
   );
