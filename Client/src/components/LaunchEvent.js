@@ -99,7 +99,7 @@ function LaunchEvent() {
             }}
           >
             <br />
-            <h1>Launch an Event</h1>
+            <h1 className="myEvent">Launch an Event</h1>
             <TextField
               fullWidth
               label="Event Title"
