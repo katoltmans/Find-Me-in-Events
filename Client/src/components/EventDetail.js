@@ -15,7 +15,7 @@ import MenuDropdown from "./MenuDropdown";
 
 const EventDetail = (props) => {
     const navigate = useNavigate();
-    const { event, user, id } = props;
+    const { event, user, id, refreshCounter, setRefreshCounter } = props;
     console.log(event);
 
     const handleDelete = () => {
@@ -47,8 +47,7 @@ const EventDetail = (props) => {
             )
             .then((res) => {
                 console.log("Status response", res);
-                navigate("/events/" + id);
-                console.log("Successfully navigated to /events/" + id);
+                setRefreshCounter(refreshCounter + 1);
             })
             .catch((err) => {
                 console.log("Error with update status", err);
@@ -57,6 +56,16 @@ const EventDetail = (props) => {
 
     const routeToUpdate = () => {
         navigate(`/event/edit/${id}`);
+    };
+
+    const buttonStatusUpdate = () => {
+        let status = "Update Status";
+        for (let going of event.going) {
+            if (going.personId._id === user._id) {
+                status = going.decision;
+            }
+        }
+        return status;
     };
 
     // Format date of event
@@ -130,7 +139,7 @@ const EventDetail = (props) => {
                         disableElevation
                         endIcon={<KeyboardArrowDownIcon />}
                     >
-                        Update Status
+                        {buttonStatusUpdate()}
                     </Button>
                 }
             >

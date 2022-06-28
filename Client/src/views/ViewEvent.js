@@ -15,6 +15,7 @@ const ViewEvent = () => {
     const [event, setEvent] = useState(false);
     const userToken = Cookies.get("userToken");
     const [user, setUser] = useState(null);
+    const [refreshCounter, setRefreshCounter] = useState(0);
     const { id } = useParams();
 
     useEffect(() => {
@@ -36,7 +37,7 @@ const ViewEvent = () => {
             .catch((err) => {
                 console.log("Error with getOneEvent request", err);
             });
-    }, [id, userToken]);
+    }, [id, userToken, refreshCounter]);
 
     return (
         <div>
@@ -44,7 +45,13 @@ const ViewEvent = () => {
                 <Box sx={{ p: 4 }}>
                     <Grid container spacing={5}>
                         <Grid item xs={6}>
-                            <EventDetail event={event} user={user} id={id} />
+                            <EventDetail
+                                event={event}
+                                user={user}
+                                id={id}
+                                refreshCounter={refreshCounter}
+                                setRefreshCounter={setRefreshCounter}
+                            />
                         </Grid>
                         <Grid item xs={6}>
                             <Stack>
@@ -57,7 +64,7 @@ const ViewEvent = () => {
                                     sx={{ mt: 1, mb: 1, width: "815px" }}
                                 >
                                     <Grid item xs={4}>
-                                        <EventStatus />
+                                        <EventStatus event={event} />
                                     </Grid>
                                     <Grid item xs={8}>
                                         <EventComments

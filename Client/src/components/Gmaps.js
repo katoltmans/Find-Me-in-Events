@@ -115,17 +115,15 @@ function Gmaps(props) {
                     <Grid container sx={{ display: "flex", width: "100%" }}>
                         <Grid item xs={5} sx={{ display: "flex" }}>
                             {/* onSubmit={(e) => calculateRoute(e, { destination })}> */}
-                            <Typography sx={{ mr: 1 }}>
-                                <TextField
-                                    placeholder="Destination"
-                                    value={destination}
-                                    size="small"
-                                    inputProps={{ style: { fontSize: 12 } }}
-                                    onSelectCapture={(e) => {
-                                        setDestination(e.target.value);
-                                    }}
-                                ></TextField>
-                            </Typography>
+                            <TextField
+                                placeholder="Destination"
+                                value={destination}
+                                size="small"
+                                inputProps={{ style: { fontSize: 12 } }}
+                                onSelectCapture={(e) => {
+                                    setDestination(e.target.value);
+                                }}
+                            ></TextField>
                             <Button
                                 variant="contained"
                                 size="small"

@@ -4,22 +4,8 @@ import { Paper, Typography, Box } from "@mui/material";
 import { useParams } from "react-router-dom";
 
 const EventStatus = (props) => {
-    const [attendees, setAttendees] = useState([]);
     const { id } = useParams();
-
-    useEffect(() => {
-        axios
-            .get(`http://localhost:8000/api/events/${id}`, {
-                withCredentials: true,
-            })
-            .then((res) => {
-                setAttendees(res.data.event.going);
-                console.log("Attendees: ", res.data.event.going);
-            })
-            .catch((err) => {
-                console.log("Error EventController going request", err);
-            });
-    }, []);
+    const { event } = props;
 
     return (
         <Paper elevation={2} sx={{ p: 3, overflow: "auto", height: "348px" }}>
@@ -35,7 +21,7 @@ const EventStatus = (props) => {
             </Typography>
             <Box sx={{ overflowY: "auto", height: "200px", mt: 1 }}>
                 <ul>
-                    {attendees.map((a, index) => {
+                    {event.going.map((a, index) => {
                         if (a.decision === "Going") {
                             return (
                                 <li
@@ -61,7 +47,7 @@ const EventStatus = (props) => {
                     Maybe
                 </Typography>
                 <ul>
-                    {attendees.map((a, index) => {
+                    {event.going.map((a, index) => {
                         if (a.decision === "Maybe") {
                             return (
                                 <li
@@ -90,7 +76,7 @@ const EventStatus = (props) => {
                     Not Going
                 </Typography>
                 <ul>
-                    {attendees.map((a, index) => {
+                    {event.going.map((a, index) => {
                         if (a.decision === "Not-Going") {
                             return (
                                 <li
