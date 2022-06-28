@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -9,7 +9,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
+// import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 
 function LaunchEvent() {
@@ -24,6 +24,7 @@ function LaunchEvent() {
   const [time, setTime] = useState("0");
   // const [image, setImage] = useState("");
   const [description, setDescription] = useState([]);
+  const [errors,setErrors]=useState([]);
 
   //navigate
   const navigate = useNavigate();
@@ -42,7 +43,8 @@ function LaunchEvent() {
         navigate("/");
       })
       .catch((err) => {
-        console.log(err);
+        setErrors(err.response.data.error.errors)
+        console.log(err.response.data.location)
       });
   };
 
@@ -88,6 +90,7 @@ function LaunchEvent() {
               onChange={(e) => setEventTitle(e.target.value)}
             />
           </Box>
+          {errors.eventTitle ? <p>{errors.eventTitle.message}</p> :null}
           <br />
           <Box
             sx={{
@@ -104,6 +107,8 @@ function LaunchEvent() {
               onChange={locationHandler}
             />
           </Box>
+          {/* {errors.location ? <p>{errors.location.street.message}</p> :null} */}
+
           <br />
           <Grid container item spacing={3}>
             <Grid item xs={6}>
@@ -115,6 +120,8 @@ function LaunchEvent() {
                 value={location.city}
                 onChange={locationHandler}
               />
+                  {/* {errors.location.city ? <p>{errors.location.city.message}</p> :null} */}
+
             </Grid>
             <Grid item xs={3}>
               <TextField
@@ -161,7 +168,6 @@ function LaunchEvent() {
           <input
             type="time"
             value={time}
-            // onChange={(e) => setTime(e.target.value)}
             onChange={handleTimings}
           />
           <br />
