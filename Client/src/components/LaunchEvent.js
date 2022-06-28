@@ -168,7 +168,6 @@ function LaunchEvent() {
           <input
             type="time"
             value={time}
-            // onChange={(e) => setTime(e.target.value)}
             onChange={handleTimings}
           />
           <br />
