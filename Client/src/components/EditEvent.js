@@ -95,7 +95,7 @@ function EditEvent() {
                         }}
                     >
                         <br />
-                        <h1>Edit Event</h1>
+                        <h1 className="myEvent">Edit Event</h1>
                         <TextField
                             fullWidth
                             label="Event Title"
