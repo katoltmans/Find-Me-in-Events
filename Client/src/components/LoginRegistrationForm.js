@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import {
     Box,
@@ -52,6 +54,7 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
             .then((res) => {
                 console.log("successfully registered", res.data);
                 setIsLoggedIn(true);
+        toast.success("Successfully Registered !!");
                 navigate("/events");
             })
             .catch((err) => {
@@ -59,7 +62,7 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
                 setRegErr([]);
                 setRegErrorObj(err.response.data.errors);
                 console.log("Error with registering post request client", err);
-
+        toast.warning("Please fill all the fields");
                 const errorarray = (obj) => {
                     const arr = [];
                     for (let keys of Object.keys(obj)) {
@@ -67,10 +70,7 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
                     }
                     setRegErr(arr);
                 };
-                if (
-                    !err.response.data.errors &&
-                    err.response.data.code == 11000
-                ) {
+        if (!err.response.data.errors && err.response.data.code == 11000) {
                     setRegErr(["Email Should be unique"]);
                 } else {
                     errorarray(err.response.data.errors);
@@ -87,13 +87,13 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
             .then((res) => {
                 console.log("successfully loggedIn", res.data);
                 setIsLoggedIn(true);
+        toast.success("Successfully Logged in!!");
                 navigate("/events");
             })
             .catch((err) => {
-                setLogErr("");
-                setRegErr([]);
-                setLogErr(err.response.data.Error);
-                console.log("Error with login post request client", err);
+                
+toast.error("Bad user credentials");
+        setLogErrors(err.response.data.Error);                console.log("Error with login post request client", err);
             });
     };
 
@@ -107,21 +107,14 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
                             p: 3,
                         }}
                     >
-                        <Typography
-                            variant="h3"
-                            component="h1"
-                            sx={{ fontSize: 25 }}
-                        >
+            <Typography variant="h3" component="h1" sx={{ fontSize: 25 }}>
                             Registration
                         </Typography>
                         {regErr && (
                             <List sx={{ mb: 5 }}>
                                 {regErr.map((error, index) => {
                                     return (
-                                        <ListItem
-                                            key={index}
-                                            sx={{ color: "error.main" }}
-                                        >
+                    <ListItem key={index} sx={{ color: "error.main" }}>
                                             {error}
                                         </ListItem>
                                     );
@@ -142,9 +135,7 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
                                                 regErrorObj?.firstName?.message
                                             }
                                             sx={{ mb: 2 }}
-                                            onChange={(e) =>
-                                                onChangeHandler(e, "register")
-                                            }
+                      onChange={(e) => onChangeHandler(e, "register")}
                                         />
                                     </Grid>
                                     <Grid item xs={12}>
@@ -153,9 +144,7 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
                                             name="lastName"
                                             label="Last Name"
                                             variant="outlined"
-                                            onChange={(e) =>
-                                                onChangeHandler(e, "register")
-                                            }
+                      onChange={(e) => onChangeHandler(e, "register")}
                                         />
                                     </Grid>
                                 </Grid>
@@ -166,9 +155,7 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
                                             name="emailId"
                                             label="Email"
                                             variant="outlined"
-                                            onChange={(e) =>
-                                                onChangeHandler(e, "register")
-                                            }
+                      onChange={(e) => onChangeHandler(e, "register")}
                                         />
                                     </Grid>
                                 </Grid>
@@ -180,9 +167,7 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
                                             type="password"
                                             label="Password"
                                             variant="outlined"
-                                            onChange={(e) =>
-                                                onChangeHandler(e, "register")
-                                            }
+                      onChange={(e) => onChangeHandler(e, "register")}
                                         />
                                     </Grid>
                                     <Grid item xs={12}>
@@ -192,9 +177,7 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
                                             type="password"
                                             label="Confirm Password"
                                             variant="outlined"
-                                            onChange={(e) =>
-                                                onChangeHandler(e, "register")
-                                            }
+                      onChange={(e) => onChangeHandler(e, "register")}
                                         />
                                     </Grid>
                                 </Grid>
@@ -216,11 +199,7 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
                             p: 3,
                         }}
                     >
-                        <Typography
-                            variant="h3"
-                            component="h1"
-                            sx={{ fontSize: 25 }}
-                        >
+            <Typography variant="h3" component="h1" sx={{ fontSize: 25 }}>
                             Login
                         </Typography>
                         <List sx={{ mb: 5, color: "error.main" }}>
@@ -235,9 +214,7 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
                                             name="emailId"
                                             label="Email"
                                             variant="outlined"
-                                            onChange={(e) =>
-                                                onChangeHandler(e, "login")
-                                            }
+                      onChange={(e) => onChangeHandler(e, "login")}
                                         />
                                     </Grid>
                                 </Grid>
@@ -249,9 +226,7 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
                                             type="password"
                                             label="Password"
                                             variant="outlined"
-                                            onChange={(e) =>
-                                                onChangeHandler(e, "login")
-                                            }
+                      onChange={(e) => onChangeHandler(e, "login")}
                                         />
                                     </Grid>
                                 </Grid>
