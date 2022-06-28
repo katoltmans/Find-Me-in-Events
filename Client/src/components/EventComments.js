@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import io from 'socket.io-client';
-import ReactScrollableFeed from 'react-scrollable-feed'
+import io from "socket.io-client";
+import ReactScrollableFeed from "react-scrollable-feed";
 import {
     Button,
     Grid,
@@ -16,7 +16,7 @@ import { Box } from "@mui/system";
 const EventComments = (props) => {
     const { comments, setComments, id, user } = props;
     const [comment, setComment] = useState("");
-    const [socket] = useState(() => io(':8000'))
+    const [socket] = useState(() => io(":8000"));
 
     const onSubmitComment = () => {
         axios
@@ -32,13 +32,12 @@ const EventComments = (props) => {
             .then((res) => {
                 console.log(res);
                 setComments(res.data.comments);
-                socket.emit('newComment', res.data.comments)
+                socket.emit("newComment", res.data.comments);
                 setComment("");
             })
             .catch((err) => {
                 console.log("Error with EventController comments request", err);
             });
-
     };
     console.log("comments", comments);
     const deleteComment = (commentId) => {
@@ -54,7 +53,7 @@ const EventComments = (props) => {
             )
             .then((res) => {
                 console.log(res);
-                socket.emit()
+                socket.emit();
                 setComments(comments.filter((c) => c._id !== commentId));
             })
             .catch((err) => {
@@ -85,52 +84,52 @@ const EventComments = (props) => {
                 </Button>
             </form>
             <Box sx={{ overflowY: "auto", height: "200px", mt: 1 }}>
-            <ReactScrollableFeed>
-                <ul>
-                    {comments.map((c) => {
-                        return (
-                            <li key={c._id}>
-                                <Grid container>
-                                    <Grid item xs={11}>
-                                        <Typography
-                                            variant="h5"
-                                            component="h2"
-                                            sx={{
-                                                fontSize: 15,
-                                                fontWeight: "bold",
-                                                mt: 1,
-                                            }}
-                                        >
-                                            {c.postedBy.firstName +
-                                                " " +
-                                                c.postedBy.lastName}
-                                        </Typography>
-                                    </Grid>
-                                    {c.postedBy._id === user._id ? (
-                                        <Grid item xs={1}>
-                                            <IconButton
-                                                onClick={() =>
-                                                    deleteComment(c._id)
-                                                }
+                <ReactScrollableFeed>
+                    <ul>
+                        {comments.map((c) => {
+                            return (
+                                <li key={c._id}>
+                                    <Grid container>
+                                        <Grid item xs={11}>
+                                            <Typography
+                                                variant="h5"
+                                                component="h2"
+                                                sx={{
+                                                    fontSize: 15,
+                                                    fontWeight: "bold",
+                                                    mt: 1,
+                                                }}
                                             >
-                                                <HighlightOffIcon
-                                                    sx={{
-                                                        color: "#992e2e",
-                                                        fontSize: 20,
-                                                        fontWeight: "bold",
-                                                        m: -8,
-                                                    }}
-                                                />
-                                            </IconButton>
+                                                {c.postedBy.firstName +
+                                                    " " +
+                                                    c.postedBy.lastName}
+                                            </Typography>
                                         </Grid>
-                                    ) : null}
-                                </Grid>
-                                {c.details}
-                            </li>
-                        );
-                    })}
-                </ul>
-            </ReactScrollableFeed>
+                                        {c.postedBy._id === user._id ? (
+                                            <Grid item xs={1}>
+                                                <IconButton
+                                                    onClick={() =>
+                                                        deleteComment(c._id)
+                                                    }
+                                                >
+                                                    <HighlightOffIcon
+                                                        sx={{
+                                                            color: "#992e2e",
+                                                            fontSize: 20,
+                                                            fontWeight: "bold",
+                                                            m: -8,
+                                                        }}
+                                                    />
+                                                </IconButton>
+                                            </Grid>
+                                        ) : null}
+                                    </Grid>
+                                    {c.details}
+                                </li>
+                            );
+                        })}
+                    </ul>
+                </ReactScrollableFeed>
             </Box>
         </Paper>
     );

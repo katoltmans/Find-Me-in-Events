@@ -16,8 +16,9 @@ import { Container } from "@mui/system";
 
 const LoginRegistrationForm = ({ setIsLoggedIn }) => {
     const navigate = useNavigate();
-    const [regErr, setRegisterErrors] = useState([]);
-    const [logErr, setLogErrors] = useState("");
+    const [regErr, setRegErr] = useState([]);
+    const [regErrorObj, setRegErrorObj] = useState({});
+    const [logErr, setLogErr] = useState("");
 
     const [user, setUser] = useState({
         firstName: "",
@@ -54,8 +55,9 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
                 navigate("/events");
             })
             .catch((err) => {
-                setLogErrors("");
-                setRegisterErrors([]);
+                setLogErr("");
+                setRegErr([]);
+                setRegErrorObj(err.response.data.errors);
                 console.log("Error with registering post request client", err);
 
                 const errorarray = (obj) => {
@@ -63,13 +65,13 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
                     for (let keys of Object.keys(obj)) {
                         arr.push(obj[keys].message);
                     }
-                    setRegisterErrors(arr);
+                    setRegErr(arr);
                 };
                 if (
                     !err.response.data.errors &&
                     err.response.data.code == 11000
                 ) {
-                    setRegisterErrors(["Email-Id Should be unique"]);
+                    setRegErr(["Email Should be unique"]);
                 } else {
                     errorarray(err.response.data.errors);
                 }
@@ -88,9 +90,9 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
                 navigate("/events");
             })
             .catch((err) => {
-                setLogErrors("");
-                setRegisterErrors([]);
-                setLogErrors(err.response.data.Error);
+                setLogErr("");
+                setRegErr([]);
+                setLogErr(err.response.data.Error);
                 console.log("Error with login post request client", err);
             });
     };
@@ -135,6 +137,10 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
                                             name="firstName"
                                             label="First Name"
                                             variant="outlined"
+                                            error={!!regErrorObj.firstName}
+                                            helperText={
+                                                regErrorObj?.firstName?.message
+                                            }
                                             sx={{ mb: 2 }}
                                             onChange={(e) =>
                                                 onChangeHandler(e, "register")
