@@ -7,7 +7,14 @@ import {
     Autocomplete,
 } from "@react-google-maps/api";
 import axios from "axios";
-import { Button, Grid, Stack, TextField, Typography } from "@mui/material";
+import {
+    Button,
+    Grid,
+    Paper,
+    Stack,
+    TextField,
+    Typography,
+} from "@mui/material";
 
 function Gmaps(props) {
     const { ID } = props;
@@ -85,10 +92,10 @@ function Gmaps(props) {
     }
 
     return isLoaded ? (
-        <div>
+        <Paper elevation={2}>
             <Stack>
                 <GoogleMap
-                    mapContainerStyle={{ width: "700px", height: "350px" }}
+                    mapContainerStyle={{ width: "800px", height: "350px" }}
                     zoom={10}
                     center={center}
                     onLoad={onLoad}
@@ -162,7 +169,7 @@ function Gmaps(props) {
                     </Grid>
                 </form>
             </Stack>
-        </div>
+        </Paper>
     ) : (
         <div></div>
     );

@@ -41,34 +41,37 @@ const ViewEvent = () => {
     return (
         <div>
             {!event ? null : (
-                <Grid
-                    container
-                    sx={{ mt: 3, mx: 2, height: "550px", width: "100%" }}
-                >
-                    <Grid item xs={6} width="100%">
-                        <EventDetail event={event} user={user} id={id} />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <Stack width="100%" sx={{ mt: 5, ml: 2 }}>
-                            <Box sx={{ height: "400px", width: "700px" }}>
-                                <Gmaps ID={id} />
-                            </Box>
-                            <Grid container spacing={2} sx={{ mt: 1, mb: 1 }}>
-                                <Grid item xs={4}>
-                                    <EventStatus />
+                <Box sx={{ p: 4 }}>
+                    <Grid container spacing={5}>
+                        <Grid item xs={6}>
+                            <EventDetail event={event} user={user} id={id} />
+                        </Grid>
+                        <Grid item xs={6}>
+                            <Stack>
+                                <Box sx={{ width: "800px" }}>
+                                    <Gmaps ID={id} />
+                                </Box>
+                                <Grid
+                                    container
+                                    spacing={2}
+                                    sx={{ mt: 1, mb: 1, width: "815px" }}
+                                >
+                                    <Grid item xs={4}>
+                                        <EventStatus />
+                                    </Grid>
+                                    <Grid item xs={8}>
+                                        <EventComments
+                                            comments={comments}
+                                            setComments={setComments}
+                                            user={user}
+                                            id={id}
+                                        />
+                                    </Grid>
                                 </Grid>
-                                <Grid item xs={7}>
-                                    <EventComments
-                                        comments={comments}
-                                        setComments={setComments}
-                                        user={user}
-                                        id={id}
-                                    />
-                                </Grid>
-                            </Grid>
-                        </Stack>
+                            </Stack>
+                        </Grid>
                     </Grid>
-                </Grid>
+                </Box>
             )}
         </div>
     );
