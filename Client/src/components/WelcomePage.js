@@ -90,7 +90,7 @@ const WelcomePage = (props) => {
             >
                 {
                     <Typography
-                        variant="h3"
+                        variant="h4"
                         sx={{ mb: 4, color: "text.primary" }}
                     >
                         Login or register to Join In the party!!
@@ -108,11 +108,12 @@ const WelcomePage = (props) => {
                             <Box
                                 component="img"
                                 sx={{
-                                    height: 700,
+                                    height: 660,
                                     display: "block",
                                     maxWidth: 1920,
                                     overflow: "hidden",
                                     width: "100%",
+                                    borderRadius: "2%",
                                 }}
                                 src={step.imgPath}
                                 alt={step.label}
