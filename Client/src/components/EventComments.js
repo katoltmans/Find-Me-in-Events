@@ -63,7 +63,7 @@ const EventComments = (props) => {
 
     socket.on('delete', (data) => {
         console.log('socket data', data)
-        setComments(comments.filter((c) => c._id !== data._id));
+        setComments(data);
     })
 
     return (
