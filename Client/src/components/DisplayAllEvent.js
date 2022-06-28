@@ -74,6 +74,7 @@ function DisplayAllEvent() {
 
   return isLoaded ? (
     <div className="displayAll">
+        <img className="image" src="https://images.unsplash.com/photo-1521356279905-e1d72a443574?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt="Input image here" />
       {eventList.map((event) => (
         <div key={event._id} className="displayAll">
           <Card sx={{ maxWidth: 450 }}>
