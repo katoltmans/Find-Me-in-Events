@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
+const socket = require('socket.io')
 const cookieParser = require("cookie-parser");
 require("dotenv").config();
 const PORT = process.env.PORT;
@@ -13,6 +14,34 @@ require("./Config/mongoose.config");
 require("./Routes/event.routes")(app);
 require("./Routes/user.routes")(app);
 
-app.listen(8000, () => {
+const server = app.listen(8000, () => {
   console.log(`Server is running  and Listening at the ${PORT} !!!!!`);
 });
+
+const io = socket(server, {
+  cors : {
+      origin: "http://localhost:3000",
+      methods: ['GET', 'POST'],
+      allowedHeaders: ['*'],
+      creentials: true
+  }
+})
+
+io.on('connection', (socket) => {
+  console.log('New User: ', socket.id)
+
+  socket.on('newComment', (data) => {
+      socket.broadcast.emit('newComment', data)
+  })
+
+  socket.on('delete', (data) => {
+      socket.broadcast.emit('delete', data)
+      console.log('delete res', data)
+  })
+
+
+  socket.on('disconnect', (socket) => {
+      console.log("User: " + socket.id + " disconnected")
+  })
+}
+)
