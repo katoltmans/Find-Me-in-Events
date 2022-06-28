@@ -47,9 +47,9 @@ const ViewEvent = () => {
                     </Grid>
                     <Grid item xs={6}>
                         <Stack width="100%" sx={{ mt: 5, ml: 2 }}>
-                            {/* <Box sx={{ height: "250px" }}> */}
-                            <Gmaps ID={id} />
-                            {/* </Box> */}
+                            <Box sx={{ height: "500px", width: "500px" }}>
+                                <Gmaps ID={id} />
+                            </Box>
                             <Grid container spacing={2} sx={{ mt: 1 }}>
                                 <Grid item xs={4}>
                                     <EventStatus />
