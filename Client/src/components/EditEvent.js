@@ -100,7 +100,7 @@ function EditEvent() {
                         />
                         
                     </Box>
-                    {errors.eventTitle ? <p>{errors.eventTitle.message}</p> : null}
+                    {errors.eventTitle ? <p className="errors">{errors.eventTitle.message}</p> : null}
                     <br />
                     <Box
                         sx={{
@@ -116,17 +116,19 @@ function EditEvent() {
                             onChange={locationHandler}
                         />
                     </Box>
-                    {/* {errors.location.street ? <p>{errors.location.street.message}</p> : null} */}
+                    {errors["location.street"] ? <p className="errors">{errors["location.street"].message}</p> :null}
                     <br />
                     <Grid container item spacing={3}>
                         <Grid item xs={6}>
                             <TextField fullWidth label="City" id="fullWidth"  value={location.city}
                             onChange={locationHandler}/>
                         </Grid>
+                        {errors["location.city"] ? <p className="errors">{errors["location.city"].message}</p> :null}
                         <Grid item xs={3}>
                             <TextField fullWidth label="State" id="fullWidth" value={location.state}
                             onChange={locationHandler}/>
                         </Grid>
+                        {errors["location.state"] ? <p className="errors">{errors["location.state"].message}</p> :null}
                         <Grid item xs={3}>
                             <TextField
                                 fullWidth
@@ -135,6 +137,7 @@ function EditEvent() {
                                 value={location.zipcode}
                             onChange={locationHandler}
                             />
+                            {errors["location.zipcode"] ? <p className="errors">{errors["location.zipcode"].message}</p> :null}
                         </Grid>
                     </Grid>
                     <br />
@@ -151,6 +154,7 @@ function EditEvent() {
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
                         />
+                        {errors.description ? <p className="errors"> {errors.description.message}</p> :null}
                     </Box>
                     <br />
                     <input
@@ -158,11 +162,13 @@ function EditEvent() {
                         value={eventDate(date)}
                         onChange={(e) => setDate(e.target.value)}
                     />
+                    {errors.date ? <p className="errors"> {errors.date.message}</p> :null}
                     <input
                         type="time"
                         value={time}
                         onChange={(e) => setTime(e.target.value)}
                     />
+                    {errors.time ? <p className="errors"> {errors.time.message}</p> :null}
                     <br />
                     <br />
                     <Stack
