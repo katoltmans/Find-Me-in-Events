@@ -54,7 +54,7 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
             .then((res) => {
                 console.log("successfully registered", res.data);
                 setIsLoggedIn(true);
-        toast.success("Successfully Registered !!");
+                toast.success("Successfully Registered !!");
                 navigate("/events");
             })
             .catch((err) => {
@@ -62,7 +62,7 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
                 setRegErr([]);
                 setRegErrorObj(err.response.data.errors);
                 console.log("Error with registering post request client", err);
-        toast.warning("Please fill all the fields");
+                toast.warning("Please fill all the fields");
                 const errorarray = (obj) => {
                     const arr = [];
                     for (let keys of Object.keys(obj)) {
@@ -70,8 +70,12 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
                     }
                     setRegErr(arr);
                 };
-        if (!err.response.data.errors && err.response.data.code == 11000) {
+                if (
+                    !err.response.data.errors &&
+                    err.response.data.code == 11000
+                ) {
                     setRegErr(["Email Should be unique"]);
+                    console.log("RegErr: ", regErr);
                 } else {
                     errorarray(err.response.data.errors);
                 }
@@ -87,13 +91,14 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
             .then((res) => {
                 console.log("successfully loggedIn", res.data);
                 setIsLoggedIn(true);
-        toast.success("Successfully Logged in!!");
+                toast.success("Successfully Logged in!!");
                 navigate("/events");
             })
             .catch((err) => {
-                
-toast.error("Bad user credentials");
-        setLogErrors(err.response.data.Error);                console.log("Error with login post request client", err);
+                toast.error("Bad user credentials");
+                setLogErr(err.response.data.Error);
+                console.log("Error with login post request client", err);
+                console.log("logErr: ", logErr);
             });
     };
 
@@ -107,14 +112,21 @@ toast.error("Bad user credentials");
                             p: 3,
                         }}
                     >
-            <Typography variant="h3" component="h1" sx={{ fontSize: 25 }}>
+                        <Typography
+                            variant="h3"
+                            component="h1"
+                            sx={{ fontSize: 25 }}
+                        >
                             Registration
                         </Typography>
                         {regErr && (
                             <List sx={{ mb: 5 }}>
                                 {regErr.map((error, index) => {
                                     return (
-                    <ListItem key={index} sx={{ color: "error.main" }}>
+                                        <ListItem
+                                            key={index}
+                                            sx={{ color: "error.main" }}
+                                        >
                                             {error}
                                         </ListItem>
                                     );
@@ -135,7 +147,9 @@ toast.error("Bad user credentials");
                                                 regErrorObj?.firstName?.message
                                             }
                                             sx={{ mb: 2 }}
-                      onChange={(e) => onChangeHandler(e, "register")}
+                                            onChange={(e) =>
+                                                onChangeHandler(e, "register")
+                                            }
                                         />
                                     </Grid>
                                     <Grid item xs={12}>
@@ -144,7 +158,13 @@ toast.error("Bad user credentials");
                                             name="lastName"
                                             label="Last Name"
                                             variant="outlined"
-                      onChange={(e) => onChangeHandler(e, "register")}
+                                            error={!!regErrorObj.lastName}
+                                            helperText={
+                                                regErrorObj?.lastName?.message
+                                            }
+                                            onChange={(e) =>
+                                                onChangeHandler(e, "register")
+                                            }
                                         />
                                     </Grid>
                                 </Grid>
@@ -155,7 +175,13 @@ toast.error("Bad user credentials");
                                             name="emailId"
                                             label="Email"
                                             variant="outlined"
-                      onChange={(e) => onChangeHandler(e, "register")}
+                                            error={!!regErrorObj.emailId}
+                                            helperText={
+                                                regErrorObj?.emailId?.message
+                                            }
+                                            onChange={(e) =>
+                                                onChangeHandler(e, "register")
+                                            }
                                         />
                                     </Grid>
                                 </Grid>
@@ -167,7 +193,13 @@ toast.error("Bad user credentials");
                                             type="password"
                                             label="Password"
                                             variant="outlined"
-                      onChange={(e) => onChangeHandler(e, "register")}
+                                            error={!!regErrorObj.password}
+                                            helperText={
+                                                regErrorObj?.password?.message
+                                            }
+                                            onChange={(e) =>
+                                                onChangeHandler(e, "register")
+                                            }
                                         />
                                     </Grid>
                                     <Grid item xs={12}>
@@ -177,7 +209,16 @@ toast.error("Bad user credentials");
                                             type="password"
                                             label="Confirm Password"
                                             variant="outlined"
-                      onChange={(e) => onChangeHandler(e, "register")}
+                                            error={
+                                                !!regErrorObj.confirmPassword
+                                            }
+                                            helperText={
+                                                regErrorObj?.confirmPassword
+                                                    ?.message
+                                            }
+                                            onChange={(e) =>
+                                                onChangeHandler(e, "register")
+                                            }
                                         />
                                     </Grid>
                                 </Grid>
@@ -199,12 +240,16 @@ toast.error("Bad user credentials");
                             p: 3,
                         }}
                     >
-            <Typography variant="h3" component="h1" sx={{ fontSize: 25 }}>
+                        <Typography
+                            variant="h3"
+                            component="h1"
+                            sx={{ fontSize: 25, mb: 7 }}
+                        >
                             Login
                         </Typography>
-                        <List sx={{ mb: 5, color: "error.main" }}>
+                        {/* <List sx={{ mb: 5, color: "error.main" }}>
                             {logErr && <p>{logErr}!!</p>}
-                        </List>
+                        </List> */}
                         <Box>
                             <Grid container spacing={3}>
                                 <Grid container item spacing={1}>
@@ -214,7 +259,11 @@ toast.error("Bad user credentials");
                                             name="emailId"
                                             label="Email"
                                             variant="outlined"
-                      onChange={(e) => onChangeHandler(e, "login")}
+                                            error={!!logErr}
+                                            helperText={logErr}
+                                            onChange={(e) =>
+                                                onChangeHandler(e, "login")
+                                            }
                                         />
                                     </Grid>
                                 </Grid>
@@ -226,7 +275,11 @@ toast.error("Bad user credentials");
                                             type="password"
                                             label="Password"
                                             variant="outlined"
-                      onChange={(e) => onChangeHandler(e, "login")}
+                                            error={!!logErr}
+                                            helperText={logErr}
+                                            onChange={(e) =>
+                                                onChangeHandler(e, "login")
+                                            }
                                         />
                                     </Grid>
                                 </Grid>
