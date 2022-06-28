@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import io from 'socket.io-client';
+import ReactScrollableFeed from 'react-scrollable-feed'
 import {
     Button,
     Grid,
@@ -14,6 +16,7 @@ import { Box } from "@mui/system";
 const EventComments = (props) => {
     const { comments, setComments, id, user } = props;
     const [comment, setComment] = useState("");
+    const [socket] = useState(() => io(':8000'))
 
     const onSubmitComment = () => {
         axios
@@ -29,11 +32,13 @@ const EventComments = (props) => {
             .then((res) => {
                 console.log(res);
                 setComments(res.data.comments);
+                socket.emit('newComment', res.data.comments)
                 setComment("");
             })
             .catch((err) => {
                 console.log("Error with EventController comments request", err);
             });
+
     };
     console.log("comments", comments);
     const deleteComment = (commentId) => {
@@ -49,6 +54,7 @@ const EventComments = (props) => {
             )
             .then((res) => {
                 console.log(res);
+                socket.emit()
                 setComments(comments.filter((c) => c._id !== commentId));
             })
             .catch((err) => {
@@ -79,6 +85,7 @@ const EventComments = (props) => {
                 </Button>
             </form>
             <Box sx={{ overflowY: "auto", height: "200px", mt: 1 }}>
+            <ReactScrollableFeed>
                 <ul>
                     {comments.map((c) => {
                         return (
@@ -123,6 +130,7 @@ const EventComments = (props) => {
                         );
                     })}
                 </ul>
+            </ReactScrollableFeed>
             </Box>
         </Paper>
     );
