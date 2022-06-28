@@ -15,8 +15,8 @@ import MenuDropdown from "./MenuDropdown";
 
 const EventDetail = (props) => {
     const navigate = useNavigate();
-    const { event, user, id } = props;
-    console.log(event)
+    const { event, user, id, refreshCounter, setRefreshCounter } = props;
+    console.log(event);
 
     const handleDelete = () => {
         axios
@@ -26,7 +26,7 @@ const EventDetail = (props) => {
             .then((res) => {
                 console.log(res);
                 // setEvents(events.filter((event) => event._id !== eventId));
-                navigate("/");
+                navigate("/events");
             })
             .catch((err) => {
                 console.log("Error with delete request", err);
@@ -47,6 +47,7 @@ const EventDetail = (props) => {
             )
             .then((res) => {
                 console.log("Status response", res);
+                setRefreshCounter(refreshCounter + 1);
             })
             .catch((err) => {
                 console.log("Error with update status", err);
@@ -57,6 +58,16 @@ const EventDetail = (props) => {
         navigate(`/event/edit/${id}`);
     };
 
+    const buttonStatusUpdate = () => {
+        let status = "Update Status";
+        for (let going of event.going) {
+            if (going.personId._id === user._id) {
+                status = going.decision;
+            }
+        }
+        return status;
+    };
+
     // Format date of event
     const eventDate = (date) => {
         let fixDate = new Date(date);
@@ -64,35 +75,37 @@ const EventDetail = (props) => {
     };
 
     return (
-        <Paper elevation={2} sx={{ p: 10 }}>
+        <Paper elevation={2} sx={{ p: 10, height: "550px" }}>
             <Grid container spacing={2} sx={{ mb: 3 }}>
                 <Grid item xs={11}>
                     <Typography variant="h4" component="h2">
                         {event.eventTitle}
                     </Typography>
                 </Grid>
-                <Grid item xs={1}>
-                    <MenuDropdown
-                        dropdownButton={
-                            <IconButton>
-                                <MoreVertIcon />
-                            </IconButton>
-                        }
-                    >
-                        <MenuItem
-                            onClick={() => routeToUpdate(event._id)}
-                            disableRipple
+                {user._id === event.createdBy ? (
+                    <Grid item xs={1}>
+                        <MenuDropdown
+                            dropdownButton={
+                                <IconButton sx={{ color: "#ff1622" }}>
+                                    <MoreVertIcon />
+                                </IconButton>
+                            }
                         >
-                            Edit
-                        </MenuItem>
-                        <MenuItem
-                            onClick={() => handleDelete(event._id)}
-                            disableRipple
-                        >
-                            Delete
-                        </MenuItem>
-                    </MenuDropdown>
-                </Grid>
+                            <MenuItem
+                                onClick={() => routeToUpdate(event._id)}
+                                disableRipple
+                            >
+                                Edit
+                            </MenuItem>
+                            <MenuItem
+                                onClick={() => handleDelete(event._id)}
+                                disableRipple
+                            >
+                                Delete
+                            </MenuItem>
+                        </MenuDropdown>
+                    </Grid>
+                ) : null}
             </Grid>
             <Grid container>
                 <Grid item xs={12} sx={{ mb: 2 }}>
@@ -106,7 +119,8 @@ const EventDetail = (props) => {
             <Grid container item spacing={5} sx={{ display: "flex", mb: 2 }}>
                 <Grid item xs={7}>
                     <Typography variant="h6" component="h2">
-                    {`${event.location.street},${event.location.city},${event.location.state},${event.location.zipcode}`}</Typography>
+                        {`${event.location.street},${event.location.city},${event.location.state},${event.location.zipcode}`}
+                    </Typography>
                 </Grid>
                 <Grid item xs={5}>
                     <Typography variant="h6" component="h2">
@@ -125,7 +139,7 @@ const EventDetail = (props) => {
                         disableElevation
                         endIcon={<KeyboardArrowDownIcon />}
                     >
-                        Update Status
+                        {buttonStatusUpdate()}
                     </Button>
                 }
             >
@@ -151,7 +165,7 @@ const EventDetail = (props) => {
                     }}
                     disableRipple
                 >
-                    Can't Go
+                    Not Going
                 </MenuItem>
             </MenuDropdown>
         </Paper>

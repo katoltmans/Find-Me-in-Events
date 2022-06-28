@@ -8,6 +8,7 @@ import DisplayAllEvent from "./components/DisplayAllEvent";
 import MyEvent from "./components/MyEvent";
 import EditEvent from "./components/EditEvent";
 import ViewEvent from "./views/ViewEvent";
+import WelcomePage from "./components/WelcomePage";
 
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -24,7 +25,8 @@ function App() {
                             />
                         }
                     />
-                    <Route path="/" element={<DisplayAllEvent />} />
+                    <Route path="/" element={<WelcomePage />} />
+                    <Route path="/events" element={<DisplayAllEvent />} />
                     <Route path="/new" element={<LaunchEvent />} />
                     <Route path="/events/:id" element={<ViewEvent />} />
                     <Route path="/event/:id" element={<MyEvent />} />
