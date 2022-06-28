@@ -78,7 +78,7 @@ const EventComments = (props) => {
                     Submit
                 </Button>
             </form>
-            <Box sx={{ overflowY: "scroll", height: "200px", mt: 1 }}>
+            <Box sx={{ overflowY: "auto", height: "200px", mt: 1 }}>
                 <ul>
                     {comments.map((c) => {
                         return (

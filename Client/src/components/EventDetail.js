@@ -26,7 +26,7 @@ const EventDetail = (props) => {
             .then((res) => {
                 console.log(res);
                 // setEvents(events.filter((event) => event._id !== eventId));
-                navigate("/");
+                navigate("/events");
             })
             .catch((err) => {
                 console.log("Error with delete request", err);

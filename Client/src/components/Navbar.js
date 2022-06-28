@@ -53,7 +53,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
                     >
                         <Link
                             component={RouterLink}
-                            to="/"
+                            to="/events"
                             color="inherit"
                             underline="none"
                         >

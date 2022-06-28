@@ -25,8 +25,8 @@ function App() {
                             />
                         }
                     />
-                    <Route path="/welcome" element={<WelcomePage />} />
-                    <Route path="/" element={<DisplayAllEvent />} />
+                    <Route path="/" element={<WelcomePage />} />
+                    <Route path="/events" element={<DisplayAllEvent />} />
                     <Route path="/new" element={<LaunchEvent />} />
                     <Route path="/events/:id" element={<ViewEvent />} />
                     <Route path="/event/:id" element={<MyEvent />} />

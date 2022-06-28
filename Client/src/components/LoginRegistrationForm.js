@@ -51,7 +51,7 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
             .then((res) => {
                 console.log("successfully registered", res.data);
                 setIsLoggedIn(true);
-                navigate("/");
+                navigate("/events");
             })
             .catch((err) => {
                 setLogErrors("");
@@ -85,7 +85,7 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
             .then((res) => {
                 console.log("successfully loggedIn", res.data);
                 setIsLoggedIn(true);
-                navigate("/");
+                navigate("/events");
             })
             .catch((err) => {
                 setLogErrors("");

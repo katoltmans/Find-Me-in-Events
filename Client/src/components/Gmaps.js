@@ -7,6 +7,7 @@ import {
     Autocomplete,
 } from "@react-google-maps/api";
 import axios from "axios";
+import { Button, Grid, Stack, TextField, Typography } from "@mui/material";
 
 function Gmaps(props) {
     const { ID } = props;
@@ -85,39 +86,82 @@ function Gmaps(props) {
 
     return isLoaded ? (
         <div>
-            <GoogleMap
-                mapContainerStyle={{ width: "700px", height: "350px" }}
-                zoom={10}
-                center={center}
-                onLoad={onLoad}
-                options={{
-                    // zoomControl: false,
-                    streetViewControl: false,
-                    // mapTypeControl: false,
-                    // fullscreenControl: false,
-                }}
-            >
-                {directionsResponse && (
-                    <DirectionsRenderer directions={directionsResponse} />
-                )}
-                <Marker position={center} title="Your location" />
-            </GoogleMap>
+            <Stack>
+                <GoogleMap
+                    mapContainerStyle={{ width: "700px", height: "350px" }}
+                    zoom={10}
+                    center={center}
+                    onLoad={onLoad}
+                    options={{
+                        // zoomControl: false,
+                        streetViewControl: false,
+                        // mapTypeControl: false,
+                        // fullscreenControl: false,
+                    }}
+                >
+                    {directionsResponse && (
+                        <DirectionsRenderer directions={directionsResponse} />
+                    )}
+                    <Marker position={center} title="Your location" />
+                </GoogleMap>
+                <form>
+                    <Grid container sx={{ display: "flex", width: "100%" }}>
+                        <Grid item xs={5} sx={{ display: "flex" }}>
+                            {/* onSubmit={(e) => calculateRoute(e, { destination })}> */}
+                            <Typography sx={{ mr: 1 }}>
+                                <TextField
+                                    placeholder="Destination"
+                                    value={destination}
+                                    size="small"
+                                    inputProps={{ style: { fontSize: 12 } }}
+                                    onSelectCapture={(e) => {
+                                        setDestination(e.target.value);
+                                    }}
+                                ></TextField>
+                            </Typography>
+                            <Button
+                                variant="contained"
+                                size="small"
+                                style={{
+                                    maxWidth: "32px",
+                                    maxHeight: "32px",
+                                    minWidth: "32px",
+                                    minHeight: "32px",
+                                }}
+                                sx={{
+                                    fontSize: 12,
+                                }}
+                                onClick={(e) =>
+                                    calculateRoute(e, { destination })
+                                }
+                            >
+                                Go
+                            </Button>
 
-            <form onSubmit={(e) => calculateRoute(e, { destination })}>
-                <Autocomplete>
-                    <input
-                        type="text"
-                        placeholder="Destination"
-                        value={destination}
-                        onSelectCapture={(e) => {
-                            setDestination(e.target.value);
-                        }}
-                    />
-                </Autocomplete>
-                <input type="submit" value="GO" />
-            </form>
-            <p>Distance : {distance}</p>
-            <p>Duration : {duration}</p>
+                            {/* <input type="submit" value="GO" /> */}
+                        </Grid>
+                        <Grid item xs={3} sx={{ display: "flex" }}>
+                            <Typography
+                                variant="h6"
+                                component="h2"
+                                sx={{ fontSize: 16 }}
+                            >
+                                Distance : {distance}
+                            </Typography>
+                        </Grid>
+
+                        <Grid item xs={4} sx={{ display: "flex" }}>
+                            <Typography
+                                variant="h6"
+                                component="h2"
+                                sx={{ fontSize: 16 }}
+                            >
+                                Duration : {duration}
+                            </Typography>
+                        </Grid>
+                    </Grid>
+                </form>
+            </Stack>
         </div>
     ) : (
         <div></div>
