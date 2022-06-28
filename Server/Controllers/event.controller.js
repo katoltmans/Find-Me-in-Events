@@ -38,6 +38,7 @@ const getMyEvents = async (req, res) => {
   try {
     const loggedInUser = req.loggedInuser;
     const events = await Event.find({ "going.personId": loggedInUser })
+      .sort({ date: 1 })
       .populate("createdBy", "firstName lastName")
       .populate("going.personId", "firstName lastName");
     res.status(200).json(events);

@@ -54,6 +54,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
               to="/events"
               color="inherit"
               underline="none"
+              state={user}
             >
               <h1>Join In</h1>
             </Link>

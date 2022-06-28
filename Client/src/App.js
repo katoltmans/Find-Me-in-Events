@@ -10,7 +10,7 @@ import EditEvent from "./components/EditEvent";
 import ViewEvent from "./views/ViewEvent";
 import WelcomePage from "./components/WelcomePage";
 
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
@@ -31,7 +31,7 @@ function App() {
           <Route path="/myEvents" element={<MyEvent />} />
           <Route path="/event/edit/:id" element={<EditEvent />} />
         </Routes>
-        <ToastContainer autoClose={1000} />
+        <ToastContainer autoClose={1000} position="top-center" />
       </div>
     </BrowserRouter>
   );
