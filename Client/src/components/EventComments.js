@@ -53,7 +53,7 @@ const EventComments = (props) => {
             )
             .then((res) => {
                 // console.log('delete res',res);
-                socket.emit('delete', res.data.comments)
+                socket.emit('delete', commentId)
                 setComments(comments.filter((c) => c._id !== commentId));
             })
             .catch((err) => {
@@ -62,8 +62,8 @@ const EventComments = (props) => {
     };
 
     socket.on('delete', (data) => {
-        console.log('socket data', data)
-        setComments(data);
+        // console.log('socket data', data)
+        setComments(comments.filter((c) => c._id !== data));
     })
 
     return (
