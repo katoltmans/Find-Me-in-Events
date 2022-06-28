@@ -9,6 +9,7 @@ import Gmaps from "../components/Gmaps";
 import jwtDecode from "jwt-decode";
 import Cookies from "js-cookie";
 import { Box } from "@mui/system";
+import io from 'socket.io-client';
 
 const ViewEvent = () => {
     const [comments, setComments] = useState([]);
@@ -17,6 +18,7 @@ const ViewEvent = () => {
     const [user, setUser] = useState(null);
     const [refreshCounter, setRefreshCounter] = useState(0);
     const { id } = useParams();
+    const [socket] = useState(() => io(':8000'))
 
     useEffect(() => {
         console.log("hello there");
@@ -37,6 +39,15 @@ const ViewEvent = () => {
             .catch((err) => {
                 console.log("Error with getOneEvent request", err);
             });
+
+            socket.on('connection', (socket) => {
+                console.log(socket.id)
+            })
+
+            socket.on('newComment', (data) => {
+                setComments(data)
+            })
+
     }, [id, userToken, refreshCounter]);
 
     return (
