@@ -94,6 +94,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
                 to="/new"
                 color="inherit"
                 underline="none"
+                state={user}
               >
                 Launch An Event
               </Link>

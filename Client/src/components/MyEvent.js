@@ -92,14 +92,20 @@ function MyEvent() {
 
   return (
     <div>
-      <div>
-        <h1>Going Events</h1>
-        {displayGoingEvents("going")}
-      </div>
-      <hr />
-      <hr />
-      <h1>Your Events</h1>
-      <div>{displayGoingEvents("created")}</div>
+      {!user ? (
+        <h1> Please Login or register</h1>
+      ) : (
+        <>
+          <div>
+            <h1>Going Events</h1>
+            {displayGoingEvents("going")}
+          </div>
+          <hr />
+          <hr />
+          <h1>Your Events</h1>
+          <div>{displayGoingEvents("created")}</div>
+        </>
+      )}
     </div>
   );
 }
