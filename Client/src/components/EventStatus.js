@@ -22,7 +22,7 @@ const EventStatus = (props) => {
     }, []);
 
     return (
-        <Paper elevation={2} sx={{ p: 3 }}>
+        <Paper elevation={2} sx={{ p: 3, overflow: "auto", height: "348px" }}>
             <Typography variant="h5" component="h2" sx={{ mb: 2 }}>
                 Look Who's Attending
             </Typography>
@@ -44,7 +44,9 @@ const EventStatus = (props) => {
                                     overflowWrap: "break-word",
                                 }}
                             >
-                {a.personId.firstName + " " + a.personId.lastName}
+                                {a.personId.firstName +
+                                    " " +
+                                    a.personId.lastName}
                             </li>
                         );
                     }
@@ -68,7 +70,9 @@ const EventStatus = (props) => {
                                     overflowWrap: "break-word",
                                 }}
                             >
-                {a.personId.firstName + " " + a.personId.lastName}
+                                {a.personId.firstName +
+                                    " " +
+                                    a.personId.lastName}
                             </li>
                         );
                     }
@@ -95,7 +99,9 @@ const EventStatus = (props) => {
                                     overflowWrap: "break-word",
                                 }}
                             >
-                {a.personId.firstName + " " + a.personId.lastName}
+                                {a.personId.firstName +
+                                    " " +
+                                    a.personId.lastName}
                             </li>
                         );
                     }

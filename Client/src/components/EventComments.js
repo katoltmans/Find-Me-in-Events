@@ -9,6 +9,7 @@ import {
     Typography,
 } from "@mui/material";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+import { Box } from "@mui/system";
 
 const EventComments = (props) => {
     const { comments, setComments, id, user } = props;
@@ -56,7 +57,7 @@ const EventComments = (props) => {
     };
 
     return (
-        <Paper elevation={2} sx={{ p: 3 }}>
+        <Paper elevation={2} sx={{ p: 3, height: "348px" }}>
             <Typography variant="h5" component="h2" sx={{ mb: 2 }}>
                 Comments
             </Typography>
@@ -77,48 +78,52 @@ const EventComments = (props) => {
                     Submit
                 </Button>
             </form>
-            <ul>
-                {comments.map((c) => {
-                    return (
-                        <li key={c._id}>
-                            <Grid container>
-                                <Grid item xs={11}>
-                                    <Typography
-                                        variant="h5"
-                                        component="h2"
-                                        sx={{
-                                            fontSize: 15,
-                                            fontWeight: "bold",
-                                            mt: 1,
-                                        }}
-                                    >
-                                        {c.postedBy.firstName +
-                                            " " +
-                                            c.postedBy.lastName}
-                                    </Typography>
-                                </Grid>
-                                {c.postedBy._id === user._id ? (
-                                    <Grid item xs={1}>
-                                        <IconButton
-                                            onClick={() => deleteComment(c._id)}
+            <Box sx={{ overflowY: "scroll", height: "200px", mt: 1 }}>
+                <ul>
+                    {comments.map((c) => {
+                        return (
+                            <li key={c._id}>
+                                <Grid container>
+                                    <Grid item xs={11}>
+                                        <Typography
+                                            variant="h5"
+                                            component="h2"
+                                            sx={{
+                                                fontSize: 15,
+                                                fontWeight: "bold",
+                                                mt: 1,
+                                            }}
                                         >
-                                            <HighlightOffIcon
-                                                sx={{
-                                                    color: "#992e2e",
-                                                    fontSize: 20,
-                                                    fontWeight: "bold",
-                                                    m: -8,
-                                                }}
-                                            />
-                                        </IconButton>
+                                            {c.postedBy.firstName +
+                                                " " +
+                                                c.postedBy.lastName}
+                                        </Typography>
                                     </Grid>
-                                ) : null}
-                            </Grid>
-                            {c.details}
-                        </li>
-                    );
-                })}
-            </ul>
+                                    {c.postedBy._id === user._id ? (
+                                        <Grid item xs={1}>
+                                            <IconButton
+                                                onClick={() =>
+                                                    deleteComment(c._id)
+                                                }
+                                            >
+                                                <HighlightOffIcon
+                                                    sx={{
+                                                        color: "#992e2e",
+                                                        fontSize: 20,
+                                                        fontWeight: "bold",
+                                                        m: -8,
+                                                    }}
+                                                />
+                                            </IconButton>
+                                        </Grid>
+                                    ) : null}
+                                </Grid>
+                                {c.details}
+                            </li>
+                        );
+                    })}
+                </ul>
+            </Box>
         </Paper>
     );
 };

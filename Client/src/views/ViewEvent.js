@@ -7,6 +7,7 @@ import EventStatus from "../components/EventStatus";
 import EventComments from "../components/EventComments";
 import jwtDecode from "jwt-decode";
 import Cookies from "js-cookie";
+import { Box } from "@mui/system";
 
 const ViewEvent = () => {
     const [comments, setComments] = useState([]);
@@ -39,13 +40,15 @@ const ViewEvent = () => {
     return (
         <div>
             {!event ? null : (
-                <Grid container sx={{ mt: 5, mx: 2 }}>
+                <Grid container sx={{ mt: 5, mx: 2, height: "550px" }}>
                     <Grid item xs={6} width="100%">
                         <EventDetail event={event} user={user} id={id} />
                     </Grid>
                     <Grid item xs={6}>
                         <Stack width="100%" sx={{ mt: 5, ml: 2 }}>
-                            Map Component will go here
+                            <Box sx={{ height: "250px" }}>
+                                Map Component will go here
+                            </Box>
                             <Grid container spacing={2} sx={{ mt: 1 }}>
                                 <Grid item xs={4}>
                                     <EventStatus />
