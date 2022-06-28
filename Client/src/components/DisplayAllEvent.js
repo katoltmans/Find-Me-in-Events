@@ -105,12 +105,7 @@ function DisplayAllEvent() {
                                     variant="body2"
                                     color="text.secondary"
                                 >
-
-                                    {`${event.location.street},
-                                    ${event.location.city},
-                                    ${event.location.state},
-                                    ${event.location.zipcode}`}
-
+                                    {`${event.location.street}, ${event.location.city}, ${event.location.state}, ${event.location.zipcode}`}
                                 </Typography>
                                 <Typography
                                     variant="body2"

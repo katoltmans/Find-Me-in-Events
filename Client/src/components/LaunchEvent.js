@@ -20,10 +20,10 @@ function LaunchEvent() {
     state: "",
     zipcode: "",
   });
-  const [date, setDate] = useState("0");
-  const [time, setTime] = useState("0");
+  const [date, setDate] = useState("");
+  const [time, setTime] = useState("");
   // const [image, setImage] = useState("");
-  const [description, setDescription] = useState([]);
+  const [description, setDescription] = useState("");
   const [errors,setErrors]=useState([]);
 
   //navigate
@@ -44,7 +44,7 @@ function LaunchEvent() {
       })
       .catch((err) => {
         setErrors(err.response.data.error.errors)
-        console.log(err.response.data.location)
+        console.log(err.response.data)
       });
   };
 
@@ -54,6 +54,9 @@ function LaunchEvent() {
       [e.target.name]: e.target.value,
     });
   };
+
+
+
   const handleTimings = (e) => {
     const time = e.target.value;
     const [hrs, min] = time.split(":");
@@ -90,7 +93,7 @@ function LaunchEvent() {
               onChange={(e) => setEventTitle(e.target.value)}
             />
           </Box>
-          {errors.eventTitle ? <p>{errors.eventTitle.message}</p> :null}
+          {errors.eventTitle ? <p className="errors">{errors.eventTitle.message}</p> :null}
           <br />
           <Box
             sx={{
@@ -107,7 +110,7 @@ function LaunchEvent() {
               onChange={locationHandler}
             />
           </Box>
-          {/* {errors.location ? <p>{errors.location.street.message}</p> :null} */}
+          {errors["location.street"] ? <p className="errors">{errors["location.street"].message}</p> :null}
 
           <br />
           <Grid container item spacing={3}>
@@ -120,7 +123,7 @@ function LaunchEvent() {
                 value={location.city}
                 onChange={locationHandler}
               />
-                  {/* {errors.location.city ? <p>{errors.location.city.message}</p> :null} */}
+                  {errors["location.city"] ? <p className="errors">{errors["location.city"].message}</p> :null}
 
             </Grid>
             <Grid item xs={3}>
@@ -132,6 +135,8 @@ function LaunchEvent() {
                 value={location.state}
                 onChange={locationHandler}
               />
+                {errors["location.state"] ? <p className="errors">{errors["location.state"].message}</p> :null}
+
             </Grid>
             <Grid item xs={3}>
               <TextField
@@ -142,6 +147,8 @@ function LaunchEvent() {
                 value={location.zipcode}
                 onChange={locationHandler}
               />
+                {errors["location.zipcode"] ? <p className="errors">{errors["location.zipcode"].message}</p> :null}
+
             </Grid>
           </Grid>
           <br />
@@ -159,17 +166,22 @@ function LaunchEvent() {
               onChange={(e) => setDescription(e.target.value)}
             />
           </Box>
+          {errors.description ? <p className="errors">{errors.description.message}</p> :null}
+
           <br />
+          <Grid item xs={3}>
           <input
             type="date"
             value={date}
             onChange={(e) => setDate(e.target.value)}
-          />
+          /> 
+          {errors.date ? <p className="errors"> {errors.date.message}</p> :null}
           <input
             type="time"
             value={time}
             onChange={handleTimings}
-          />
+          /></Grid>
+                    {errors.time ? <p className="errors">{errors.time.message}</p> :null}
           <br />
           <br />
           <Stack spacing={2} direction="row" className="eventLaunchButton">
