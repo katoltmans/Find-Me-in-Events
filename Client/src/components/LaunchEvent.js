@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 //Imports from the MUI
 import Box from "@mui/material/Box";
@@ -12,13 +12,20 @@ import Button from "@mui/material/Button";
 import { toast } from "react-toastify";
 // import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import Autocomplete from "@mui/material/Autocomplete";
+import { statesArray } from "./utils";
 
 function LaunchEvent() {
+  const { state: user } = useLocation();
   const [eventTitle, setEventTitle] = useState("");
   const [location, setLocation] = useState({
     street: "",
     city: "",
-    state: "",
+    state: "sss",
     zipcode: "",
   });
   const [date, setDate] = useState("");
@@ -72,6 +79,14 @@ function LaunchEvent() {
       setTime(`${hrs}:${min} AM`);
     }
   };
+
+  if (!user) {
+    return (
+      <>
+        <h1>Please Login or Register to create an event</h1>
+      </>
+    );
+  }
 
   return (
     <div className="eventLaunchBar">
@@ -132,19 +147,47 @@ function LaunchEvent() {
                 <p className="errors">{errors["location.city"].message}</p>
               ) : null}
             </Grid>
-            <Grid item xs={3}>
-              <TextField
-                fullWidth
+            {/* <Grid item xs={3}>
+              <InputLabel id="demo-simple-select-label">State</InputLabel>
+              <Select
+                style={{ width: 100, height: 50 }}
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={location.state}
                 label="State"
-                id="fullWidth"
                 name="state"
+                onChange={locationHandler}
+              >
+                {statesArray.map((state) => (
+                  <MenuItem value={state}>{state}</MenuItem>
+                ))}
+              </Select>
+              {errors["location.state"] ? (
+                <p className="errors">{errors["location.state"].message}</p>
+              ) : null}
+            </Grid> */}
+            <Grid item xs={3}>
+              <input
+                style={{ width: 100, height: 50 }}
+                placeholder="State"
+                type="text"
+                list="states"
+                name="state"
+                id="state"
                 value={location.state}
                 onChange={locationHandler}
               />
+              <datalist id="states">
+                {statesArray.map((state) => (
+                  <option value={state} />
+                ))}
+              </datalist>
+
               {errors["location.state"] ? (
                 <p className="errors">{errors["location.state"].message}</p>
               ) : null}
             </Grid>
+
             <Grid item xs={3}>
               <TextField
                 fullWidth
