@@ -134,7 +134,8 @@ for(let i=0; i<reset.length; i++){
                 <CardActionArea>
                   <CardMedia
                     component="img"
-                    height="140"
+                    height="150"
+                    sx={{p:1}}
                     image={event.image}
                     alt={event.image}
                   />
@@ -153,11 +154,11 @@ for(let i=0; i<reset.length; i++){
                     </Typography>
                   </CardContent>
                 </CardActionArea>
-                <CardActions>
+                {/* <CardActions>
                   <Button size="small" color="primary">
                     <Link to={`/events/${event._id}`}> View Details</Link>
                   </Button>
-                </CardActions>
+                </CardActions> */}
               </Card>
             </div>
           </Link>

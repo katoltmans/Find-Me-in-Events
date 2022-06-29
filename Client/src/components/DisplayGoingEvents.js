@@ -36,6 +36,7 @@ const DisplayGoingEvents = ({ eventsToshow, sectionId }) => {
         <div className="displayAll">
             {eventsToshow.map((event, i) => (
                 <div key={event._id} className="displayAll">
+                   
                     <div
                         id={sectionId}
                         className=""
@@ -50,7 +51,7 @@ const DisplayGoingEvents = ({ eventsToshow, sectionId }) => {
                             <CardActionArea>
                                 <CardMedia
                                     component="img"
-                                    height="140"
+                                    height="150"
                                     image={event.image}
                                     alt={event.image}
                                 />
