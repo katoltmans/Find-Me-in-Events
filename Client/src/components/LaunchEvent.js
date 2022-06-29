@@ -49,7 +49,7 @@ function LaunchEvent() {
       .then((res) => {
         console.log(res.data);
         toast.success("Successfully Created New Event !!");
-        navigate("/events");
+        navigate("/events", { state: user });
       })
       .catch((err) => {
         setErrors(err.response.data.error.errors);
