@@ -39,10 +39,19 @@
 
 .myEvent {
     color: #2e9384;
-    margin-left: 10px;
+    margin-left:50px;
 }
 
 .spn{
     font-size: 15px;
     color: #ccc;
+}
+.transitBox{
+    display:inline-block;
+}
+.myEventBox{
+    border: 1px solid #c1c2c2;
+    margin:15px;
+    border-radius:1%;
+    box-shadow: 10px 10px 10px 10px #888888
 }
