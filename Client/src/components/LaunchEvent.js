@@ -10,6 +10,7 @@ import CardContent from "@mui/material/CardContent";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import { toast } from "react-toastify";
+import { Paper } from "@mui/material";
 // import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 
@@ -95,6 +96,7 @@ function LaunchEvent() {
 
   return (
     <div className="eventLaunchBar">
+      <Paper elevation={2} sx={{ p: 5 }}>
       <Card sx={{ maxWidth: 450 }} className="boxDetails">
         <form onSubmit={submitHandler}>
           <Box
@@ -249,6 +251,7 @@ function LaunchEvent() {
           <br />
         </form>
       </Card>
+      </Paper>
     </div>
   );
 }

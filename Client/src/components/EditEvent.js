@@ -12,6 +12,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import { format } from "date-fns";
+import { Paper } from "@mui/material";
 
 function EditEvent() {
     const [eventTitle, setEventTitle] = useState("");
@@ -86,6 +87,7 @@ function EditEvent() {
 
     return (
         <div className="eventLaunchBar">
+            <Paper elevation={2} sx={{ p: 5 }}>
             <Card sx={{ maxWidth: 450 }} className="boxDetails">
                 <form>
                     <Box
@@ -231,6 +233,7 @@ function EditEvent() {
                     <br />
                 </form>
             </Card>
+            </Paper>
         </div>
     );
 }

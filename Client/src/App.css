@@ -41,9 +41,13 @@
 }
 
 .myEvent {
-    color: #2e9384;
-    margin-left:50px;
+color:#2e9384;
 }
+
+.myEvents {
+    color:#2e9384;
+    margin-left: 50px;
+    }
 
 .spn{
     font-size: 15px;
