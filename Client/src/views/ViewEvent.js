@@ -48,6 +48,17 @@ const ViewEvent = () => {
                 setComments(data)
             })
 
+            socket.on('statusChange', () => {
+                axios
+            .get(`http://localhost:8000/api/events/${id}`, {
+                withCredentials: true,
+            })
+            .then((res) => {
+                setEvent(res.data.event);
+                setComments(res.data.event.comments);
+            })
+        })
+
     }, [id, userToken, refreshCounter]);
 
     return (

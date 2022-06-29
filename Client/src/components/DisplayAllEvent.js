@@ -9,6 +9,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Button, CardActionArea, CardActions } from "@mui/material";
 import io from "socket.io-client";
+import '../App.css'
 
 
 function DisplayAllEvent() {
@@ -33,7 +34,7 @@ function DisplayAllEvent() {
         .get("http://localhost:8000/api/events", { withCredentials: true })
         .then((res) => {
           setEventList(res.data.events);
-        //   console.log('all events', res.data.events);
+          console.log('all events', res.data.events);
           setIsLoaded(true);
         })
         .catch((err) => {
@@ -125,7 +126,7 @@ socket.on('deleteEvent', () => {
                   {`${event.location.street}, ${event.location.city}, ${event.location.state}, ${event.location.zipcode}`}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  {eventDate(event.date)}
+                  {eventDate(event.date)} - <span className="spn">Created by: {event.createdBy.firstName} {event.createdBy.lastName}</span>
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
                   {event.time}

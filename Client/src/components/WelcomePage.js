@@ -112,7 +112,7 @@ const WelcomePage = (props) => {
                                 Join In
                             </Link>
                         </span>{" "}
-                        the party!!
+                        on events!!
                     </Typography>
                 }
             </Paper>

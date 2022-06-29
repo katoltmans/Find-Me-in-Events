@@ -28,6 +28,8 @@
 
 .errors {
     color: red;
+    font-size: 14px;
+    text-align: left;
 }
 
 .image {
@@ -42,6 +44,10 @@
     margin-left:50px;
 }
 
+.spn{
+    font-size: 15px;
+    color: #ccc;
+}
 .transitBox{
     display:inline-block;
 }

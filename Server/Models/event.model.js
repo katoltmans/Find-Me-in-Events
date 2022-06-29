@@ -63,20 +63,20 @@ const EventSchema = new mongoose.Schema(
     location: {
       street: {
         type: String,
-        required: [true, "Sreet name is required"],
+        required: [true, "Enter Sreet"],
       },
       city: {
         type: String,
-        required: [true, "City name is required"],
+        required: [true, "Enter City"],
       },
       zipcode: {
         type: Number,
-        required: [true, "Zipcode name is required"],
+        required: [true, "Enter Zipcode"],
       },
       state: {
         type: String,
         uppercase: true,
-        required: true,
+        required: [true, "Enter State"],
         enum: statesArray,
       },
     },

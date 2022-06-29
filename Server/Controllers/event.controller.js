@@ -20,6 +20,8 @@ const createEvent = (req, res) => {
 
 const getAllEvents = (req, res) => {
   Event.find()
+    .sort({ date: 1 })
+    .populate("createdBy", "firstName lastName")
     .populate("comments", "details postedAt")
     .populate("comments.postedBy", "firstName lastName")
     .then((allEvent) => {
@@ -49,6 +51,7 @@ const getMyEvents = async (req, res) => {
 };
 const getOneEvent = (req, res) => {
   Event.findOne({ _id: req.params.id })
+    .populate("createdBy", "firstName lastName")
     .populate("comments", "details postedAt")
     .populate("comments.postedBy", " firstName lastName")
     .populate("going.personId", "firstName lastName")
