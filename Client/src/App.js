@@ -13,28 +13,77 @@ import WelcomePage from "./components/WelcomePage";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import { ThemeProvider } from "@emotion/react";
+import { Box, createTheme, CssBaseline } from "@mui/material";
+
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  return (
-    <BrowserRouter>
-      <div>
-        <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-        <Routes>
-          <Route
-            path="/login"
-            element={<LoginRegistrationForm setIsLoggedIn={setIsLoggedIn} />}
-          />
-          <Route path="/" element={<WelcomePage />} />
-          <Route path="/events" element={<DisplayAllEvent />} />
-          <Route path="/new" element={<LaunchEvent />} />
-          <Route path="/events/:id" element={<ViewEvent />} />
-          <Route path="/myEvents" element={<MyEvent />} />
-          <Route path="/event/edit/:id" element={<EditEvent />} />
-        </Routes>
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    const theme = createTheme({
+        palette: {
+            background: {
+                default: "#e8e3df",
+            },
+            primary: {
+                light: "#6fa7ff",
+                main: "#3179d1",
+                dark: "#004e9f",
+            },
+            secondary: {
+                light: "#97f7e6",
+                main: "#7ce8d7",
+                dark: "2e9384",
+            },
+            // text: {
+            //     primary: "#004e9f",
+            // },
+            // text: {
+            //     secondary: "#2e9384",
+            // },
+            // text: {
+            //     disabled: "#b0ffff",
+            // },
+            // info: {
+            //     main: "#46b5a6",
+            // },
+            typography: {
+                useNextVariants: true,
+            },
+        },
+    });
+
+    return (
+        <ThemeProvider theme={theme}>
+            <CssBaseline>
+                <BrowserRouter>
+                    <Box>
+                        <Navbar
+                            isLoggedIn={isLoggedIn}
+                            setIsLoggedIn={setIsLoggedIn}
+                        />
+                    </Box>
+
+                    <Routes>
+                        <Route
+                            path="/login"
+                            element={
+                                <LoginRegistrationForm
+                                    setIsLoggedIn={setIsLoggedIn}
+                                />
+                            }
+                        />
+                        <Route path="/" element={<WelcomePage />} />
+                        <Route path="/events" element={<DisplayAllEvent />} />
+                        <Route path="/new" element={<LaunchEvent />} />
+                        <Route path="/events/:id" element={<ViewEvent />} />
+                        <Route path="/myEvents" element={<MyEvent />} />
+                        <Route path="/event/edit/:id" element={<EditEvent />} />
+                    </Routes>
         <ToastContainer autoClose={1000} position="top-center" />
-      </div>
-    </BrowserRouter>
-  );
+                </BrowserRouter>
+            </CssBaseline>
+        </ThemeProvider>
+    );
 }
 
 export default App;

@@ -10,146 +10,150 @@ import { toast } from "react-toastify";
 import axios from "axios";
 
 const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
-  console.log("props", isLoggedIn);
-  const navigate = useNavigate();
-  const [user, setUser] = useState(null);
-  const userToken = Cookies.get("userToken");
+    console.log("props", isLoggedIn);
+    const navigate = useNavigate();
+    const [user, setUser] = useState(null);
+    const userToken = Cookies.get("userToken");
 
-  useEffect(() => {
-    if (userToken) {
-      const user = jwtDecode(userToken);
-      console.log("user", user);
-      setUser(user);
-      //navigate("/");  This redirects all other pages upon refresh
-    }
-  }, [isLoggedIn]);
+    useEffect(() => {
+        if (userToken) {
+            const user = jwtDecode(userToken);
+            console.log("user", user);
+            setUser(user);
+            //navigate("/");  This redirects all other pages upon refresh
+        }
+    }, [isLoggedIn]);
 
-  const handleLogout = () => {
-    axios
-      .post("http://localhost:8000/api/logout", {}, { withCredentials: true })
-      .then((response) => {
-        console.log("succfully logged out", response.data);
-        setUser(null);
-        setIsLoggedIn(false);
-        toast.success("Successfully LoggedOut !!");
-        navigate("/");
-      })
-      .catch((err) => {
-        console.log("error while logging out", err);
-      });
-  };
+    const handleLogout = () => {
+        axios
+            .post(
+                "http://localhost:8000/api/logout",
+                {},
+                { withCredentials: true }
+            )
+            .then((response) => {
+                console.log("succfully logged out", response.data);
+                setUser(null);
+                setIsLoggedIn(false);
+                toast.success("Successfully LoggedOut !!");
+                navigate("/");
+            })
+            .catch((err) => {
+                console.log("error while logging out", err);
+            });
+    };
 
-  return (
-    <Box sx={{ display: "flex" }}>
-      <AppBar position="static">
-        <Toolbar disableGutters sx={{ ml: 2 }}>
-          <Typography
-            variant="h6"
-            color="inherit"
-            component="div"
-            sx={{ flexGrow: 4 }}
-          >
-            <Link
-              component={RouterLink}
-              to="/events"
-              color="inherit"
-              underline="none"
+    return (
+        <Box sx={{ display: "flex" }}>
+            <AppBar position="static">
+                <Toolbar disableGutters sx={{ ml: 2 }}>
+                    <Typography
+                        variant="h6"
+                        color="inherit"
+                        component="div"
+                        sx={{ flexGrow: 4 }}
+                    >
+                        <Link
+                            component={RouterLink}
+                            to="/events"
+                            color="inherit"
+                            underline="none"
               state={user}
-            >
-              <h1>Join In</h1>
-            </Link>
-          </Typography>
+                        >
+                            <h1>Join In</h1>
+                        </Link>
+                    </Typography>
 
-          <Stack
-            direction="row"
-            alignItems="end"
-            sx={{
-              display: "flex",
-              flexGrow: 1,
-            }}
-          >
-            <Typography
-              variant="h6"
-              color="inherit"
-              component="div"
-              sx={{ mr: 8 }}
-            >
-              <Link
-                component={RouterLink}
-                to="/myEvents"
-                color="inherit"
-                underline="none"
+                    <Stack
+                        direction="row"
+                        alignItems="end"
+                        sx={{
+                            display: "flex",
+                            flexGrow: 1,
+                        }}
+                    >
+                        <Typography
+                            variant="h6"
+                            color="inherit"
+                            component="div"
+                            sx={{ mr: 8 }}
+                        >
+                            <Link
+                                component={RouterLink}
+                                to="/myEvents"
+                                color="inherit"
+                                underline="none"
+                                state={user}
+                            >
+                                My Events
+                            </Link>
+                        </Typography>
+                        <Typography
+                            variant="h6"
+                            color="inherit"
+                            component="div"
+                            sx={{ mr: 8 }}
+                        >
+                            <Link
+                                component={RouterLink}
+                                to="/new"
+                                color="inherit"
+                                underline="none"
                 state={user}
-              >
-                My Events
-              </Link>
-            </Typography>
-            <Typography
-              variant="h6"
-              color="inherit"
-              component="div"
-              sx={{ mr: 8 }}
-            >
-              <Link
-                component={RouterLink}
-                to="/new"
-                color="inherit"
-                underline="none"
-                state={user}
-              >
-                Launch An Event
-              </Link>
-            </Typography>
-            {!!user?.firstName ? (
-              <Box
-                sx={{
-                  display: "flex",
-                  ml: 5,
-                  flexGrow: 1,
-                }}
-              >
-                <Typography
-                  sx={{
-                    pt: 1,
-                    fontSize: 30,
-                    fontWeight: "bold",
-                  }}
-                >
-                  Welcome {user.firstName}
-                </Typography>
-                <Button
-                  variant="contained"
-                  onClick={handleLogout}
-                  sx={{ ml: 3 }}
-                >
-                  Logout
-                </Button>
-              </Box>
-            ) : (
-              <Box
-                sx={{
-                  flexDirection: "row-reverse",
-                  ml: 5,
-                  flexGrow: 1,
-                }}
-              >
-                <Button variant="contained">
-                  <Link
-                    component={RouterLink}
-                    to="/login"
-                    color="inherit"
-                    underline="none"
-                  >
-                    Login or Register
-                  </Link>
-                </Button>
-              </Box>
-            )}
-          </Stack>
-        </Toolbar>
-      </AppBar>
-    </Box>
-  );
+                            >
+                                Launch An Event
+                            </Link>
+                        </Typography>
+                        {!!user?.firstName ? (
+                            <Box
+                                sx={{
+                                    display: "flex",
+                                    ml: 5,
+                                    flexGrow: 1,
+                                }}
+                            >
+                                <Typography
+                                    sx={{
+                                        pt: 1,
+                                        fontSize: 30,
+                                        fontWeight: "bold",
+                                    }}
+                                >
+                                    Welcome {user.firstName}
+                                </Typography>
+                                <Button
+                                    variant="contained"
+                                    onClick={handleLogout}
+                                    sx={{ ml: 3 }}
+                                >
+                                    Logout
+                                </Button>
+                            </Box>
+                        ) : (
+                            <Box
+                                sx={{
+                                    flexDirection: "row-reverse",
+                                    ml: 5,
+                                    flexGrow: 1,
+                                }}
+                            >
+                                <Button variant="contained">
+                                    <Link
+                                        component={RouterLink}
+                                        to="/login"
+                                        color="inherit"
+                                        underline="none"
+                                    >
+                                        Login or Register
+                                    </Link>
+                                </Button>
+                            </Box>
+                        )}
+                    </Stack>
+                </Toolbar>
+            </AppBar>
+        </Box>
+    );
 };
 
 export default Navbar;
