@@ -4,12 +4,14 @@ import { useLocation, Link } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import "../App.css";
 import DisplayGoingEvents from "./DisplayGoingEvents";
+import io from "socket.io-client";
 
 function MyEvent() {
     const [goingEvent, setGoingEvent] = useState([]);
     const [createdEvent, setCreatedEvent] = useState([]);
     const { state: user } = useLocation();
-    console.log("state", user);
+    const [socket] = useState(() => io(":8000"));
+
 
     useEffect(() => {
         axios
@@ -37,6 +39,30 @@ function MyEvent() {
                 console.log("Error while fetching the my events", err);
             });
     }, []);
+
+
+    socket.on('deleteEvent', (data) => {
+      axios
+            .get(`http://localhost:8000/api/getmyevents`, {
+                withCredentials: true,
+            })
+            .then((res) => {
+                const myallEvents = res.data;
+                const createdEvent = myallEvents.filter((events) => {
+                    return events.createdBy._id == user._id;
+                });
+                // setCreatedEvent(
+                //     myallEvents.filter(
+                //         (event) => event.createdBy._id == user._id
+                //     )
+                // );
+                setGoingEvent(
+                    myallEvents.filter(
+                        (event) => event.createdBy._id != user._id
+                    )
+                );
+            })
+    } )
 
     return (
         <div>
