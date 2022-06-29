@@ -105,8 +105,9 @@ function Gmaps(props) {
     return isLoaded ? (
         <Paper elevation={2}>
             <Stack>
+                <div style={{height: "350px", width:'800px'}}>
                 <GoogleMap
-                    mapContainerStyle={{ width: "800px", height: "350px" }}
+                    mapContainerStyle={{ width: "inherit", height: "inherit" }}
                     zoom={10}
                     center={center}
                     onLoad={onLoad}
@@ -122,6 +123,7 @@ function Gmaps(props) {
                     )}
                     <Marker position={center} title="Your location" />
                 </GoogleMap>
+                </div>
                 <form>
                     <Grid
                         container
