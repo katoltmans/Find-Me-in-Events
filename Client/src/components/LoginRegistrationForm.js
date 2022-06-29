@@ -240,7 +240,7 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
               </Button>
               <Button
                 variant="contained"
-                sx={{ mt: 3 }}
+                sx={{ mt: 3 , ml:3}}
                 onClick={() => navigate("/forgotPassword")}
               >
                 Forgot passssword

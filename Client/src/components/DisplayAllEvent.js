@@ -128,7 +128,7 @@ for(let i=0; i<reset.length; i++){
       {eventList.map((event, i) => (
         <div key={event._id} className="displayAll"  >
           <Link className="link" to={`/events/${event._id}`}>
-            <div id="ev" className=""  onMouseOver={(e) => {handlehover(e, i)}} onMouseOut = {(e) => {out(e)}} >
+            <div id="ev" className="borderBox"  onMouseOver={(e) => {handlehover(e, i)}} onMouseOut = {(e) => {out(e)}} >
               <Card sx={{ maxWidth: 450 }}  >
                 
                 <CardActionArea>
