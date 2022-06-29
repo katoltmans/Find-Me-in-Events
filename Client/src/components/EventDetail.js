@@ -15,6 +15,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import MenuDropdown from "./MenuDropdown";
 import io from "socket.io-client";
 
+import '../App.css'
 
 const EventDetail = (props) => {
     const [socket] = useState(() => io(":8000"));
@@ -56,6 +57,7 @@ const EventDetail = (props) => {
                 console.log("Status response", res);
         toast.success("Successfully updated the status !!");
                 setRefreshCounter(refreshCounter + 1);
+                socket.emit('statusChange')
             })
             .catch((err) => {
         toast.warning("Error while updated the status !!");
@@ -123,8 +125,9 @@ const EventDetail = (props) => {
                 </Grid>
                 <Grid item xs={5}>
                     <Typography variant="h6" component="h2">
-                        {eventDate(event.date)} | {event.time}
+                        {eventDate(event.date)} | {event.time} 
                     </Typography>
+                    <span className="spn">Created by: {event.createdBy.firstName} {event.createdBy.lastName}</span>
                 </Grid>
             </Grid>
             <Typography variant="body1" component="h2" sx={{ mb: 3 }}>
