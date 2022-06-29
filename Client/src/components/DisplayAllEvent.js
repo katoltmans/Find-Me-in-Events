@@ -8,12 +8,16 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Button, CardActionArea, CardActions } from "@mui/material";
+import io from "socket.io-client";
+
 
 function DisplayAllEvent() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [eventList, setEventList] = useState([]);
   const navigate = useNavigate();
   const { state: user } = useLocation();
+  const [socket] = useState(() => io(":8000"));
+
   console.log("user", user);
   // const [lat, setLat] = useState(0)
   // const [lng, setLng] = useState(0)
@@ -29,7 +33,7 @@ function DisplayAllEvent() {
         .get("http://localhost:8000/api/events", { withCredentials: true })
         .then((res) => {
           setEventList(res.data.events);
-          console.log(res.data.events);
+          console.log('all events', res.data.events);
           setIsLoaded(true);
         })
         .catch((err) => {
@@ -74,10 +78,27 @@ function DisplayAllEvent() {
   // }
 
   // how to fix date to numeric
-  const eventDate = (date) => {
+const eventDate = (date) => {
     let fixDate = new Date(date);
     return fixDate.toLocaleDateString();
-  };
+};
+
+
+socket.on('newEvent', (data) => {
+    setEventList(eventList => {
+        return [data, ...eventList]
+    })
+})
+
+socket.on('deleteEvent', () => {
+    axios
+    .get("http://localhost:8000/api/events", { withCredentials: true })
+    .then((res) => {
+        setEventList(res.data.events);
+        setIsLoaded(true);
+    })
+})
+
 
   return isLoaded ? (
     <div className="displayAll">

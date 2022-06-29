@@ -13,8 +13,12 @@ import {
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import MenuDropdown from "./MenuDropdown";
+import io from "socket.io-client";
+
 
 const EventDetail = (props) => {
+    const [socket] = useState(() => io(":8000"));
+
     const navigate = useNavigate();
     const { event, user, id, refreshCounter, setRefreshCounter } = props;
     console.log(event);
@@ -25,9 +29,10 @@ const EventDetail = (props) => {
                 withCredentials: true,
             })
             .then((res) => {
-                console.log(res);
-        toast.success("Successfully Deleted the event !!");
-        navigate("/events", { state: user });
+                console.log('delete response', res);
+            toast.success("Successfully Deleted the event !!");
+            navigate("/events", { state: user });
+            socket.emit("deleteEvent")
             })
             .catch((err) => {
         toast.warning("Error while deleting the event !!");
