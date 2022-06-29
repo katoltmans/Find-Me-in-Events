@@ -18,6 +18,7 @@ import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import Autocomplete from "@mui/material/Autocomplete";
 import { statesArray } from "./utils";
+import io from "socket.io-client";
 
 function LaunchEvent() {
   const { state: user } = useLocation();
@@ -25,7 +26,7 @@ function LaunchEvent() {
   const [location, setLocation] = useState({
     street: "",
     city: "",
-    state: "sss",
+    state: "",
     zipcode: "",
   });
   const [date, setDate] = useState("");
@@ -33,6 +34,7 @@ function LaunchEvent() {
   // const [image, setImage] = useState("");
   const [description, setDescription] = useState("");
   const [errors, setErrors] = useState([]);
+  const [socket] = useState(() => io(":8000"));
 
   //navigate
   const navigate = useNavigate();
@@ -47,9 +49,11 @@ function LaunchEvent() {
         { withCredentials: true }
       )
       .then((res) => {
-        console.log(res.data);
+        console.log('new event data',res.data);
         toast.success("Successfully Created New Event !!");
         navigate("/events", { state: user });
+        socket.emit('newEvent', res.data)
+        
       })
       .catch((err) => {
         setErrors(err.response.data.error.errors);

@@ -36,9 +36,15 @@ io.on('connection', (socket) => {
 
   socket.on('delete', (data) => {
       socket.broadcast.emit('delete', data)
-      console.log('delete res', data)
   })
 
+  socket.on('newEvent', (data) => {
+    socket.broadcast.emit('newEvent', data)
+  })
+
+  socket.on('deleteEvent', () => {
+    socket.broadcast.emit('deleteEvent')
+  })
 
   socket.on('disconnect', (socket) => {
       console.log("User: " + socket.id + " disconnected")
