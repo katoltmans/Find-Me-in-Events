@@ -93,7 +93,7 @@ const EventDetail = (props) => {
                         {event.eventTitle}
                     </Typography>
                 </Grid>
-                {user._id === event.createdBy ? (
+                {user._id === event.createdBy._id ? (
                     <Grid item xs={1}>
                         <MenuDropdown
                             dropdownButton={
