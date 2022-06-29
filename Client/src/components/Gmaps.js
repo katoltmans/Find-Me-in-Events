@@ -22,6 +22,8 @@ function Gmaps(props) {
     const [lat, setLat] = useState(37.09024);
     const [lng, setLng] = useState(-95.712891);
     const [destination, setDestination] = useState("");
+    const [mode, setMode] = useState('DRIVING')
+    const [routeErr, setRouteErr] = useState('')
 
     axios
         .get(`http://localhost:8000/api/events/${ID}`, {
@@ -84,8 +86,12 @@ function Gmaps(props) {
             origin: center,
             destination: destination,
             // eslint-disable-next-line no-undef
-            travelMode: google.maps.TravelMode.DRIVING,
-        });
+            travelMode: google.maps.TravelMode[mode],
+        })
+        .catch(err => {
+            console.log("google map errors", err)
+            setRouteErr(err)
+    }) ;
         setDirectionsResponse(results);
         setDistance(results.routes[0].legs[0].distance.text);
         setDuration(results.routes[0].legs[0].duration.text);
@@ -166,6 +172,16 @@ function Gmaps(props) {
                         </Grid>
                     </Grid>
                 </form>
+                <div>
+                    <label>Travel Mode</label>
+                    <select value={mode} onChange={(e) => setMode(e.target.value) }>
+                        <option value="DRIVING">Driving</option>
+                        <option value="BICYCLING">Bicycling</option>
+                        <option value="TRANSIT">Transit</option>
+                        <option value="WALKING">Walking</option>
+                    </select>
+                    {routeErr? <p>No route could be found between the origin and destination.</p> : null}
+                </div>
             </Stack>
         </Paper>
     ) : (
