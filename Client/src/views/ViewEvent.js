@@ -64,7 +64,7 @@ const ViewEvent = () => {
         <div>
             {!event ? null : (
                 <Box sx={{ p: 4 }}>
-                    <Grid container spacing={5}>
+                    <Grid container spacing={5} sx={{ m: "auto" }}>
                         <Grid item xs={6}>
                             <EventDetail
                                 event={event}

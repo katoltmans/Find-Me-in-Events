@@ -15,7 +15,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import MenuDropdown from "./MenuDropdown";
 import io from "socket.io-client";
 
-import '../App.css'
+import "../App.css";
 
 const EventDetail = (props) => {
     const [socket] = useState(() => io(":8000"));
@@ -31,12 +31,12 @@ const EventDetail = (props) => {
             })
             .then((res) => {
                 // console.log('delete response', res);
-            toast.success("Successfully Deleted the event !!");
-            navigate("/events", { state: user });
-            socket.emit("deleteEvent")
+                toast.success("Successfully Deleted the event !!");
+                navigate("/events", { state: user });
+                socket.emit("deleteEvent");
             })
             .catch((err) => {
-        toast.warning("Error while deleting the event !!");
+                toast.warning("Error while deleting the event !!");
                 console.log("Error with delete request", err);
             });
     };
@@ -55,12 +55,12 @@ const EventDetail = (props) => {
             )
             .then((res) => {
                 console.log("Status response", res);
-        toast.success("Successfully updated the status !!");
+                toast.success("Successfully updated the status !!");
                 setRefreshCounter(refreshCounter + 1);
-                socket.emit('statusChange')
+                socket.emit("statusChange");
             })
             .catch((err) => {
-        toast.warning("Error while updated the status !!");
+                toast.warning("Error while updated the status !!");
                 console.log("Error with update status", err);
             });
     };
@@ -102,10 +102,17 @@ const EventDetail = (props) => {
                                 </IconButton>
                             }
                         >
-                <MenuItem onClick={() => routeToUpdate(event._id)} disableRipple>
+                            <MenuItem
+                                onClick={() => routeToUpdate(event._id)}
+                                disableRipple
+                            >
                                 Edit
                             </MenuItem>
-            <MenuItem onClick={() => handleDelete(event._id)} disableRipple sx={{ color: "#ff1622" }}>
+                            <MenuItem
+                                onClick={() => handleDelete(event._id)}
+                                disableRipple
+                                sx={{ color: "#ff1622" }}
+                            >
                                 Delete
                             </MenuItem>
                         </MenuDropdown>
@@ -114,7 +121,11 @@ const EventDetail = (props) => {
             </Grid>
             <Grid container>
                 <Grid item xs={12} sx={{ mb: 2 }}>
-            <img src="/image/Meetup.png" alt="placeholder" width="100%" />
+                    <img
+                        src="/image/Meetup.png"
+                        alt="placeholder"
+                        width="100%"
+                    />
                 </Grid>
             </Grid>
             <Grid container item spacing={5} sx={{ display: "flex", mb: 2 }}>
@@ -125,9 +136,12 @@ const EventDetail = (props) => {
                 </Grid>
                 <Grid item xs={5}>
                     <Typography variant="h6" component="h2">
-                        {eventDate(event.date)} | {event.time} 
+                        {eventDate(event.date)} | {event.time}
                     </Typography>
-                    <span className="spn">Created by: {event.createdBy.firstName} {event.createdBy.lastName}</span>
+                    <span className="spn">
+                        Created by: {event.createdBy.firstName}{" "}
+                        {event.createdBy.lastName}
+                    </span>
                 </Grid>
             </Grid>
             <Typography variant="body1" component="h2" sx={{ mb: 3 }}>
