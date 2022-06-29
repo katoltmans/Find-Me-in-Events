@@ -100,10 +100,10 @@ const EventDetail = (props) => {
                                 </IconButton>
                             }
                         >
-              <MenuItem onClick={() => routeToUpdate(event._id)} disableRipple>
+                <MenuItem onClick={() => routeToUpdate(event._id)} disableRipple>
                                 Edit
                             </MenuItem>
-              <MenuItem onClick={() => handleDelete(event._id)} disableRipple>
+            <MenuItem onClick={() => handleDelete(event._id)} disableRipple sx={{ color: "#ff1622" }}>
                                 Delete
                             </MenuItem>
                         </MenuDropdown>
@@ -112,7 +112,7 @@ const EventDetail = (props) => {
             </Grid>
             <Grid container>
                 <Grid item xs={12} sx={{ mb: 2 }}>
-          <img src="/image/Meetup.png" alt="placeholder" width="100%" />
+            <img src="/image/Meetup.png" alt="placeholder" width="100%" />
                 </Grid>
             </Grid>
             <Grid container item spacing={5} sx={{ display: "flex", mb: 2 }}>

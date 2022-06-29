@@ -91,19 +91,19 @@ function MyEvent() {
   };
 
   return (
-    <div>
+    <div >
       {!user ? (
         <h1> Please Login or register</h1>
       ) : (
         <>
-          <div>
+          <div className="myEventBox">
             <h1 className="myEvent">Going Events</h1>
             {displayGoingEvents("going")}
           </div>
-          <hr />
-          <hr />
+          <div className="myEventBox">
           <h1 className="myEvent">Your Events</h1>
-          <div>{displayGoingEvents("created")}</div>
+            {displayGoingEvents("created")}
+            </div>
         </>
       )}
     </div>

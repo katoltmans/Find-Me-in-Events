@@ -15,6 +15,12 @@ import {
     TextField,
     Typography,
 } from "@mui/material";
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+
+
+
 
 function Gmaps(props) {
     const { ID } = props;
@@ -174,17 +180,24 @@ function Gmaps(props) {
                     </Grid>
                 </form>
                 <div>
-                    <label>Travel Mode</label>
-                    <select value={mode} onChange={(e) => {
+                <FormControl sx={{ m:1, minWidth: 100, display: "inline-block" }} size="small">
+                <Typography
+                                variant="h4"
+                                component="h2"
+                                sx={{ fontSize: 18 }}
+                                className="transitBox"
+                            > Travel Mode:  </Typography>
+                    <Select  value={mode} onChange={(e) => {
                         setRouteErr('')
                         setMode(e.target.value)
-                        } }>
-                        <option value="DRIVING">Driving</option>
-                        <option value="BICYCLING">Bicycling</option>
-                        <option value="TRANSIT">Transit</option>
-                        <option value="WALKING">Walking</option>
-                    </select>
-                    {routeErr? <p>No route could be found between the origin and destination.</p> : null}
+                        } }> 
+                        <MenuItem value="DRIVING">Driving</MenuItem>
+                        <MenuItem value="BICYCLING">Bicycling</MenuItem>
+                        <MenuItem value="TRANSIT">Transit</MenuItem>
+                        <MenuItem value="WALKING">Walking</MenuItem>
+                    </Select>
+                    {routeErr? <p className="errors"> No route could be found between the origin and destination.</p> : null}
+                    </FormControl>
                 </div>
             </Stack>
         </Paper>
