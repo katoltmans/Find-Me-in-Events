@@ -9,7 +9,7 @@ import Gmaps from "../components/Gmaps";
 import jwtDecode from "jwt-decode";
 import Cookies from "js-cookie";
 import { Box } from "@mui/system";
-import io from 'socket.io-client';
+import io from "socket.io-client";
 
 const ViewEvent = () => {
     const [comments, setComments] = useState([]);
@@ -18,7 +18,7 @@ const ViewEvent = () => {
     const [user, setUser] = useState(null);
     const [refreshCounter, setRefreshCounter] = useState(0);
     const { id } = useParams();
-    const [socket] = useState(() => io(':8000'))
+    const [socket] = useState(() => io(":8000"));
 
     useEffect(() => {
         console.log("hello there");
@@ -40,32 +40,31 @@ const ViewEvent = () => {
                 console.log("Error with getOneEvent request", err);
             });
 
-            socket.on('connection', (socket) => {
-                console.log(socket.id)
-            })
+        socket.on("connection", (socket) => {
+            console.log(socket.id);
+        });
 
-            socket.on('newComment', (data) => {
-                setComments(data)
-            })
+        socket.on("newComment", (data) => {
+            setComments(data);
+        });
 
-            socket.on('statusChange', () => {
-                axios
-            .get(`http://localhost:8000/api/events/${id}`, {
-                withCredentials: true,
-            })
-            .then((res) => {
-                setEvent(res.data.event);
-                setComments(res.data.event.comments);
-            })
-        })
-
+        socket.on("statusChange", () => {
+            axios
+                .get(`http://localhost:8000/api/events/${id}`, {
+                    withCredentials: true,
+                })
+                .then((res) => {
+                    setEvent(res.data.event);
+                    setComments(res.data.event.comments);
+                });
+        });
     }, [id, userToken, refreshCounter]);
 
     return (
         <div>
             {!event ? null : (
                 <Box sx={{ p: 4 }}>
-                    <Grid container spacing={5}>
+                    <Grid container spacing={5} sx={{ m: "auto" }}>
                         <Grid item xs={6}>
                             <EventDetail
                                 event={event}
@@ -83,7 +82,7 @@ const ViewEvent = () => {
                                 <Grid
                                     container
                                     spacing={2}
-                                    sx={{ mt: 1, mb: 1, width: "815px" }}
+                                    sx={{ mt: 0.5, mb: 1, width: "815px" }}
                                 >
                                     <Grid item xs={4}>
                                         <EventStatus event={event} />

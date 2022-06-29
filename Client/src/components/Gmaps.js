@@ -15,12 +15,9 @@ import {
     TextField,
     Typography,
 } from "@mui/material";
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-
-
-
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
 
 function Gmaps(props) {
     const { ID } = props;
@@ -28,8 +25,8 @@ function Gmaps(props) {
     const [lat, setLat] = useState(37.09024);
     const [lng, setLng] = useState(-95.712891);
     const [destination, setDestination] = useState("");
-    const [mode, setMode] = useState('DRIVING')
-    const [routeErr, setRouteErr] = useState('')
+    const [mode, setMode] = useState("DRIVING");
+    const [routeErr, setRouteErr] = useState("");
 
     axios
         .get(`http://localhost:8000/api/events/${ID}`, {
@@ -88,17 +85,17 @@ function Gmaps(props) {
         console.log("center", center);
         // eslint-disable-next-line no-undef
         const directionsService = new google.maps.DirectionsService();
-        const results = await directionsService.route({
-            origin: center,
-            destination: destination,
-            // eslint-disable-next-line no-undef
-            travelMode: google.maps.TravelMode[mode],
-        })
-        .catch(err => {
-            console.log("google map errors", err)
-            setRouteErr(err)
-            
-    }) ;
+        const results = await directionsService
+            .route({
+                origin: center,
+                destination: destination,
+                // eslint-disable-next-line no-undef
+                travelMode: google.maps.TravelMode[mode],
+            })
+            .catch((err) => {
+                console.log("google map errors", err);
+                setRouteErr(err);
+            });
         setDirectionsResponse(results);
         setDistance(results.routes[0].legs[0].distance.text);
         setDuration(results.routes[0].legs[0].duration.text);
@@ -125,7 +122,10 @@ function Gmaps(props) {
                     <Marker position={center} title="Your location" />
                 </GoogleMap>
                 <form>
-                    <Grid container sx={{ display: "flex", width: "100%" }}>
+                    <Grid
+                        container
+                        sx={{ display: "flex", width: "100%", p: 1 }}
+                    >
                         <Grid item xs={5} sx={{ display: "flex" }}>
                             {/* onSubmit={(e) => calculateRoute(e, { destination })}> */}
                             <TextField
@@ -180,23 +180,43 @@ function Gmaps(props) {
                     </Grid>
                 </form>
                 <div>
-                <FormControl sx={{ m:1, minWidth: 100, display: "inline-block" }} size="small">
-                <Typography
-                                variant="h4"
-                                component="h2"
-                                sx={{ fontSize: 18 }}
-                                className="transitBox"
-                            > Travel Mode:  </Typography>
-                    <Select  value={mode} onChange={(e) => {
-                        setRouteErr('')
-                        setMode(e.target.value)
-                        } }> 
-                        <MenuItem value="DRIVING">Driving</MenuItem>
-                        <MenuItem value="BICYCLING">Bicycling</MenuItem>
-                        <MenuItem value="TRANSIT">Transit</MenuItem>
-                        <MenuItem value="WALKING">Walking</MenuItem>
-                    </Select>
-                    {routeErr? <p className="errors"> No route could be found between the origin and destination.</p> : null}
+                    <FormControl
+                        sx={{
+                            m: 1,
+                            minWidth: 100,
+                            display: "inline-block",
+                        }}
+                        size="small"
+                    >
+                        <Typography
+                            variant="h4"
+                            component="h2"
+                            sx={{ fontSize: 18, mr: 1 }}
+                            className="transitBox"
+                        >
+                            {" "}
+                            Travel Mode:{" "}
+                        </Typography>
+                        <Select
+                            value={mode}
+                            sx={{ height: "30px" }}
+                            onChange={(e) => {
+                                setRouteErr("");
+                                setMode(e.target.value);
+                            }}
+                        >
+                            <MenuItem value="DRIVING">Driving</MenuItem>
+                            <MenuItem value="BICYCLING">Bicycling</MenuItem>
+                            <MenuItem value="TRANSIT">Transit</MenuItem>
+                            <MenuItem value="WALKING">Walking</MenuItem>
+                        </Select>
+                        {routeErr ? (
+                            <p className="errors">
+                                {" "}
+                                No route could be found between the origin and
+                                destination.
+                            </p>
+                        ) : null}
                     </FormControl>
                 </div>
             </Stack>
