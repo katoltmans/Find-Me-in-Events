@@ -75,7 +75,7 @@ function EditEvent() {
                 { withCredentials: true }
             )
             .then((res) => {
-                console.log(res.data);
+                // console.log(res.data);
                 navigate("/events/" + id);
             })
             .catch((err) => {

@@ -19,7 +19,7 @@ function MyEvent() {
     axios
       .get(`http://localhost:8000/api/getmyevents`, { withCredentials: true })
       .then((res) => {
-        console.log("successfully fetched allmy events", res.data);
+        // console.log("successfully fetched all my events", res.data);
         const myallEvents = res.data;
         const createdEvent = myallEvents.filter((events) => {
           return events.createdBy._id == user._id;
