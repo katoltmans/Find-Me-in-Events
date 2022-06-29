@@ -37,6 +37,7 @@
     height: 400px;
     border-radius: 5px;
     object-fit: cover;
+    padding: 10px;
 }
 
 .myEvent {
