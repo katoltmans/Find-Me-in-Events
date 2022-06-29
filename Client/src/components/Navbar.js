@@ -19,7 +19,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
     useEffect(() => {
         if (userToken) {
             const user = jwtDecode(userToken);
-            console.log("user", user);
+            // console.log("user", user);
             setUser(user);
         }
     }, [isLoggedIn]);
@@ -32,7 +32,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
                 { withCredentials: true }
             )
             .then((response) => {
-                console.log("succfully logged out", response.data);
+                // console.log("succfully logged out", response.data);
                 setUser(null);
                 setIsLoggedIn(false);
                 toast.success("Successfully LoggedOut !!");

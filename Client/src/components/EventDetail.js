@@ -29,7 +29,7 @@ const EventDetail = (props) => {
                 withCredentials: true,
             })
             .then((res) => {
-                console.log('delete response', res);
+                // console.log('delete response', res);
             toast.success("Successfully Deleted the event !!");
             navigate("/events", { state: user });
             socket.emit("deleteEvent")

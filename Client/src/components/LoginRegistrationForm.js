@@ -52,7 +52,7 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
                 withCredentials: true,
             })
             .then((res) => {
-                console.log("successfully registered", res.data);
+                // console.log("successfully registered", res.data);
                 setIsLoggedIn(true);
                 toast.success("Successfully Registered !!");
         navigate("/events", { state: res.data });
@@ -88,7 +88,7 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
                 withCredentials: true,
             })
             .then((res) => {
-                console.log("successfully loggedIn", res.data);
+                // console.log("successfully loggedIn", res.data);
                 setIsLoggedIn(true);
                 toast.success("Successfully Logged in!!");
         navigate("/events", { state: res.data });

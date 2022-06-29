@@ -49,7 +49,7 @@ function LaunchEvent() {
         { withCredentials: true }
       )
       .then((res) => {
-        console.log('new event data',res.data);
+        // console.log('new event data',res.data);
         toast.success("Successfully Created New Event !!");
         navigate("/events", { state: user });
         socket.emit('newEvent', res.data)

@@ -32,7 +32,7 @@ const ViewEvent = () => {
                 withCredentials: true,
             })
             .then((res) => {
-                console.log("EVENT: ", res.data);
+                // console.log("EVENT: ", res.data);
                 setEvent(res.data.event);
                 setComments(res.data.event.comments);
             })
