@@ -8,7 +8,7 @@ const createEvent = (req, res) => {
   })
     .then((newEvent) => {
       res.json({ event: newEvent });
-      console.log("Running Query: create()", newEvent);
+      console.log("Running Query: create()");
     })
     .catch((err) => {
       res.status(400).json({
@@ -26,7 +26,7 @@ const getAllEvents = (req, res) => {
     .populate("comments.postedBy", "firstName lastName")
     .then((allEvent) => {
       res.json({ events: allEvent });
-      console.log("Running Query: find()", allEvent);
+      console.log("Running Query: find()");
     })
     .catch((err) => {
       res.status(400).json({
