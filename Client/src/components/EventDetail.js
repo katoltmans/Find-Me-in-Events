@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import {
     Grid,
     Paper,
@@ -25,10 +26,11 @@ const EventDetail = (props) => {
             })
             .then((res) => {
                 console.log(res);
-                // setEvents(events.filter((event) => event._id !== eventId));
-                navigate("/events");
+        toast.success("Successfully Deleted the event !!");
+        navigate("/events", { state: user });
             })
             .catch((err) => {
+        toast.warning("Error while deleting the event !!");
                 console.log("Error with delete request", err);
             });
     };
@@ -47,9 +49,11 @@ const EventDetail = (props) => {
             )
             .then((res) => {
                 console.log("Status response", res);
+        toast.success("Successfully updated the status !!");
                 setRefreshCounter(refreshCounter + 1);
             })
             .catch((err) => {
+        toast.warning("Error while updated the status !!");
                 console.log("Error with update status", err);
             });
     };
@@ -91,16 +95,10 @@ const EventDetail = (props) => {
                                 </IconButton>
                             }
                         >
-                            <MenuItem
-                                onClick={() => routeToUpdate(event._id)}
-                                disableRipple
-                            >
+              <MenuItem onClick={() => routeToUpdate(event._id)} disableRipple>
                                 Edit
                             </MenuItem>
-                            <MenuItem
-                                onClick={() => handleDelete(event._id)}
-                                disableRipple
-                            >
+              <MenuItem onClick={() => handleDelete(event._id)} disableRipple>
                                 Delete
                             </MenuItem>
                         </MenuDropdown>
@@ -109,11 +107,7 @@ const EventDetail = (props) => {
             </Grid>
             <Grid container>
                 <Grid item xs={12} sx={{ mb: 2 }}>
-                    <img
-                        src="/image/Meetup.png"
-                        alt="placeholder"
-                        width="100%"
-                    />
+          <img src="/image/Meetup.png" alt="placeholder" width="100%" />
                 </Grid>
             </Grid>
             <Grid container item spacing={5} sx={{ display: "flex", mb: 2 }}>

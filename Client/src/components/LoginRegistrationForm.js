@@ -55,7 +55,7 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
                 console.log("successfully registered", res.data);
                 setIsLoggedIn(true);
                 toast.success("Successfully Registered !!");
-                navigate("/events");
+        navigate("/events", { state: res.data });
             })
             .catch((err) => {
                 setLogErr("");
@@ -69,14 +69,11 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
                 //     }
                 //     setRegErr(arr);
                 // };
-                if (
-                    !err.response.data.errors &&
-                    err.response.data.code == 11000
-                ) {
+        if (!err.response.data.errors && err.response.data.code == 11000) {
                     setRegErrorObj({
                         ...err.response.data.errors,
                         emailId: { message: "Email Should be unique" },
-                    });
+      });
                     console.log("regErrorObj: ", regErrorObj);
                 } //else {
                 //     errorarray(err.response.data.errors);
@@ -94,7 +91,7 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
                 console.log("successfully loggedIn", res.data);
                 setIsLoggedIn(true);
                 toast.success("Successfully Logged in!!");
-                navigate("/events");
+        navigate("/events", { state: res.data });
             })
             .catch((err) => {
                 toast.error("Bad user credentials");
@@ -114,21 +111,14 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
                             p: 3,
                         }}
                     >
-                        <Typography
-                            variant="h3"
-                            component="h1"
-                            sx={{ fontSize: 25 }}
-                        >
+            <Typography variant="h3" component="h1" sx={{ fontSize: 25 }}>
                             Registration
                         </Typography>
                         {/* {regErr && (
                             <List sx={{ mb: 5 }}>
                                 {regErr.map((error, index) => {
                                     return (
-                                        <ListItem
-                                            key={index}
-                                            sx={{ color: "error.main" }}
-                                        >
+                    <ListItem key={index} sx={{ color: "error.main" }}>
                                             {error}
                                         </ListItem>
                                     );
@@ -145,13 +135,9 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
                                             label="First Name"
                                             variant="outlined"
                                             error={!!regErrorObj.firstName}
-                                            helperText={
-                                                regErrorObj?.firstName?.message
-                                            }
+                      helperText={regErrorObj?.firstName?.message}
                                             sx={{ mb: 2 }}
-                                            onChange={(e) =>
-                                                onChangeHandler(e, "register")
-                                            }
+                      onChange={(e) => onChangeHandler(e, "register")}
                                         />
                                     </Grid>
                                     <Grid item xs={12}>
@@ -161,12 +147,8 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
                                             label="Last Name"
                                             variant="outlined"
                                             error={!!regErrorObj.lastName}
-                                            helperText={
-                                                regErrorObj?.lastName?.message
-                                            }
-                                            onChange={(e) =>
-                                                onChangeHandler(e, "register")
-                                            }
+                      helperText={regErrorObj?.lastName?.message}
+                      onChange={(e) => onChangeHandler(e, "register")}
                                         />
                                     </Grid>
                                 </Grid>
@@ -178,12 +160,8 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
                                             label="Email"
                                             variant="outlined"
                                             error={!!regErrorObj.emailId}
-                                            helperText={
-                                                regErrorObj?.emailId?.message
-                                            }
-                                            onChange={(e) =>
-                                                onChangeHandler(e, "register")
-                                            }
+                      helperText={regErrorObj?.emailId?.message}
+                      onChange={(e) => onChangeHandler(e, "register")}
                                         />
                                     </Grid>
                                 </Grid>
@@ -196,12 +174,8 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
                                             label="Password"
                                             variant="outlined"
                                             error={!!regErrorObj.password}
-                                            helperText={
-                                                regErrorObj?.password?.message
-                                            }
-                                            onChange={(e) =>
-                                                onChangeHandler(e, "register")
-                                            }
+                      helperText={regErrorObj?.password?.message}
+                      onChange={(e) => onChangeHandler(e, "register")}
                                         />
                                     </Grid>
                                     <Grid item xs={12}>
@@ -211,16 +185,9 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
                                             type="password"
                                             label="Confirm Password"
                                             variant="outlined"
-                                            error={
-                                                !!regErrorObj.confirmPassword
-                                            }
-                                            helperText={
-                                                regErrorObj?.confirmPassword
-                                                    ?.message
-                                            }
-                                            onChange={(e) =>
-                                                onChangeHandler(e, "register")
-                                            }
+                      error={!!regErrorObj.confirmPassword}
+                      helperText={regErrorObj?.confirmPassword?.message}
+                      onChange={(e) => onChangeHandler(e, "register")}
                                         />
                                     </Grid>
                                 </Grid>
@@ -263,9 +230,7 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
                                             variant="outlined"
                                             error={!!logErr}
                                             helperText={logErr}
-                                            onChange={(e) =>
-                                                onChangeHandler(e, "login")
-                                            }
+                      onChange={(e) => onChangeHandler(e, "login")}
                                         />
                                     </Grid>
                                 </Grid>
@@ -279,9 +244,7 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
                                             variant="outlined"
                                             error={!!logErr}
                                             helperText={logErr}
-                                            onChange={(e) =>
-                                                onChangeHandler(e, "login")
-                                            }
+                      onChange={(e) => onChangeHandler(e, "login")}
                                         />
                                     </Grid>
                                 </Grid>

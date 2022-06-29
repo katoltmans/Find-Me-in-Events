@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 //Mui imports
@@ -12,6 +12,9 @@ import { Button, CardActionArea, CardActions } from "@mui/material";
 function DisplayAllEvent() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [eventList, setEventList] = useState([]);
+  const navigate = useNavigate();
+  const { state: user } = useLocation();
+  console.log("user", user);
   // const [lat, setLat] = useState(0)
   // const [lng, setLng] = useState(0)
   // const [distance, setDistance] = useState('');
@@ -19,16 +22,20 @@ function DisplayAllEvent() {
   // const [directionsResponse, setDirectionsResponse] = useState(null)
 
   useEffect(() => {
-    axios
-      .get("http://localhost:8000/api/events", { withCredentials: true })
-      .then((res) => {
-        setEventList(res.data.events);
-        console.log(res.data.events);
-        setIsLoaded(true);
-      })
-      .catch((err) => {
-        console.log("error in front end DispalyALl", err);
-      });
+    if (!user) {
+      navigate("/");
+    } else {
+      axios
+        .get("http://localhost:8000/api/events", { withCredentials: true })
+        .then((res) => {
+          setEventList(res.data.events);
+          console.log(res.data.events);
+          setIsLoaded(true);
+        })
+        .catch((err) => {
+          console.log("error in front end DispalyALl", err);
+        });
+    }
   }, []);
 
   // useEffect(() => {
@@ -74,7 +81,11 @@ function DisplayAllEvent() {
 
   return isLoaded ? (
     <div className="displayAll">
-        <img className="image" src="https://images.unsplash.com/photo-1521356279905-e1d72a443574?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt="Input image here" />
+      <img
+        className="image"
+        src="https://images.unsplash.com/photo-1521356279905-e1d72a443574?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
+        alt="Input image here"
+      />
       {eventList.map((event) => (
         <div key={event._id} className="displayAll">
           <Card sx={{ maxWidth: 450 }}>
