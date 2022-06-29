@@ -30,7 +30,6 @@ const EventComments = (props) => {
                 }
             )
             .then((res) => {
-                console.log(res);
                 setComments(res.data.comments);
                 socket.emit("newComment", res.data.comments);
                 setComment("");
@@ -52,14 +51,19 @@ const EventComments = (props) => {
                 }
             )
             .then((res) => {
-                console.log(res);
-                socket.emit();
+                // console.log('delete res',res);
+                socket.emit('delete', commentId)
                 setComments(comments.filter((c) => c._id !== commentId));
             })
             .catch((err) => {
                 console.log("Error with delete request", err);
             });
     };
+
+    socket.on('delete', (data) => {
+        // console.log('socket data', data)
+        setComments(comments.filter((c) => c._id !== data));
+    })
 
     return (
         <Paper elevation={2} sx={{ p: 3, height: "348px" }}>
