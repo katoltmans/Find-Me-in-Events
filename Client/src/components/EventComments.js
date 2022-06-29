@@ -77,6 +77,7 @@ const EventComments = (props) => {
                     id="div"
                     className="textField"
                     value={comment}
+                    size="small"
                     onChange={(e) => setComment(e.target.value)}
                 />
                 <Button
@@ -87,7 +88,7 @@ const EventComments = (props) => {
                     Submit
                 </Button>
             </form>
-            <Box sx={{ overflowY: "auto", height: "150px", mt: 1 }}>
+            <Box sx={{ overflowY: "auto", height: "170px", mt: 1 }}>
                 <ReactScrollableFeed>
                     <ul>
                         {comments.map((c) => {
