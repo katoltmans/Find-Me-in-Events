@@ -34,18 +34,18 @@ function App() {
                 main: "#7ce8d7",
                 dark: "2e9384",
             },
-            // text: {
-            //     primary: "#004e9f",
-            // },
-            // text: {
-            //     secondary: "#2e9384",
-            // },
-            // text: {
-            //     disabled: "#b0ffff",
-            // },
-            // info: {
-            //     main: "#46b5a6",
-            // },
+            text: {
+                primary: "#004e9f",
+            },
+            text: {
+                secondary: "#2e9384",
+            },
+            text: {
+                disabled: "#b0ffff",
+            },
+            info: {
+                main: "#46b5a6",
+            },
             typography: {
                 useNextVariants: true,
             },
@@ -79,7 +79,7 @@ function App() {
                         <Route path="/myEvents" element={<MyEvent />} />
                         <Route path="/event/edit/:id" element={<EditEvent />} />
                     </Routes>
-        <ToastContainer autoClose={1000} position="top-center" />
+                    <ToastContainer autoClose={1000} position="top-center" />
                 </BrowserRouter>
             </CssBaseline>
         </ThemeProvider>

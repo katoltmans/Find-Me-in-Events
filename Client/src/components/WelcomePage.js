@@ -7,6 +7,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { Box } from "@mui/system";
 import SwipeableViews from "react-swipeable-views";
 import { autoPlay } from "react-swipeable-views-utils";
+import { Link } from "react-router-dom";
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
@@ -16,27 +17,28 @@ const imageArray = [
         imgPath: "/image/pexels-joey-theswampboi-1486628.jpg",
     },
     {
-        label: "party scene",
+        label: "wedding",
         imgPath: "/image/pexels-craig-adderley-2306281.jpg",
     },
     {
-        label: "party scene",
+        label: "happy hour",
         imgPath: "/image/pexels-expect-best-1243337.jpg",
     },
     {
-        label: "party scene",
-        imgPath: "/image/pexels-fu-zhichao-587741.jpg",
-    },
-    {
-        label: "party scene",
+        label: "fireworks",
         imgPath: "/image/pexels-jonathan-petersson-399610.jpg",
     },
     {
-        label: "party scene",
+        label: "baby shower",
+        imgPath: "/image/pexels-fu-zhichao-587741.jpg",
+    },
+
+    {
+        label: "evening out",
         imgPath: "image/pexels-salah-alawadhi-382297.jpg",
     },
     {
-        label: "party scene",
+        label: "birthday",
         imgPath: "/image/pexels-ylanite-koppens-796606.jpg",
     },
 ];
@@ -91,9 +93,26 @@ const WelcomePage = (props) => {
                 {
                     <Typography
                         variant="h4"
-                        sx={{ mb: 4, color: "text.primary" }}
+                        sx={{
+                            mb: 4,
+                            color: "secondaryMain",
+                            fontWeight: "bold",
+                        }}
                     >
-                        Login or register to Join In the party!!
+                        Login or register to
+                        <span>
+                            <Link
+                                to="/login"
+                                style={{
+                                    textDecoration: "none",
+                                    color: "#a120e2",
+                                }}
+                            >
+                                {" "}
+                                Join In
+                            </Link>
+                        </span>{" "}
+                        the party!!
                     </Typography>
                 }
             </Paper>

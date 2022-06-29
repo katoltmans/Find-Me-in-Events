@@ -52,7 +52,7 @@ const EventComments = (props) => {
             )
             .then((res) => {
                 // console.log('delete res',res);
-                socket.emit('delete', commentId)
+                socket.emit("delete", commentId);
                 setComments(comments.filter((c) => c._id !== commentId));
             })
             .catch((err) => {
@@ -60,10 +60,10 @@ const EventComments = (props) => {
             });
     };
 
-    socket.on('delete', (data) => {
+    socket.on("delete", (data) => {
         // console.log('socket data', data)
         setComments(comments.filter((c) => c._id !== data));
-    })
+    });
 
     return (
         <Paper elevation={2} sx={{ p: 3, height: "348px" }}>
@@ -87,7 +87,7 @@ const EventComments = (props) => {
                     Submit
                 </Button>
             </form>
-            <Box sx={{ overflowY: "auto", height: "200px", mt: 1 }}>
+            <Box sx={{ overflowY: "auto", height: "150px", mt: 1 }}>
                 <ReactScrollableFeed>
                     <ul>
                         {comments.map((c) => {

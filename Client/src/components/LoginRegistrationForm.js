@@ -18,7 +18,6 @@ import { Container } from "@mui/system";
 
 const LoginRegistrationForm = ({ setIsLoggedIn }) => {
     const navigate = useNavigate();
-    const [regErr, setRegErr] = useState([]);
     const [regErrorObj, setRegErrorObj] = useState({});
     const [logErr, setLogErr] = useState("");
 
@@ -46,6 +45,7 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
     const OnSubmitHandlerRegistration = (e) => {
         console.log("submitting registration");
         e.preventDefault();
+        setRegErrorObj({});
         console.log("USER: ", user);
         axios
             .post("http://localhost:8000/api/register", user, {
@@ -59,26 +59,28 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
             })
             .catch((err) => {
                 setLogErr("");
-                setRegErr([]);
                 setRegErrorObj(err.response.data.errors);
                 console.log("Error with registering post request client", err);
                 toast.warning("Please fill all the fields");
-                const errorarray = (obj) => {
-                    const arr = [];
-                    for (let keys of Object.keys(obj)) {
-                        arr.push(obj[keys].message);
-                    }
-                    setRegErr(arr);
-                };
+                // const errorarray = (obj) => {
+                //     const arr = [];
+                //     for (let keys of Object.keys(obj)) {
+                //         arr.push(obj[keys].message);
+                //     }
+                //     setRegErr(arr);
+                // };
                 if (
                     !err.response.data.errors &&
                     err.response.data.code == 11000
                 ) {
-                    setRegErr(["Email Should be unique"]);
-                    console.log("RegErr: ", regErr);
-                } else {
-                    errorarray(err.response.data.errors);
-                }
+                    setRegErrorObj({
+                        ...err.response.data.errors,
+                        emailId: { message: "Email Should be unique" },
+                    });
+                    console.log("regErrorObj: ", regErrorObj);
+                } //else {
+                //     errorarray(err.response.data.errors);
+                // }
             });
     };
 
@@ -119,7 +121,7 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
                         >
                             Registration
                         </Typography>
-                        {regErr && (
+                        {/* {regErr && (
                             <List sx={{ mb: 5 }}>
                                 {regErr.map((error, index) => {
                                     return (
@@ -132,7 +134,7 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
                                     );
                                 })}
                             </List>
-                        )}
+                        )} */}
                         <Box>
                             <Grid container spacing={3}>
                                 <Grid container item spacing={1}>
