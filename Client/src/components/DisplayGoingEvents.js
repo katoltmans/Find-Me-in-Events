@@ -36,7 +36,6 @@ const DisplayGoingEvents = ({ eventsToshow, sectionId }) => {
         <div className="displayAll">
             {eventsToshow.map((event, i) => (
                 <div key={event._id} className="displayAll">
-                   
                     <div
                         id={sectionId}
                         className=""

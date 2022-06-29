@@ -46,14 +46,14 @@ function MyEvent() {
             ) : (
                 <>
                     <div className="myEventBox">
-                        <h1 className="myEvent">Going Events</h1>
+                        <h1 className="myEvents">Going Events</h1>
                         <DisplayGoingEvents
                             eventsToshow={goingEvent}
                             sectionId="goingEvents"
                         />
                     </div>
                     <div className="myEventBox">
-                        <h1 className="myEvent">Your Events</h1>
+                        <h1 className="myEvents">Your Events</h1>
                         <DisplayGoingEvents
                             eventsToshow={createdEvent}
                             sectionId="yourEvents"

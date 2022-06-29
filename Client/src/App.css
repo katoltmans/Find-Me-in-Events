@@ -22,7 +22,7 @@
 
 .displayAll {
     display: inline-block;
-    justify-content: space-around;
+    justify-content: space-evenly;
     margin: 20px;
 }
 
@@ -41,9 +41,13 @@
 }
 
 .myEvent {
-    color: #2e9384;
-    margin-left:50px;
+color:#2e9384;
 }
+
+.myEvents {
+    color:#2e9384;
+    margin-left: 50px;
+    }
 
 .spn{
     font-size: 15px;
@@ -67,4 +71,12 @@
 
 .link{
     text-decoration: none;
+}
+
+.passwordBar{
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
 }
