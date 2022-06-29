@@ -18,6 +18,7 @@ import {
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
+import { Box } from "@mui/system";
 
 function Gmaps(props) {
     const { ID } = props;
@@ -128,33 +129,46 @@ function Gmaps(props) {
                     >
                         <Grid item xs={5} sx={{ display: "flex" }}>
                             {/* onSubmit={(e) => calculateRoute(e, { destination })}> */}
-                            <TextField
-                                placeholder="Destination"
-                                value={destination}
-                                size="small"
-                                inputProps={{ style: { fontSize: 12 } }}
-                                onSelectCapture={(e) => {
-                                    setDestination(e.target.value);
-                                }}
-                            ></TextField>
-                            <Button
-                                variant="contained"
-                                size="small"
-                                style={{
-                                    maxWidth: "32px",
-                                    maxHeight: "32px",
-                                    minWidth: "32px",
-                                    minHeight: "32px",
-                                }}
+                            <FormControl
                                 sx={{
-                                    fontSize: 12,
+                                    m: 1,
+                                    minWidth: 100,
+                                    display: "inline-block",
                                 }}
-                                onClick={(e) =>
-                                    calculateRoute(e, { destination })
-                                }
+                                size="small"
                             >
-                                Go
-                            </Button>
+                                <Typography
+                                    variant="h4"
+                                    component="h2"
+                                    sx={{ fontSize: 18, mr: 1 }}
+                                    className="transitBox"
+                                >
+                                    {" "}
+                                    Travel Mode:{" "}
+                                </Typography>
+                                <Select
+                                    value={mode}
+                                    sx={{ height: "30px" }}
+                                    onChange={(e) => {
+                                        setRouteErr("");
+                                        setMode(e.target.value);
+                                    }}
+                                >
+                                    <MenuItem value="DRIVING">Driving</MenuItem>
+                                    <MenuItem value="BICYCLING">
+                                        Bicycling
+                                    </MenuItem>
+                                    <MenuItem value="TRANSIT">Transit</MenuItem>
+                                    <MenuItem value="WALKING">Walking</MenuItem>
+                                </Select>
+                                {routeErr ? (
+                                    <p className="errors">
+                                        {" "}
+                                        No route could be found between the
+                                        origin and destination.
+                                    </p>
+                                ) : null}
+                            </FormControl>
 
                             {/* <input type="submit" value="GO" /> */}
                         </Grid>
@@ -179,46 +193,34 @@ function Gmaps(props) {
                         </Grid>
                     </Grid>
                 </form>
-                <div>
-                    <FormControl
-                        sx={{
-                            m: 1,
-                            minWidth: 100,
-                            display: "inline-block",
-                        }}
+
+                <Box sx={{ ml: 1, mb: 1 }}>
+                    <TextField
+                        placeholder="Destination"
+                        value={destination}
                         size="small"
+                        inputProps={{ style: { fontSize: 12 } }}
+                        onSelectCapture={(e) => {
+                            setDestination(e.target.value);
+                        }}
+                    ></TextField>
+                    <Button
+                        variant="contained"
+                        size="small"
+                        style={{
+                            maxWidth: "32px",
+                            maxHeight: "32px",
+                            minWidth: "32px",
+                            minHeight: "32px",
+                        }}
+                        sx={{
+                            fontSize: 12,
+                        }}
+                        onClick={(e) => calculateRoute(e, { destination })}
                     >
-                        <Typography
-                            variant="h4"
-                            component="h2"
-                            sx={{ fontSize: 18, mr: 1 }}
-                            className="transitBox"
-                        >
-                            {" "}
-                            Travel Mode:{" "}
-                        </Typography>
-                        <Select
-                            value={mode}
-                            sx={{ height: "30px" }}
-                            onChange={(e) => {
-                                setRouteErr("");
-                                setMode(e.target.value);
-                            }}
-                        >
-                            <MenuItem value="DRIVING">Driving</MenuItem>
-                            <MenuItem value="BICYCLING">Bicycling</MenuItem>
-                            <MenuItem value="TRANSIT">Transit</MenuItem>
-                            <MenuItem value="WALKING">Walking</MenuItem>
-                        </Select>
-                        {routeErr ? (
-                            <p className="errors">
-                                {" "}
-                                No route could be found between the origin and
-                                destination.
-                            </p>
-                        ) : null}
-                    </FormControl>
-                </div>
+                        Go
+                    </Button>
+                </Box>
             </Stack>
         </Paper>
     ) : (
