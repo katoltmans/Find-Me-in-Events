@@ -40,6 +40,7 @@ function MyEvent() {
 
     return (
         <div>
+            
             {!user ? (
                 <h1> Please Login or register</h1>
             ) : (
@@ -58,8 +59,10 @@ function MyEvent() {
                             sectionId="yourEvents"
                         />
                     </div>
+                    
                 </>
             )}
+            
         </div>
     );
 }
