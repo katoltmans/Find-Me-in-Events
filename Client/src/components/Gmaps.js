@@ -91,6 +91,7 @@ function Gmaps(props) {
         .catch(err => {
             console.log("google map errors", err)
             setRouteErr(err)
+            
     }) ;
         setDirectionsResponse(results);
         setDistance(results.routes[0].legs[0].distance.text);
@@ -174,7 +175,10 @@ function Gmaps(props) {
                 </form>
                 <div>
                     <label>Travel Mode</label>
-                    <select value={mode} onChange={(e) => setMode(e.target.value) }>
+                    <select value={mode} onChange={(e) => {
+                        setRouteErr('')
+                        setMode(e.target.value)
+                        } }>
                         <option value="DRIVING">Driving</option>
                         <option value="BICYCLING">Bicycling</option>
                         <option value="TRANSIT">Transit</option>
