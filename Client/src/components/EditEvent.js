@@ -118,10 +118,13 @@ function EditEvent() {
                         <TextField
                             fullWidth
                             label="Street"
-                            id="fullWidth"
+                            name="street"
+                            // id="fullWidth"
                             value={location.street}
-                            onChange={locationHandler}
+                            onChange={locationHandler} 
+                            
                         />
+
                     </Box>
                     {errors["location.street"] ? (
                         <p className="errors">
@@ -135,6 +138,7 @@ function EditEvent() {
                                 fullWidth
                                 label="City"
                                 id="fullWidth"
+                                name="city"
                                 value={location.city}
                                 onChange={locationHandler}
                             />
@@ -149,6 +153,7 @@ function EditEvent() {
                                 fullWidth
                                 label="State"
                                 id="fullWidth"
+                                name="state"
                                 value={location.state}
                                 onChange={locationHandler}
                             />
@@ -163,6 +168,7 @@ function EditEvent() {
                                 fullWidth
                                 label="ZipCode"
                                 id="fullWidth"
+                                name="zipcode"
                                 value={location.zipcode}
                                 onChange={locationHandler}
                             />
