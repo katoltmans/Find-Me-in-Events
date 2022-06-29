@@ -8,7 +8,7 @@ const EventStatus = (props) => {
     const { event } = props;
 
     return (
-        <Paper elevation={2} sx={{ p: 3, overflow: "auto", height: "348px" }}>
+        <Paper elevation={2} sx={{ p: 3, height: "348px" }}>
             <Typography variant="h5" component="h2" sx={{ mb: 2 }}>
                 Look Who's Attending
             </Typography>
