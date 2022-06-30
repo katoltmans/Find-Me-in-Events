@@ -86,9 +86,13 @@ const eventDate = (date) => {
 
 
 socket.on('newEvent', (data) => {
-    setEventList(eventList => {
-        return [data, ...eventList]
-    })
+  axios
+  .get("http://localhost:8000/api/events", { withCredentials: true })
+  .then((res) => {
+    setEventList(res.data.events);
+    console.log('all events', res.data.events);
+    setIsLoaded(true);
+  })
 })
 
 socket.on('deleteEvent', () => {
