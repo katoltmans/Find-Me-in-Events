@@ -14,6 +14,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import MenuDropdown from "./MenuDropdown";
 import io from "socket.io-client";
+import { format, parse } from "date-fns";
 
 import "../App.css";
 
@@ -79,6 +80,13 @@ const EventDetail = (props) => {
         return status;
     };
 
+    // Format time of event
+    const eventTime = (time) => {
+        let eventTime = parse(time, "HH:mm", new Date());
+        // let eventTime = Date.parse(time);
+        return format(eventTime, "h:mm'\xa0'aa");
+    };
+
     // Format date of event
     const eventDate = (date) => {
         let fixDate = new Date(date);
@@ -136,7 +144,7 @@ const EventDetail = (props) => {
                 </Grid>
                 <Grid item xs={5}>
                     <Typography variant="h6" component="h2">
-                        {eventDate(event.date)} | {event.time}
+                        {eventDate(event.date)} | {eventTime(event.time)}
                     </Typography>
                     <span className="spn">
                         Created by: {event.createdBy.firstName}{" "}

@@ -9,6 +9,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import "../App.css";
+import { format, parse } from "date-fns";
 
 const DisplayGoingEvents = ({ eventsToshow, sectionId }) => {
     const handlehover = (e, indx) => {
@@ -30,6 +31,13 @@ const DisplayGoingEvents = ({ eventsToshow, sectionId }) => {
     const eventDate = (date) => {
         let fixDate = new Date(date);
         return fixDate.toLocaleDateString();
+    };
+
+    // Format time of event
+    const eventTime = (time) => {
+        let eventTime = parse(time, "HH:mm", new Date());
+        // let eventTime = Date.parse(time);
+        return format(eventTime, "h:mm'\xa0'aa");
     };
 
     return (
@@ -78,7 +86,7 @@ const DisplayGoingEvents = ({ eventsToshow, sectionId }) => {
                                         variant="body2"
                                         color="text.secondary"
                                     >
-                                        {event.time}
+                                        {eventTime(event.time)}
                                     </Typography>
                                     <Typography
                                         variant="body2"
