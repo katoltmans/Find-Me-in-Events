@@ -70,10 +70,10 @@ function LaunchEvent() {
         });
     };
 
-    const handleTimings = (e) => {
-        const time = e.target.value;
-        setTime(time);
-    };
+    // const handleTimings = (e) => {
+    //     const time = e.target.value;
+    //     setTime(time);
+    // };
 
     if (!user) {
         return (
@@ -242,7 +242,8 @@ function LaunchEvent() {
                             <input
                                 type="time"
                                 value={time}
-                                onChange={handleTimings}
+                                onChange={(e) => setTime(e.target.value)}
+                                // onChange={handleTimings}
                             />
                         </Grid>
                         {errors.time ? (

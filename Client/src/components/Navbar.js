@@ -43,9 +43,9 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
     };
 
     return (
-        <Box sx={{ display: "flex" }}>
+        <Box sx={{ display: "flex", width: "100%" }}>
             <AppBar position="static">
-                <Toolbar disableGutters sx={{ ml: 2 }}>
+                <Toolbar disableGutters sx={{ ml: 4 }}>
                     <GroupsIcon sx={{ fontSize: "60px" }} />
                     <Typography
                         variant="h6"
