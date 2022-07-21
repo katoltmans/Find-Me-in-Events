@@ -25,7 +25,6 @@ const pages = [
 ];
 
 const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
-    console.log("props", isLoggedIn);
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
     const userToken = Cookies.get("userToken");
