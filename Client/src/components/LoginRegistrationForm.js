@@ -21,12 +21,12 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
     const [loginuser, setloginUser] = useState({ emailId: "", password: "" });
 
     const onChangeHandler = (e, val) => {
-        if (val == "register") {
+        if (val === "register") {
             setUser({
                 ...user,
                 [e.target.name]: e.target.value,
             });
-        } else if (val == "login") {
+        } else if (val === "login") {
             setloginUser({ ...loginuser, [e.target.name]: e.target.value });
         }
     };
@@ -53,7 +53,7 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
                 toast.warning("Please fill all the fields");
                 if (
                     !err.response.data.errors &&
-                    err.response.data.code == 11000
+                    err.response.data.code === 11000
                 ) {
                     setRegErrorObj({
                         ...err.response.data.errors,
@@ -82,9 +82,6 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
                 console.log("Error with login post request client", err);
                 console.log("logErr: ", logErr);
             });
-    };
-    const responseFacebook = (response) => {
-        console.log(response);
     };
     return (
         <Box sx={{ pt: 5, mx: 4 }}>

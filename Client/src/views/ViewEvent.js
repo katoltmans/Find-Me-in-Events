@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import EventDetail from "../components/EventDetail";
 import { Grid, Stack } from "@mui/material";
 import EventStatus from "../components/EventStatus";

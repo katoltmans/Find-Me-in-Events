@@ -1,10 +1,7 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React from "react";
 import { Paper, Typography, Box } from "@mui/material";
-import { useParams } from "react-router-dom";
 
 const EventStatus = (props) => {
-    const { id } = useParams();
     const { event } = props;
 
     return (
@@ -37,6 +34,7 @@ const EventStatus = (props) => {
                                 </li>
                             );
                         }
+                        return null;
                     })}
                 </ul>
                 <Typography
@@ -63,6 +61,7 @@ const EventStatus = (props) => {
                                 </li>
                             );
                         }
+                        return null;
                     })}
                 </ul>
                 <Typography
@@ -92,6 +91,7 @@ const EventStatus = (props) => {
                                 </li>
                             );
                         }
+                        return null;
                     })}
                 </ul>
             </Box>

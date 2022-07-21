@@ -3,11 +3,9 @@ import Cookies from "js-cookie";
 import jwtDecode from "jwt-decode";
 import {
     AppBar,
-    Paper,
     Link,
     Button,
     Box,
-    Stack,
     Menu,
     MenuItem,
     IconButton,
@@ -56,7 +54,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
             // console.log("user", user);
             setUser(user);
         }
-    }, [isLoggedIn]);
+    }, [isLoggedIn, userToken]);
 
     const handleLogout = () => {
         axios

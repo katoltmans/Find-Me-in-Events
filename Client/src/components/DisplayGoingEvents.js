@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React from "react";
 import { CardActionArea } from "@mui/material";
-import { useLocation, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -15,7 +14,7 @@ const DisplayGoingEvents = ({ eventsToshow, sectionId }) => {
     const handlehover = (e, indx) => {
         let add = document.querySelectorAll("#" + sectionId);
         for (let i = 0; i < add.length; i++) {
-            if (i == indx) {
+            if (i === indx) {
                 add[i].className = "hoverEffect";
             }
         }

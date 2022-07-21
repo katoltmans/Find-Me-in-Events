@@ -6,7 +6,6 @@ import { useNavigate, useLocation } from "react-router-dom";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import { toast } from "react-toastify";
@@ -14,11 +13,6 @@ import { Paper } from "@mui/material";
 // import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
-import Autocomplete from "@mui/material/Autocomplete";
 import { statesArray } from "./utils";
 // import io from "socket.io-client";
 

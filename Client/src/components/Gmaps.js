@@ -4,7 +4,6 @@ import {
     useJsApiLoader,
     Marker,
     DirectionsRenderer,
-    Autocomplete,
 } from "@react-google-maps/api";
 import axios from "axios";
 import {
@@ -105,24 +104,29 @@ function Gmaps(props) {
     return isLoaded ? (
         <Paper elevation={2}>
             <Stack>
-                <div style={{height: "350px", width:'800px'}}>
-                <GoogleMap
-                    mapContainerStyle={{ width: "inherit", height: "inherit" }}
-                    zoom={10}
-                    center={center}
-                    onLoad={onLoad}
-                    options={{
-                        // zoomControl: false,
-                        streetViewControl: false,
-                        // mapTypeControl: false,
-                        // fullscreenControl: false,
-                    }}
-                >
-                    {directionsResponse && (
-                        <DirectionsRenderer directions={directionsResponse} />
-                    )}
-                    <Marker position={center} title="Your location" />
-                </GoogleMap>
+                <div style={{ height: "350px", width: "800px" }}>
+                    <GoogleMap
+                        mapContainerStyle={{
+                            width: "inherit",
+                            height: "inherit",
+                        }}
+                        zoom={10}
+                        center={center}
+                        onLoad={onLoad}
+                        options={{
+                            // zoomControl: false,
+                            streetViewControl: false,
+                            // mapTypeControl: false,
+                            // fullscreenControl: false,
+                        }}
+                    >
+                        {directionsResponse && (
+                            <DirectionsRenderer
+                                directions={directionsResponse}
+                            />
+                        )}
+                        <Marker position={center} title="Your location" />
+                    </GoogleMap>
                 </div>
                 <form>
                     <Grid

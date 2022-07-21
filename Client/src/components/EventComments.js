@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 // import io from "socket.io-client";
-import ReactScrollableFeed from "react-scrollable-feed";
+// import ReactScrollableFeed from "react-scrollable-feed";
 import {
     Button,
     Grid,
@@ -89,52 +89,52 @@ const EventComments = (props) => {
                 </Button>
             </form>
             <Box sx={{ overflowY: "auto", height: "170px", mt: 1 }}>
-                <ReactScrollableFeed>
-                    <ul>
-                        {comments.map((c) => {
-                            return (
-                                <li key={c._id}>
-                                    <Grid container>
-                                        <Grid item xs={11}>
-                                            <Typography
-                                                variant="h5"
-                                                component="h2"
-                                                sx={{
-                                                    fontSize: 15,
-                                                    fontWeight: "bold",
-                                                    mt: 1,
-                                                }}
-                                            >
-                                                {c.postedBy.firstName +
-                                                    " " +
-                                                    c.postedBy.lastName}
-                                            </Typography>
-                                        </Grid>
-                                        {c.postedBy._id === user._id ? (
-                                            <Grid item xs={1}>
-                                                <IconButton
-                                                    onClick={() =>
-                                                        deleteComment(c._id)
-                                                    }
-                                                >
-                                                    <HighlightOffIcon
-                                                        sx={{
-                                                            color: "#992e2e",
-                                                            fontSize: 20,
-                                                            fontWeight: "bold",
-                                                            m: -8,
-                                                        }}
-                                                    />
-                                                </IconButton>
-                                            </Grid>
-                                        ) : null}
+                <ul
+                    style={{ display: "flex", flexDirection: "column-reverse" }}
+                >
+                    {comments.map((c) => {
+                        return (
+                            <li key={c._id}>
+                                <Grid container>
+                                    <Grid item xs={11}>
+                                        <Typography
+                                            variant="h5"
+                                            component="h2"
+                                            sx={{
+                                                fontSize: 15,
+                                                fontWeight: "bold",
+                                                mt: 1,
+                                            }}
+                                        >
+                                            {c.postedBy.firstName +
+                                                " " +
+                                                c.postedBy.lastName}
+                                        </Typography>
                                     </Grid>
-                                    {c.details}
-                                </li>
-                            );
-                        })}
-                    </ul>
-                </ReactScrollableFeed>
+                                    {c.postedBy._id === user._id ? (
+                                        <Grid item xs={1}>
+                                            <IconButton
+                                                onClick={() =>
+                                                    deleteComment(c._id)
+                                                }
+                                            >
+                                                <HighlightOffIcon
+                                                    sx={{
+                                                        color: "#992e2e",
+                                                        fontSize: 20,
+                                                        fontWeight: "bold",
+                                                        m: -8,
+                                                    }}
+                                                />
+                                            </IconButton>
+                                        </Grid>
+                                    ) : null}
+                                </Grid>
+                                {c.details}
+                            </li>
+                        );
+                    })}
+                </ul>
             </Box>
         </Paper>
     );

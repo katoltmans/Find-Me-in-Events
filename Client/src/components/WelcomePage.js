@@ -1,10 +1,7 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { Grid, Paper, Typography, Button, MobileStepper } from "@mui/material";
+import React, { useState } from "react";
+import { Box, Paper, Typography, Button, MobileStepper } from "@mui/material";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
-import DeleteIcon from "@mui/icons-material/Delete";
-import { Box } from "@mui/system";
 import SwipeableViews from "react-swipeable-views";
 import { autoPlay } from "react-swipeable-views-utils";
 import { Link } from "react-router-dom";
@@ -54,7 +51,6 @@ const imageArray = [
 
 const WelcomePage = (props) => {
     const [activeStep, setActiveStep] = useState(0);
-    const maxSteps = imageArray.length;
 
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);

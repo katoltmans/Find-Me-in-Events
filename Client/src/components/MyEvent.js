@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useLocation, Link } from "react-router-dom";
-import Typography from "@mui/material/Typography";
+import { useLocation } from "react-router-dom";
 import "../App.css";
 import DisplayGoingEvents from "./DisplayGoingEvents";
 // import io from "socket.io-client";
@@ -20,17 +19,14 @@ function MyEvent() {
             .then((res) => {
                 // console.log("successfully fetched all my events", res.data);
                 const myallEvents = res.data;
-                const createdEvent = myallEvents.filter((events) => {
-                    return events.createdBy._id == user._id;
-                });
                 setCreatedEvent(
                     myallEvents.filter(
-                        (event) => event.createdBy._id == user._id
+                        (event) => event.createdBy._id === user._id
                     )
                 );
                 setGoingEvent(
                     myallEvents.filter(
-                        (event) => event.createdBy._id != user._id
+                        (event) => event.createdBy._id !== user._id
                     )
                 );
             })
