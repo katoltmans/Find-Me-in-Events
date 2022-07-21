@@ -18,7 +18,8 @@ const EventComments = (props) => {
     const [comment, setComment] = useState("");
     // const [socket] = useState(() => io("http://localhost:8000"));
 
-    const onSubmitComment = () => {
+    const onSubmitComment = (event) => {
+        event.preventDefault();
         axios
             .put(
                 `http://localhost:8000/api/comment/${id}`,
@@ -70,7 +71,7 @@ const EventComments = (props) => {
             <Typography variant="h5" component="h2" sx={{ mb: 2 }}>
                 Comments
             </Typography>
-            <form>
+            <form onSubmit={onSubmitComment}>
                 <TextField
                     fullWidth
                     label="Comments"
