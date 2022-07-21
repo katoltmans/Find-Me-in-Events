@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import io from "socket.io-client";
+// import io from "socket.io-client";
 import ReactScrollableFeed from "react-scrollable-feed";
 import {
     Button,
@@ -16,7 +16,7 @@ import { Box } from "@mui/system";
 const EventComments = (props) => {
     const { comments, setComments, id, user } = props;
     const [comment, setComment] = useState("");
-    const [socket] = useState(() => io("http://localhost:8000"));
+    // const [socket] = useState(() => io("http://localhost:8000"));
 
     const onSubmitComment = () => {
         axios
@@ -31,7 +31,7 @@ const EventComments = (props) => {
             )
             .then((res) => {
                 setComments(res.data.comments);
-                socket.emit("newComment", res.data.comments);
+                // socket.emit("newComment", res.data.comments);
                 setComment("");
             })
             .catch((err) => {
@@ -52,7 +52,7 @@ const EventComments = (props) => {
             )
             .then((res) => {
                 // console.log('delete res',res);
-                socket.emit("delete", commentId);
+                // socket.emit("delete", commentId);
                 setComments(comments.filter((c) => c._id !== commentId));
             })
             .catch((err) => {
@@ -60,10 +60,10 @@ const EventComments = (props) => {
             });
     };
 
-    socket.on("delete", (data) => {
-        // console.log('socket data', data)
-        setComments(comments.filter((c) => c._id !== data));
-    });
+    // socket.on("delete", (data) => {
+    //     // console.log('socket data', data)
+    //     setComments(comments.filter((c) => c._id !== data));
+    // });
 
     return (
         <Paper elevation={2} sx={{ p: 3, height: "348px" }}>

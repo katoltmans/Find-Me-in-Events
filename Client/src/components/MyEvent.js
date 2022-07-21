@@ -4,14 +4,13 @@ import { useLocation, Link } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import "../App.css";
 import DisplayGoingEvents from "./DisplayGoingEvents";
-import io from "socket.io-client";
+// import io from "socket.io-client";
 
 function MyEvent() {
     const [goingEvent, setGoingEvent] = useState([]);
     const [createdEvent, setCreatedEvent] = useState([]);
     const { state: user } = useLocation();
-    const [socket] = useState(() => io("http://localhost:8000"));
-
+    // const [socket] = useState(() => io("http://localhost:8000"));
 
     useEffect(() => {
         axios
@@ -40,33 +39,31 @@ function MyEvent() {
             });
     }, []);
 
-
-    socket.on('deleteEvent', (data) => {
-      axios
-            .get(`http://localhost:8000/api/getmyevents`, {
-                withCredentials: true,
-            })
-            .then((res) => {
-                const myallEvents = res.data;
-                const createdEvent = myallEvents.filter((events) => {
-                    return events.createdBy._id == user._id;
-                });
-                // setCreatedEvent(
-                //     myallEvents.filter(
-                //         (event) => event.createdBy._id == user._id
-                //     )
-                // );
-                setGoingEvent(
-                    myallEvents.filter(
-                        (event) => event.createdBy._id != user._id
-                    )
-                );
-            })
-    } )
+    // socket.on('deleteEvent', (data) => {
+    //   axios
+    //         .get(`http://localhost:8000/api/getmyevents`, {
+    //             withCredentials: true,
+    //         })
+    //         .then((res) => {
+    //             const myallEvents = res.data;
+    //             const createdEvent = myallEvents.filter((events) => {
+    //                 return events.createdBy._id == user._id;
+    //             });
+    //             // setCreatedEvent(
+    //             //     myallEvents.filter(
+    //             //         (event) => event.createdBy._id == user._id
+    //             //     )
+    //             // );
+    //             setGoingEvent(
+    //                 myallEvents.filter(
+    //                     (event) => event.createdBy._id != user._id
+    //                 )
+    //             );
+    //         })
+    // } )
 
     return (
         <div>
-            
             {!user ? (
                 <h1> Please Login or register</h1>
             ) : (
@@ -85,10 +82,8 @@ function MyEvent() {
                             sectionId="yourEvents"
                         />
                     </div>
-                    
                 </>
             )}
-            
         </div>
     );
 }

@@ -8,7 +8,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Button, CardActionArea, CardActions } from "@mui/material";
-import io from "socket.io-client";
+// import io from "socket.io-client";
 import "../App.css";
 import { format, parse } from "date-fns";
 
@@ -17,7 +17,7 @@ function DisplayAllEvent() {
     const [eventList, setEventList] = useState([]);
     const navigate = useNavigate();
     const { state: user } = useLocation();
-    const [socket] = useState(() => io("http://localhost:8000"));
+    // const [socket] = useState(() => io("http://localhost:8000"));
 
     console.log("user", user);
     // const [lat, setLat] = useState(0)
@@ -86,30 +86,30 @@ function DisplayAllEvent() {
         return fixDate.toLocaleDateString();
     };
 
-    socket.on("newEvent", (data) => {
-        setEventList((eventList) => {
-            return [data, ...eventList];
-        });
-    });
+    // socket.on("newEvent", (data) => {
+    //     setEventList((eventList) => {
+    //         return [data, ...eventList];
+    //     });
+    // });
 
-    socket.on("newEvent", (data) => {
-        axios
-            .get("http://localhost:8000/api/events", { withCredentials: true })
-            .then((res) => {
-                setEventList(res.data.events);
-                console.log("all events", res.data.events);
-                setIsLoaded(true);
-            });
-    });
+    // socket.on("newEvent", (data) => {
+    //     axios
+    //         .get("http://localhost:8000/api/events", { withCredentials: true })
+    //         .then((res) => {
+    //             setEventList(res.data.events);
+    //             console.log("all events", res.data.events);
+    //             setIsLoaded(true);
+    //         });
+    // });
 
-    socket.on("deleteEvent", () => {
-        axios
-            .get("http://localhost:8000/api/events", { withCredentials: true })
-            .then((res) => {
-                setEventList(res.data.events);
-                setIsLoaded(true);
-            });
-    });
+    // socket.on("deleteEvent", () => {
+    //     axios
+    //         .get("http://localhost:8000/api/events", { withCredentials: true })
+    //         .then((res) => {
+    //             setEventList(res.data.events);
+    //             setIsLoaded(true);
+    //         });
+    // });
 
     const handlehover = (e, indx) => {
         let add = document.querySelectorAll("#ev");

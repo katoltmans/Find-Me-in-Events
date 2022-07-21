@@ -13,13 +13,13 @@ import {
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import MenuDropdown from "./MenuDropdown";
-import io from "socket.io-client";
+// import io from "socket.io-client";
 import { format, parse } from "date-fns";
 
 import "../App.css";
 
 const EventDetail = (props) => {
-    const [socket] = useState(() => io("http://localhost:8000"));
+    // const [socket] = useState(() => io("http://localhost:8000"));
 
     const navigate = useNavigate();
     const { event, user, id, refreshCounter, setRefreshCounter } = props;
@@ -34,7 +34,7 @@ const EventDetail = (props) => {
                 // console.log('delete response', res);
                 toast.success("Successfully Deleted the event !!");
                 navigate("/events", { state: user });
-                socket.emit("deleteEvent");
+                // socket.emit("deleteEvent");
             })
             .catch((err) => {
                 toast.warning("Error while deleting the event !!");
@@ -58,7 +58,7 @@ const EventDetail = (props) => {
                 console.log("Status response", res);
                 toast.success("Successfully updated the status !!");
                 setRefreshCounter(refreshCounter + 1);
-                socket.emit("statusChange");
+                // socket.emit("statusChange");
             })
             .catch((err) => {
                 toast.warning("Error while updated the status !!");
