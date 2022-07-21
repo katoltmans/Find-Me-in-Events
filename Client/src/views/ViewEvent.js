@@ -18,7 +18,7 @@ const ViewEvent = () => {
     const [user, setUser] = useState(null);
     const [refreshCounter, setRefreshCounter] = useState(0);
     const { id } = useParams();
-    const [socket] = useState(() => io(":8000"));
+    const [socket] = useState(() => io("http://localhost:8000"));
 
     useEffect(() => {
         console.log("hello there");

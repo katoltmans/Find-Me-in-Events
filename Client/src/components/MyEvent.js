@@ -10,7 +10,7 @@ function MyEvent() {
     const [goingEvent, setGoingEvent] = useState([]);
     const [createdEvent, setCreatedEvent] = useState([]);
     const { state: user } = useLocation();
-    const [socket] = useState(() => io(":8000"));
+    const [socket] = useState(() => io("http://localhost:8000"));
 
 
     useEffect(() => {

@@ -17,7 +17,7 @@ function DisplayAllEvent() {
     const [eventList, setEventList] = useState([]);
     const navigate = useNavigate();
     const { state: user } = useLocation();
-    const [socket] = useState(() => io(":8000"));
+    const [socket] = useState(() => io("http://localhost:8000"));
 
     console.log("user", user);
     // const [lat, setLat] = useState(0)

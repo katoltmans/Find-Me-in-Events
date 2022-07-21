@@ -36,7 +36,7 @@ function LaunchEvent() {
     // const [image, setImage] = useState("");
     const [description, setDescription] = useState("");
     const [errors, setErrors] = useState([]);
-    const [socket] = useState(() => io(":8000"));
+    const [socket] = useState(() => io("http://localhost:8000"));
 
     //navigate
     const navigate = useNavigate();

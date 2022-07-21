@@ -16,7 +16,7 @@ import { Box } from "@mui/system";
 const EventComments = (props) => {
     const { comments, setComments, id, user } = props;
     const [comment, setComment] = useState("");
-    const [socket] = useState(() => io(":8000"));
+    const [socket] = useState(() => io("http://localhost:8000"));
 
     const onSubmitComment = () => {
         axios

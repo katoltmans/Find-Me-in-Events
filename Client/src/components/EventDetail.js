@@ -19,7 +19,7 @@ import { format, parse } from "date-fns";
 import "../App.css";
 
 const EventDetail = (props) => {
-    const [socket] = useState(() => io(":8000"));
+    const [socket] = useState(() => io("http://localhost:8000"));
 
     const navigate = useNavigate();
     const { event, user, id, refreshCounter, setRefreshCounter } = props;

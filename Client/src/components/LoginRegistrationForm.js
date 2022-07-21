@@ -101,6 +101,80 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
                             component="h1"
                             sx={{ fontSize: 25, mb: 5 }}
                         >
+                            Login
+                        </Typography>
+                        {/* <List sx={{ mb: 5, color: "error.main" }}>
+                            {logErr && <p>{logErr}!!</p>}
+                        </List> */}
+                        <Box>
+                            <Grid container spacing={3}>
+                                <Grid container item spacing={1}>
+                                    <Grid item xs={12}>
+                                        <TextField
+                                            fullWidth
+                                            name="emailId"
+                                            label="Email"
+                                            variant="outlined"
+                                            error={!!logErr}
+                                            helperText={logErr}
+                                            onChange={(e) =>
+                                                onChangeHandler(e, "login")
+                                            }
+                                        />
+                                    </Grid>
+                                </Grid>
+                                <Grid container item spacing={3}>
+                                    <Grid item xs={12}>
+                                        <TextField
+                                            fullWidth
+                                            name="password"
+                                            type="password"
+                                            label="Password"
+                                            variant="outlined"
+                                            error={!!logErr}
+                                            helperText={logErr}
+                                            onChange={(e) =>
+                                                onChangeHandler(e, "login")
+                                            }
+                                        />
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                            <Grid container spacing={3} sx={{ mt: 3 }}>
+                                <Grid item xs={12} sm={6}>
+                                    <Button
+                                        variant="contained"
+                                        onClick={OnSubmitHandlerLogin}
+                                    >
+                                        Login
+                                    </Button>
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <Button
+                                        variant="contained"
+                                        onClick={() =>
+                                            navigate("/forgotPassword")
+                                        }
+                                    >
+                                        Forgot passssword
+                                    </Button>
+                                </Grid>
+                            </Grid>
+                        </Box>
+                    </Paper>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <Paper
+                        elevation={2}
+                        sx={{
+                            p: 3,
+                        }}
+                    >
+                        <Typography
+                            variant="h3"
+                            component="h1"
+                            sx={{ fontSize: 25, mb: 5 }}
+                        >
                             Registration
                         </Typography>
                         <Box>
@@ -200,80 +274,6 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
                             >
                                 Submit
                             </Button>
-                        </Box>
-                    </Paper>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                    <Paper
-                        elevation={2}
-                        sx={{
-                            p: 3,
-                        }}
-                    >
-                        <Typography
-                            variant="h3"
-                            component="h1"
-                            sx={{ fontSize: 25, mb: 5 }}
-                        >
-                            Login
-                        </Typography>
-                        {/* <List sx={{ mb: 5, color: "error.main" }}>
-                            {logErr && <p>{logErr}!!</p>}
-                        </List> */}
-                        <Box>
-                            <Grid container spacing={3}>
-                                <Grid container item spacing={1}>
-                                    <Grid item xs={12}>
-                                        <TextField
-                                            fullWidth
-                                            name="emailId"
-                                            label="Email"
-                                            variant="outlined"
-                                            error={!!logErr}
-                                            helperText={logErr}
-                                            onChange={(e) =>
-                                                onChangeHandler(e, "login")
-                                            }
-                                        />
-                                    </Grid>
-                                </Grid>
-                                <Grid container item spacing={3}>
-                                    <Grid item xs={12}>
-                                        <TextField
-                                            fullWidth
-                                            name="password"
-                                            type="password"
-                                            label="Password"
-                                            variant="outlined"
-                                            error={!!logErr}
-                                            helperText={logErr}
-                                            onChange={(e) =>
-                                                onChangeHandler(e, "login")
-                                            }
-                                        />
-                                    </Grid>
-                                </Grid>
-                            </Grid>
-                            <Grid container spacing={3} sx={{ mt: 3 }}>
-                                <Grid item xs={12} sm={6}>
-                                    <Button
-                                        variant="contained"
-                                        onClick={OnSubmitHandlerLogin}
-                                    >
-                                        Login
-                                    </Button>
-                                </Grid>
-                                <Grid item xs={12} sm={6}>
-                                    <Button
-                                        variant="contained"
-                                        onClick={() =>
-                                            navigate("/forgotPassword")
-                                        }
-                                    >
-                                        Forgot passssword
-                                    </Button>
-                                </Grid>
-                            </Grid>
                         </Box>
                     </Paper>
                 </Grid>
