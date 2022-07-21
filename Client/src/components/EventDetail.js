@@ -137,12 +137,12 @@ const EventDetail = (props) => {
                 </Grid>
             </Grid>
             <Grid container item spacing={5} sx={{ display: "flex", mb: 2 }}>
-                <Grid item xs={7}>
+                <Grid item xs={12} sm={7}>
                     <Typography variant="h6" component="h2">
                         {`${event.location.street},${event.location.city},${event.location.state},${event.location.zipcode}`}
                     </Typography>
                 </Grid>
-                <Grid item xs={5}>
+                <Grid item xs={12} sm={5}>
                     <Typography variant="h6" component="h2">
                         {eventDate(event.date)} | {eventTime(event.time)}
                     </Typography>

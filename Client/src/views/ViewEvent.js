@@ -65,7 +65,7 @@ const ViewEvent = () => {
             {!event ? null : (
                 <Box sx={{ p: 4 }}>
                     <Grid container spacing={5}>
-                        <Grid item xs={6}>
+                        <Grid item xs={12} sm={6}>
                             <EventDetail
                                 event={event}
                                 user={user}
@@ -74,7 +74,7 @@ const ViewEvent = () => {
                                 setRefreshCounter={setRefreshCounter}
                             />
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={12} sm={6}>
                             <Stack>
                                 <Box sx={{ width: "800px" }}>
                                     <Gmaps ID={id} />
@@ -84,10 +84,10 @@ const ViewEvent = () => {
                                     spacing={2}
                                     sx={{ mt: 0.5, mb: 1, width: "815px" }}
                                 >
-                                    <Grid item xs={4}>
+                                    <Grid item xs={12} sm={4}>
                                         <EventStatus event={event} />
                                     </Grid>
-                                    <Grid item xs={8}>
+                                    <Grid item xs={12} sm={8}>
                                         <EventComments
                                             comments={comments}
                                             setComments={setComments}

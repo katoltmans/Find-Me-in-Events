@@ -9,6 +9,8 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import GroupsIcon from "@mui/icons-material/Groups";
 
+const pages = ["My Events", "Launch An Event"];
+
 const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
     console.log("props", isLoggedIn);
     const navigate = useNavigate();
@@ -45,7 +47,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
     return (
         <Box sx={{ display: "flex", width: "100%" }}>
             <AppBar position="static">
-                <Toolbar disableGutters sx={{ ml: 4 }}>
+                <Toolbar disableGutters sx={{ ml: 7 }}>
                     <GroupsIcon sx={{ fontSize: "60px" }} />
                     <Typography
                         variant="h6"

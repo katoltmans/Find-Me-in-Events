@@ -3,17 +3,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
-import {
-    Box,
-    Grid,
-    Paper,
-    TextField,
-    Typography,
-    Button,
-    ListItem,
-    List,
-    Stack,
-} from "@mui/material";
+import { Box, Grid, Paper, TextField, Typography, Button } from "@mui/material";
 import { Container } from "@mui/system";
 
 const LoginRegistrationForm = ({ setIsLoggedIn }) => {
@@ -123,7 +113,7 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
                                             name="firstName"
                                             label="First Name"
                                             variant="outlined"
-                                            error={!!regErrorObj.firstName}
+                                            error={!!regErrorObj?.firstName}
                                             helperText={
                                                 regErrorObj?.firstName?.message
                                             }
@@ -139,7 +129,7 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
                                             name="lastName"
                                             label="Last Name"
                                             variant="outlined"
-                                            error={!!regErrorObj.lastName}
+                                            error={!!regErrorObj?.lastName}
                                             helperText={
                                                 regErrorObj?.lastName?.message
                                             }
@@ -156,7 +146,7 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
                                             name="emailId"
                                             label="Email"
                                             variant="outlined"
-                                            error={!!regErrorObj.emailId}
+                                            error={!!regErrorObj?.emailId}
                                             helperText={
                                                 regErrorObj?.emailId?.message
                                             }
@@ -174,7 +164,7 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
                                             type="password"
                                             label="Password"
                                             variant="outlined"
-                                            error={!!regErrorObj.password}
+                                            error={!!regErrorObj?.password}
                                             helperText={
                                                 regErrorObj?.password?.message
                                             }
@@ -191,7 +181,7 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
                                             label="Confirm Password"
                                             variant="outlined"
                                             error={
-                                                !!regErrorObj.confirmPassword
+                                                !!regErrorObj?.confirmPassword
                                             }
                                             helperText={
                                                 regErrorObj?.confirmPassword
