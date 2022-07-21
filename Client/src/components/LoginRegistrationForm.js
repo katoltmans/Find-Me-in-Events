@@ -4,7 +4,6 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import { Box, Grid, Paper, TextField, Typography, Button } from "@mui/material";
-import { Container } from "@mui/system";
 
 const LoginRegistrationForm = ({ setIsLoggedIn }) => {
     const navigate = useNavigate();
@@ -88,9 +87,9 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
         console.log(response);
     };
     return (
-        <Box sx={{ pt: 5, mx: 15 }}>
+        <Box sx={{ pt: 5, mx: 4 }}>
             <Grid container spacing={10}>
-                <Grid item xs={6}>
+                <Grid item xs={12} sm={6}>
                     <Paper
                         elevation={2}
                         sx={{
@@ -204,7 +203,7 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
                         </Box>
                     </Paper>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12} sm={6}>
                     <Paper
                         elevation={2}
                         sx={{
@@ -255,20 +254,26 @@ const LoginRegistrationForm = ({ setIsLoggedIn }) => {
                                     </Grid>
                                 </Grid>
                             </Grid>
-                            <Button
-                                variant="contained"
-                                sx={{ mt: 3 }}
-                                onClick={OnSubmitHandlerLogin}
-                            >
-                                Login
-                            </Button>
-                            <Button
-                                variant="contained"
-                                sx={{ mt: 3, ml: 3 }}
-                                onClick={() => navigate("/forgotPassword")}
-                            >
-                                Forgot passssword
-                            </Button>
+                            <Grid container spacing={3} sx={{ mt: 3 }}>
+                                <Grid item xs={12} sm={6}>
+                                    <Button
+                                        variant="contained"
+                                        onClick={OnSubmitHandlerLogin}
+                                    >
+                                        Login
+                                    </Button>
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <Button
+                                        variant="contained"
+                                        onClick={() =>
+                                            navigate("/forgotPassword")
+                                        }
+                                    >
+                                        Forgot passssword
+                                    </Button>
+                                </Grid>
+                            </Grid>
                         </Box>
                     </Paper>
                 </Grid>
