@@ -66,7 +66,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
                 { withCredentials: true }
             )
             .then((response) => {
-                // console.log("succfully logged out", response.data);
+                // console.log("successfully logged out", response.data);
                 setUser(null);
                 setIsLoggedIn(false);
                 toast.success("Successfully LoggedOut !!");
@@ -164,6 +164,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
                                             to={page.link}
                                             underline="none"
                                             sx={menuStyles}
+                                            state={user}
                                         >
                                             {page.title}
                                         </Link>
@@ -188,6 +189,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
                                             to="/login"
                                             color="inherit"
                                             underline="none"
+                                            state={user}
                                         >
                                             Login or Register
                                         </Link>
@@ -249,6 +251,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
                                         color="inherit"
                                         underline="none"
                                         sx={styles}
+                                        state={user}
                                     >
                                         {page.title}
                                     </Link>
@@ -297,6 +300,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
                                     to="/login"
                                     color="inherit"
                                     underline="none"
+                                    state={user}
                                 >
                                     Login or Register
                                 </Link>
