@@ -9,7 +9,13 @@ import Card from "@mui/material/Card";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import { toast } from "react-toastify";
-import { Paper } from "@mui/material";
+import {
+    FormControl,
+    InputLabel,
+    MenuItem,
+    Paper,
+    Select,
+} from "@mui/material";
 // import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 
@@ -80,70 +86,57 @@ function LaunchEvent() {
     return (
         <div className="eventLaunchBar">
             <Paper elevation={2} sx={{ p: 5 }}>
-                <Card sx={{ maxWidth: 450 }} className="boxDetails">
-                    <form onSubmit={submitHandler}>
-                        <Box
-                            sx={{
-                                width: 500,
-                                maxWidth: "100%",
-                            }}
-                        >
-                            <br />
-                            <h1 className="myEvent">Launch an Event</h1>
-                            <TextField
-                                fullWidth
-                                label="Event Title"
-                                id="div"
-                                className="textField"
-                                value={eventTitle}
-                                onChange={(e) => setEventTitle(e.target.value)}
-                            />
-                        </Box>
-                        {errors.eventTitle ? (
-                            <p className="errors">
-                                {errors.eventTitle.message}
-                            </p>
-                        ) : null}
+                <form onSubmit={submitHandler}>
+                    <Box>
                         <br />
-                        <Box
-                            sx={{
-                                width: 500,
-                                maxWidth: "100%",
-                            }}
-                        >
+                        <h1 className="myEvent">Launch an Event</h1>
+                        <TextField
+                            fullWidth
+                            label="Event Title"
+                            id="div"
+                            className="textField"
+                            value={eventTitle}
+                            onChange={(e) => setEventTitle(e.target.value)}
+                        />
+                    </Box>
+                    {errors.eventTitle ? (
+                        <p className="errors">{errors.eventTitle.message}</p>
+                    ) : null}
+                    <br />
+                    <Box>
+                        <TextField
+                            fullWidth
+                            label="Street"
+                            id="fullWidth"
+                            name="street"
+                            value={location.street}
+                            onChange={locationHandler}
+                        />
+                    </Box>
+                    {errors["location.street"] ? (
+                        <p className="errors">
+                            {errors["location.street"].message}
+                        </p>
+                    ) : null}
+
+                    <br />
+                    <Grid container spacing={3}>
+                        <Grid item xs={12} md={4}>
                             <TextField
                                 fullWidth
-                                label="Street"
+                                label="City"
                                 id="fullWidth"
-                                name="street"
-                                value={location.street}
+                                name="city"
+                                value={location.city}
                                 onChange={locationHandler}
                             />
-                        </Box>
-                        {errors["location.street"] ? (
-                            <p className="errors">
-                                {errors["location.street"].message}
-                            </p>
-                        ) : null}
-
-                        <br />
-                        <Grid container item spacing={3}>
-                            <Grid item xs={6}>
-                                <TextField
-                                    fullWidth
-                                    label="City"
-                                    id="fullWidth"
-                                    name="city"
-                                    value={location.city}
-                                    onChange={locationHandler}
-                                />
-                                {errors["location.city"] ? (
-                                    <p className="errors">
-                                        {errors["location.city"].message}
-                                    </p>
-                                ) : null}
-                            </Grid>
-                            {/* <Grid item xs={3}>
+                            {errors["location.city"] ? (
+                                <p className="errors">
+                                    {errors["location.city"].message}
+                                </p>
+                            ) : null}
+                        </Grid>
+                        {/* <Grid item xs={3}>
               <InputLabel id="demo-simple-select-label">State</InputLabel>
               <Select
                 style={{ width: 100, height: 50 }}
@@ -162,101 +155,99 @@ function LaunchEvent() {
                 <p className="errors">{errors["location.state"].message}</p>
               ) : null}
             </Grid> */}
-                            <Grid item xs={3}>
-                                <input
-                                    style={{ width: 100, height: 50 }}
+                        <Grid item xs={12} md={4}>
+                            <FormControl fullWidth>
+                                <InputLabel id="stateSelect">State</InputLabel>
+                                <Select
+                                    // style={{ width: 100, height: 50 }}
+                                    labelId="stateSelect"
                                     placeholder="State"
                                     type="text"
                                     list="states"
                                     name="state"
                                     id="state"
+                                    label="State"
                                     value={location.state}
                                     onChange={locationHandler}
-                                />
-                                <datalist id="states">
+                                >
                                     {statesArray.map((state, index) => (
-                                        <option value={state} key={index} />
+                                        <MenuItem value={state} key={index}>
+                                            {state}
+                                        </MenuItem>
                                     ))}
-                                </datalist>
+                                </Select>
+                            </FormControl>
 
-                                {errors["location.state"] ? (
-                                    <p className="errors">
-                                        {errors["location.state"].message}
-                                    </p>
-                                ) : null}
-                            </Grid>
-
-                            <Grid item xs={3}>
-                                <TextField
-                                    fullWidth
-                                    label="ZipCode"
-                                    id="fullWidth"
-                                    name="zipcode"
-                                    value={location.zipcode}
-                                    onChange={locationHandler}
-                                />
-                                {errors["location.zipcode"] ? (
-                                    <p className="errors">
-                                        {errors["location.zipcode"].message}
-                                    </p>
-                                ) : null}
-                            </Grid>
+                            {errors["location.state"] ? (
+                                <p className="errors">
+                                    {errors["location.state"].message}
+                                </p>
+                            ) : null}
                         </Grid>
-                        <br />
-                        <Box
-                            sx={{
-                                width: 500,
-                                maxWidth: "100%",
-                            }}
-                        >
+
+                        <Grid item xs={12} md={4}>
                             <TextField
                                 fullWidth
-                                label="Description"
+                                label="ZipCode"
                                 id="fullWidth"
-                                value={description}
-                                onChange={(e) => setDescription(e.target.value)}
+                                name="zipcode"
+                                value={location.zipcode}
+                                onChange={locationHandler}
                             />
-                        </Box>
-                        {errors.description ? (
-                            <p className="errors">
-                                {errors.description.message}
-                            </p>
-                        ) : null}
-
-                        <br />
-                        <Grid item xs={3}>
-                            <input
-                                type="date"
-                                value={date}
-                                onChange={(e) => setDate(e.target.value)}
-                            />
-                            {errors.date ? (
-                                <p className="errors"> {errors.date.message}</p>
+                            {errors["location.zipcode"] ? (
+                                <p className="errors">
+                                    {errors["location.zipcode"].message}
+                                </p>
                             ) : null}
-                            <input
-                                type="time"
-                                value={time}
-                                onChange={(e) => setTime(e.target.value)}
-                                // onChange={handleTimings}
-                            />
                         </Grid>
-                        {errors.time ? (
-                            <p className="errors">{errors.time.message}</p>
+                    </Grid>
+                    <br />
+                    <Box>
+                        <TextField
+                            fullWidth
+                            label="Description"
+                            id="fullWidth"
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                        />
+                    </Box>
+                    {errors.description ? (
+                        <p className="errors">{errors.description.message}</p>
+                    ) : null}
+
+                    <br />
+                    <Grid item xs={3}>
+                        <input
+                            type="date"
+                            value={date}
+                            onChange={(e) => setDate(e.target.value)}
+                        />
+                        {errors.date ? (
+                            <p className="errors"> {errors.date.message}</p>
                         ) : null}
-                        <br />
-                        <br />
-                        <Stack
-                            spacing={2}
-                            direction="row"
-                            className="eventLaunchButton"
-                        >
-                            <Button variant="outlined" type="submit">
-                                Create an Event
-                            </Button>
-                        </Stack>
-                        <br />
-                    </form>
-                </Card>
+                        <input
+                            type="time"
+                            value={time}
+                            onChange={(e) => setTime(e.target.value)}
+                            // onChange={handleTimings}
+                        />
+                    </Grid>
+                    {errors.time ? (
+                        <p className="errors">{errors.time.message}</p>
+                    ) : null}
+                    <br />
+                    <br />
+                    <Stack
+                        spacing={2}
+                        direction="row"
+                        className="eventLaunchButton"
+                    >
+                        <Button variant="outlined" type="submit">
+                            Create an Event
+                        </Button>
+                    </Stack>
+                    <br />
+                </form>
             </Paper>
         </div>
     );

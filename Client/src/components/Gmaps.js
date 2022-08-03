@@ -104,7 +104,7 @@ function Gmaps(props) {
     return isLoaded ? (
         <Paper elevation={2}>
             <Stack>
-                <div style={{ height: "350px", width: "800px" }}>
+                <div style={{ height: "350px" }}>
                     <GoogleMap
                         mapContainerStyle={{
                             width: "inherit",

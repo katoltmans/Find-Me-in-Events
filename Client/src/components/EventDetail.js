@@ -94,7 +94,7 @@ const EventDetail = (props) => {
     };
 
     return (
-        <Paper elevation={2} sx={{ p: 10 }}>
+        <Paper elevation={2} sx={{ p: 5 }}>
             <Grid container spacing={2} sx={{ mb: 3 }}>
                 <Grid item xs={11}>
                     <Typography variant="h4" component="h2">

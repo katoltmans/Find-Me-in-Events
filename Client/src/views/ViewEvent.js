@@ -63,8 +63,8 @@ const ViewEvent = () => {
     return (
         <div>
             {!event ? null : (
-                <Box sx={{ p: 4 }}>
-                    <Grid container spacing={5}>
+                <Box sx={{ p: 2 }}>
+                    <Grid container spacing={2}>
                         <Grid item xs={12} sm={6}>
                             <EventDetail
                                 event={event}
@@ -76,13 +76,13 @@ const ViewEvent = () => {
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <Stack>
-                                <Box sx={{ width: "800px" }}>
+                                <Box>
                                     <Gmaps ID={id} />
                                 </Box>
                                 <Grid
                                     container
                                     spacing={2}
-                                    sx={{ mt: 0.5, mb: 1, width: "815px" }}
+                                    sx={{ mt: 0.5, mb: 1 }}
                                 >
                                     <Grid item xs={12} sm={4}>
                                         <EventStatus event={event} />
