@@ -263,22 +263,23 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
                                 display: { xs: "none", md: "flex" },
                                 justifyContent: "flex-end",
                                 ml: 5,
+                                mr: 3,
                             }}
                         >
                             <Typography
                                 variant="h6"
                                 component="div"
                                 sx={{
-                                    fontSize: "25px",
-                                    fontWeight: "bold",
+                                    fontSize: "12px",
+                                    textAlign: "match-parent",
                                 }}
                             >
-                                Welcome {user.firstName}
+                                Welcome, {user.firstName}
                             </Typography>
                             <Button
                                 variant="contained"
                                 onClick={handleLogout}
-                                sx={{ ml: 3 }}
+                                sx={{ ml: 1 }}
                             >
                                 Logout
                             </Button>
